@@ -1,0 +1,16 @@
+{
+    "home": "Home",
+    "profile" : "Profile",
+    "welcomeMessage": "Welcome to the King Research!",
+    "profileTitle": "Profile Screen",
+    "logout": "Logout",
+    "loginTitle": "King Research",
+    "login": "Get WhatsApp Code",
+    "loginError": "The entered Mobile Number incorrect",
+    "emptyFieldsError": "Please Enter Mobile Number",
+    "email": "emailID",
+    "otp": "Verify",
+    "notificationScreenTitle":"Notifications",
+    "allcategorybutton":"All"
+
+}
