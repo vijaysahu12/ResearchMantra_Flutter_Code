@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:463798038207:ios:3373bf5c6fdfbc63fda00a</string>
+	<key>DATABASE_URL</key>
+	<string>https://researchmantraofficial-80bcf-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

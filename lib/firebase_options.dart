@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '463798038207',
     projectId: 'researchmantraofficial-80bcf',
     authDomain: 'researchmantraofficial-80bcf.firebaseapp.com',
+    databaseURL: 'https://researchmantraofficial-80bcf-default-rtdb.firebaseio.com',
     storageBucket: 'researchmantraofficial-80bcf.firebasestorage.app',
     measurementId: 'G-7G3ZLHMDM0',
   );
@@ -55,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:463798038207:android:5c7498727ae297a6fda00a',
     messagingSenderId: '463798038207',
     projectId: 'researchmantraofficial-80bcf',
+    databaseURL: 'https://researchmantraofficial-80bcf-default-rtdb.firebaseio.com',
     storageBucket: 'researchmantraofficial-80bcf.firebasestorage.app',
   );
 
@@ -63,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:463798038207:ios:3373bf5c6fdfbc63fda00a',
     messagingSenderId: '463798038207',
     projectId: 'researchmantraofficial-80bcf',
+    databaseURL: 'https://researchmantraofficial-80bcf-default-rtdb.firebaseio.com',
     storageBucket: 'researchmantraofficial-80bcf.firebasestorage.app',
     iosBundleId: 'com.researchMantraOfficial',
   );
@@ -72,6 +75,7 @@ class DefaultFirebaseOptions {
     appId: '1:463798038207:ios:c235e22cb0d8200afda00a',
     messagingSenderId: '463798038207',
     projectId: 'researchmantraofficial-80bcf',
+    databaseURL: 'https://researchmantraofficial-80bcf-default-rtdb.firebaseio.com',
     storageBucket: 'researchmantraofficial-80bcf.firebasestorage.app',
     iosBundleId: 'com.example.researchMantraOfficial',
   );
@@ -82,6 +86,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '463798038207',
     projectId: 'researchmantraofficial-80bcf',
     authDomain: 'researchmantraofficial-80bcf.firebaseapp.com',
+    databaseURL: 'https://researchmantraofficial-80bcf-default-rtdb.firebaseio.com',
     storageBucket: 'researchmantraofficial-80bcf.firebasestorage.app',
     measurementId: 'G-GJQD8M3MZC',
   );

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +51,10 @@ class FirebaseNotificationsUtils {
           print('📲 APNs Token got successful');
         } else {
           print('⚠️ APNs token not available after retrying.');
+          
         }
       }
+          
 
       // Now get FCM token (safe even on Android)
       String? fcmToken = await messaging.getToken();
@@ -81,6 +84,7 @@ class FirebaseNotificationsUtils {
         return; // Do not proceed to show notification
       }
       if (message.notification != null && message.data.isNotEmpty) {
+
         LocalNotificationService.showNotification(message);
       }
     });

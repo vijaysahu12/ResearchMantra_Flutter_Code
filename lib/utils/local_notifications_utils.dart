@@ -1,5 +1,6 @@
 // Import necessary packages for Firebase Cloud Messaging and local notifications
 
+import 'dart:developer';
 import 'dart:typed_data';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
@@ -157,6 +158,9 @@ class LocalNotificationService {
       const DarwinNotificationDetails iOSPlatformChannelSpecifics =
           DarwinNotificationDetails(
               presentSound: true,
+              presentAlert: true,
+              presentBadge: true,
+
               // threadIdentifier: 'thread_id',
               sound: 'notification_tone.wav');
 
@@ -174,7 +178,7 @@ class LocalNotificationService {
           importance: Importance.max,
           styleInformation: BigPictureStyleInformation(
             ByteArrayAndroidBitmap.fromBase64String(base64Image),
-          //  htmlFormatContent: true,
+            //  htmlFormatContent: true,
             htmlFormatTitle: true,
           ),
           sound: RawResourceAndroidNotificationSound("notification_tone"),
@@ -188,7 +192,7 @@ class LocalNotificationService {
           enableVibration: true,
           priority: Priority.high,
           importance: Importance.max,
-          styleInformation:BigTextStyleInformation(
+          styleInformation: BigTextStyleInformation(
             message.notification?.body ?? "",
             htmlFormatContent: true,
             //  htmlFormatBigText: true
@@ -204,6 +208,7 @@ class LocalNotificationService {
 
       // Show the local notification using FlutterLocalNotificationsPlugin
 
+
       await flutterLocalNotificationsPlugin.show(
           notificationId,
           message.notification?.title ?? "Embrace the Journey!",
@@ -215,8 +220,8 @@ class LocalNotificationService {
           ),
           payload: jsonEncode(message.data));
 
-      await _httpClient.postOthers(
-          "$other?message=Notification Received  ${message.data.toString()} at ${DateTime.now()}");
+      // await _httpClient.postOthers(
+      //     "$other?message=Notification Received  ${message.data.toString()} at ${DateTime.now()}");
     } catch (e) {
       print(e.toString());
     }

@@ -51,15 +51,15 @@ class ExclusiveTradingInsightsCard extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Always show the Scanner button
-          if (!isScanner)
-            _buildAnimatedButton(
-                context: context,
-                label: emptyScannerScreenScannerButtonText,
-                color: theme.indicatorColor,
-                icon: Icons.notifications_active,
-                onTap: () => _navigateToHomeTab(context, 1),
-                fontSize: fontSize,
-                theme: theme),
+          // if (!isScanner)
+          //   _buildAnimatedButton(
+          //       context: context,
+          //       label: emptyScannerScreenScannerButtonText,
+          //       color: theme.indicatorColor,
+          //       icon: Icons.notifications_active,
+          //       onTap: () => _navigateToHomeTab(context, 1),
+          //       fontSize: fontSize,
+          //       theme: theme),
 
           const SizedBox(height: 16),
 
@@ -70,7 +70,7 @@ class ExclusiveTradingInsightsCard extends StatelessWidget {
                 label: emptyScannerScreenResearchButtonText,
                 color: theme.indicatorColor,
                 icon: Icons.insights,
-                onTap: () => _navigateToHomeTab(context, 3),
+                onTap: () => _navigateToHomeTab(context, 1),
                 fontSize: fontSize,
                 theme: theme),
 

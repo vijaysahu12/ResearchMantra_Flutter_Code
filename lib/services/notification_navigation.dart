@@ -50,10 +50,10 @@ Future<void> navigateToSpecificName(String screenName, dynamic id,
 
 //Todo: Need to remove this value from here and need to add in the constants value from the constants file
   const routeIndexMap = {
-    "productscreen": 1,
-    "getAllBlogs": 2,
-    "researchScreen": 3,
-    "scannersScreen": 4,
+    // "productscreen": 1,
+    // "getAllBlogs": 2,
+    "researchScreen": 1,
+    // "scannersScreen": 4,
   };
 
   final productId = (id is int)
@@ -63,24 +63,24 @@ Future<void> navigateToSpecificName(String screenName, dynamic id,
   try {
     // Check if ID is available and navigate to product/subscription screens
     final navigationMap = {
-      "productDetailsScreenWidget": () => ProductDetailsScreenWidget(
-            product: ProductApiResponseModel(
-              groupName: '',
-              description: "",
-              id: productId,
-              listImage: "",
-              name: productName ?? '',
-              price: 0,
-              overAllRating: 0.0,
-              heartsCount: null,
-              userRating: 0.0,
-              userHasHeart: false,
-              isInMyBucket: true,
-              isInValidity: false,
-              buyButtonText: "",
-            ),
-            isFromNotification: isFromNotification,
-          ),
+      // "productDetailsScreenWidget": () => ProductDetailsScreenWidget(
+      //       product: ProductApiResponseModel(
+      //         groupName: '',
+      //         description: "",
+      //         id: productId,
+      //         listImage: "",
+      //         name: productName ?? '',
+      //         price: 0,
+      //         overAllRating: 0.0,
+      //         heartsCount: null,
+      //         userRating: 0.0,
+      //         userHasHeart: false,
+      //         isInMyBucket: true,
+      //         isInValidity: false,
+      //         buyButtonText: "",
+      //       ),
+      //       isFromNotification: isFromNotification,
+      //     ),
       "subscriptonPlanScreen": () => Subscription(
             planId: 0,
             productName: productName ?? '',
@@ -92,12 +92,12 @@ Future<void> navigateToSpecificName(String screenName, dynamic id,
 
     // Handle product-specific navigation
     if (navigationMap.containsKey(screenName)) {
-      if (screenName == 'productDetailsScreenWidget') {
-        navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => navigationMap[screenName]!()),
-        );
-        return;
-      }
+      // if (screenName == 'productDetailsScreenWidget') {
+      //   navigatorKey.currentState?.push(
+      //     MaterialPageRoute(builder: (context) => navigationMap[screenName]!()),
+      //   );
+      //   return;
+      // }
       final isValid =
           await _iNotificationRepository.checkProductValidity(productId);
       final destination = isValid
