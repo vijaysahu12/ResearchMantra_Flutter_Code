@@ -101,7 +101,6 @@ import 'firebase_options.dart';
 // When the app is completely terminated (closed).
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(message) async {
-
   await Firebase.initializeApp();
 
   ////If your notifications contain a notification payload (handled by FCM automatically), then you don't need showNotification  .
@@ -154,12 +153,10 @@ Future<void> main() async {
   FirebaseNotificationsUtils.configureFirebaseMessaging();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   FlutterError.onError = (errorDetails) {
-
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
   // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
   PlatformDispatcher.instance.onError = (error, stack) {
- 
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
@@ -184,7 +181,6 @@ Future<void> main() async {
 
 //Function to navigate screens
 void _configureSelectNotificationSubject() {
-
   selectNotificationStream.stream.listen((String? payload) async {
     //If payload is null navigating to notifications
 

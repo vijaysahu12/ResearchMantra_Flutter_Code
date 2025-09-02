@@ -78,12 +78,12 @@ class _ScreenersHomeScreenState extends ConsumerState<ScreenersHomeScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: CommonAppBarWithBackButton(
-        appBarText: "Screeners",
-        handleBackButton: () {
-          Navigator.pop(context);
-        },
-      ),
+      // appBar: CommonAppBarWithBackButton(
+      //   appBarText: "Screeners",
+      //   handleBackButton: () {
+      //     Navigator.pop(context);
+      //   },
+      // ),
       backgroundColor: theme.primaryColor,
       body: _buildScreenersData(getCategoryData, theme, isConnection),
     );
@@ -117,7 +117,9 @@ class _ScreenersHomeScreenState extends ConsumerState<ScreenersHomeScreen> {
             padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
+              children: 
+              
+              List.generate(
                   getCategoryData.categoryModel.length ?? 0,
                   (categoryindex) => AnimationConfiguration.staggeredList(
                         position: categoryindex,
@@ -283,4 +285,6 @@ class _ScreenersHomeScreenState extends ConsumerState<ScreenersHomeScreen> {
       ),
     );
   }
+
+
 }

@@ -8,12 +8,12 @@ import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/bottom_navigation.dart';
 import 'package:research_mantra_official/ui/components/dynamic_promo_card/service/promo_manager.dart';
 import 'package:research_mantra_official/ui/components/dynamic_promo_card/watcher/promo_activator.dart';
-import 'package:research_mantra_official/ui/screens/blogs/blogs_screen.dart';
 import 'package:research_mantra_official/ui/screens/home/home_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/profile_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
-import 'package:research_mantra_official/ui/screens/products/product_screen.dart';
 import 'package:research_mantra_official/ui/screens/scanners/scanners.dart';
+import 'package:research_mantra_official/ui/screens/screeners/screeners_home_screen.dart';
+import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 class HomeNavigatorWidget extends ConsumerStatefulWidget {
@@ -219,12 +219,10 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
       // ),
 
       // const BlogScreenBaseScreen(),
-      const ResearchScreen(),
-       const ProfileWidget(),
-      // ScannersListScreen(
-      //   isNotification: false,
-      //   topicName: widget.topicName,
-      // ),
+      // const ResearchScreen(),
+      const TradeScreen(),
+      ScreenersHomeScreen(),
+      const ProfileWidget(),
     ];
 
     return SafeArea(

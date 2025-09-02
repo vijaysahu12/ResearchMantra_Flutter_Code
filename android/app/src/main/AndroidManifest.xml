@@ -54,7 +54,7 @@
     </queries>
 
     <application
-        android:label="research_mantra_official"
+        android:label="Research Mantra"
         android:name="${applicationName}"
         android:allowBackup="false"
         android:fullBackupContent="false"

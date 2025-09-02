@@ -49,41 +49,35 @@ class _DashboardCarouselSliderState extends State<DashboardCarouselSlider> {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
-      child: Stack(
-        alignment: const Alignment(0, 0.89),
-        children: [
-          CarouselSlider(
-            key: carouselKey,
-            items: List.generate(_images.length, (index) {
-              return GestureDetector(
-                onTap: () => _handleTap(index),
-                child: CircularCachedNetworkLandScapeImages(
-                  imageURL: _images[index],
-                  baseUrl: widget.displayImage,
-                  defaultImagePath: widget.dashBoardDefaultImage,
-                  aspectRatio: 2,
-                ),
-              );
-            }),
-            options: CarouselOptions(
-              aspectRatio: 2,
-              autoPlay: _images.length > 1,
-              initialPage: _currentIndex,
-              enableInfiniteScroll: true,
-              viewportFraction: 1,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(seconds: 2),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              onPageChanged: (index, reason) {
-                setState(() => _currentIndex = index);
-              },
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0),
+      child: CarouselSlider(
+        key: carouselKey,
+        items: List.generate(_images.length, (index) {
+          return Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: GestureDetector(
+              onTap: () => _handleTap(index),
+              child: CircularCachedNetworkLandScapeImages(
+                imageURL: _images[index],
+                baseUrl: widget.displayImage,
+                defaultImagePath: widget.dashBoardDefaultImage,
+                aspectRatio: 2,
+              ),
             ),
-          ),
-          if (_images.length > 1) const SizedBox(height: 10),
-          if (_images.length > 1) _buildIndicator(theme),
-        ],
+          );
+        }),
+        options: CarouselOptions(
+          aspectRatio: 2.3,
+          autoPlay: false, // user swipes manually
+          enableInfiniteScroll: false,
+          viewportFraction: 0.9, // show 90% of current → 10% next visible
+          enlargeCenterPage:
+              false, // disable enlarge (otherwise hides next preview)
+          padEnds: false, // ensures first and last also align to the edges
+          onPageChanged: (index, reason) {
+            setState(() => _currentIndex = index);
+          },
+        ),
       ),
     );
   }
@@ -105,27 +99,6 @@ class _DashboardCarouselSliderState extends State<DashboardCarouselSlider> {
         .map<String>((image) => image['url'] ?? '')
         .where((url) => url.isNotEmpty)
         .toList();
-  }
-
-  Widget _buildIndicator(ThemeData theme) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(_images.length, (index) {
-        final isActive = _currentIndex == index;
-        return GestureDetector(
-          onTap: () => setState(() => _currentIndex = index),
-          child: Container(
-            width: 10,
-            height: 10,
-            margin: const EdgeInsets.symmetric(horizontal: 6),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isActive ? theme.indicatorColor : theme.focusColor,
-            ),
-          ),
-        );
-      }),
-    );
   }
 
   Widget _buildBannerDefaultImage() {

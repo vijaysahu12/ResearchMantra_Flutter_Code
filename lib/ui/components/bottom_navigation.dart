@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:research_mantra_official/constants/assets.dart';
 
 class BottomNavigation extends StatelessWidget {
   final int selectedIndex;
@@ -22,12 +21,22 @@ class BottomNavigation extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
           activeIcon: Icon(Icons.home),
-          label: 'Home',
+          label: 'Explore',
+        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.account_balance_wallet_outlined),
+        //   activeIcon: Icon(Icons.account_balance_wallet),
+        //   label: 'Demat',
+        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.data_exploration_outlined),
+          activeIcon: Icon(Icons.data_exploration),
+          label: 'Trades', // center icon has no label
         ),
         BottomNavigationBarItem(
-          icon:  Icon(Icons.data_exploration_outlined),
+          icon: Icon(Icons.data_exploration_outlined),
           activeIcon: Icon(Icons.data_exploration),
-          label: 'Research', // center icon has no label
+          label: 'Screeners', // center icon has no label
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

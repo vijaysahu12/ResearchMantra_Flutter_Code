@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/ui/components/trading_journal/trading_journal_screen.dart';
 import 'package:research_mantra_official/ui/components/widget/notification_count_widget.dart';
 import 'package:research_mantra_official/ui/components/widget/username_profileimage_dashboard.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
-
 import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
-import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 class AppBarScreen extends StatefulWidget implements PreferredSizeWidget {
   final int selectedIndex;
