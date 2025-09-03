@@ -1,46 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:research_mantra_official/ui/common_components/common_ontap_button.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/all_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/history_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/live_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/mcx/mcx_trades.dart';
+import 'package:research_mantra_official/ui/screens/trades/widgets/trade_ideas.dart';
 
-class TradeScreen extends StatefulWidget {
-  const TradeScreen({super.key});
+class LiveTradesScreen extends StatefulWidget {
+  const LiveTradesScreen({super.key});
 
   @override
-  State<TradeScreen> createState() => _TradeScreenState();
+  State<LiveTradesScreen> createState() => _LiveTradesScreenState();
 }
 
-class _TradeScreenState extends State<TradeScreen> {
+class _LiveTradesScreenState extends State<LiveTradesScreen> {
   int selectedTabIndex = 0;
 
-  final List<String> tabLabels = [
-    'Home',
-    'Live Trades',
-    'Closed Trades',
-    'MCX'
-  ];
+  final List<String> tabLabels = ['Short', 'Long', 'Futures', 'Options'];
   final List<Widget> tabScreens = [
-    AllTradesDetailsScreen(),
-    LiveTradesScreen(),
-    HistoryTradesScreen(),
-    McxTradesScreen(),
+    TradesIdeasWidget(tradeType: "Short"),
+    TradesIdeasWidget(tradeType: "Long"),
+    TradesIdeasWidget(tradeType: "Futures"),
+    TradesIdeasWidget(tradeType: "Options"),
   ];
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
       backgroundColor: theme.primaryColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTabBarOnTapButton(
+            isBorderEnabled: true,
             buttonTextColor: theme.primaryColorDark,
-            buttonBackgroundColor: theme.primaryColor,
-            backgroundColor: theme.shadowColor,
             tabLabels: tabLabels,
             selectedIndex: selectedTabIndex,
             onTabSelected: (index) {

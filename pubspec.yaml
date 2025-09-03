@@ -227,10 +227,12 @@ flutter:
     - assets/images/const/images/video.gif
     - assets/mp3/design.wav
     - assets/images/lottie/splash.json
-  
-
-
-   
+    #Research Mantra Images
+    - assets/images/research_mantra/arrow.png
+    - assets/images/research_mantra/bull-market.png
+    - assets/images/research_mantra/candlestick.png
+    - assets/images/research_mantra/ingots.png
+    - assets/images/research_mantra/options.png
     # - ios/notification_tone.wav
 
   # To add assets to your application, add an assets section, like this:

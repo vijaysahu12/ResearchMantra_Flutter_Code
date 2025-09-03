@@ -31,12 +31,12 @@ class BottomNavigation extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.data_exploration_outlined),
           activeIcon: Icon(Icons.data_exploration),
-          label: 'Trades', // center icon has no label
+          label: 'Trades',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.data_exploration_outlined),
           activeIcon: Icon(Icons.data_exploration),
-          label: 'Screeners', // center icon has no label
+          label: 'Screeners',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

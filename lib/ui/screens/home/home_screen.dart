@@ -34,6 +34,7 @@ import 'package:research_mantra_official/ui/components/popupscreens/quotepopup/d
 import 'package:research_mantra_official/ui/components/popupscreens/userregistrationpopup/user_registration_popup.dart';
 import 'package:research_mantra_official/ui/components/shimmers/home_shimmer.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
+import 'package:research_mantra_official/ui/screens/home/screens/ongoing_trades.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider_widget.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
@@ -438,7 +439,6 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                   child: OngoingTradesSection(
                     onSubscribe: (tab) {
                       print("Subscribe for $tab clicked!");
-                      // TODO: Navigate or call API for subscription per tab
                     },
                   ),
                 ),
@@ -641,12 +641,13 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     );
   }
 
+//Bottom Grid Multibaggers,commodity,screeners
   Widget _buildBottomGrid() {
     const List<Map<String, dynamic>> gridItems = [
       {
         'title': 'Multibagger',
         'icon': Icons.trending_up,
-        'color': Colors.green,
+        'color': Colors.blue,
       },
       {
         'title': 'Up to 100%',
@@ -654,32 +655,25 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
         'color': Colors.blue,
       },
       {
-        'title': 'Commodity ',
+        'title': 'Commodity',
         'icon': Icons.search,
-        'color': Colors.purple,
+        'color': Colors.blue,
       },
       {
         'title': 'Screeners',
         'icon': Icons.medical_services,
-        'color': Colors.red,
+        'color': Colors.blue,
       },
     ];
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.09,
-      child: Row(
-        children: List.generate(
-          gridItems.length,
-          (index) => Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                right: index < gridItems.length - 1 ? 8 : 0,
-              ),
-              child: _buildGridItem(gridItems[index]),
-            ),
-          ),
-        ),
-      ),
+    return GridView.count(
+      shrinkWrap: true, // Important if inside a Column
+      physics: NeverScrollableScrollPhysics(), // Disable scrolling
+      crossAxisCount: 4, // 4 items per row
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+      childAspectRatio: 1.2,
+      children: gridItems.map((item) => _buildGridItem(item)).toList(),
     );
   }
 
@@ -692,7 +686,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 8,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -702,39 +696,34 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
           borderRadius: BorderRadius.circular(12),
           onTap: () {},
           child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Icon and Badge Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: item['color'].withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        item['icon'],
-                        color: item['color'],
-                        size: 22,
-                      ),
-                    ),
-                  ],
+                // Centered Icon
+                Container(
+                  width: 60,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: item['color'].withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    item['icon'],
+                    color: item['color'],
+                    size: 22,
+                  ),
                 ),
-                Spacer(),
-                // Title
+                const SizedBox(height: 8),
+                // Title at the bottom
                 Text(
                   item['title'],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
+                  textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -918,75 +907,6 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class OngoingTradesSection extends StatelessWidget {
-  final void Function(String tab) onSubscribe;
-
-  const OngoingTradesSection({
-    Key? key,
-    required this.onSubscribe,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    // Example data: you can fetch this from API later
-    final List<Map<String, String>> tradeSections = [
-      {"title": "Futures", "avg": "Avg 12.5%"},
-      {"title": "Options", "avg": "Avg 9.2%"},
-      {"title": "MCX", "avg": "Avg 14.8%"},
-    ];
-
-    return Row(
-      children: tradeSections.map((section) {
-        return Expanded(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 4),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: theme.primaryColor,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  section["title"]!,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: theme.primaryColorDark,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  section["avg"]!,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: theme.focusColor,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                CommonOutlineButton(
-                    borderRadius: 5,
-                    text: "Active",
-                    onPressed: () => onSubscribe(section["title"]!))
-              ],
-            ),
-          ),
-        );
-      }).toList(),
     );
   }
 }

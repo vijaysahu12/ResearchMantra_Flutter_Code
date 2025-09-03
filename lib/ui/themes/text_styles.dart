@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const fontFamily = 'Sinteca';
+const fontFamily = 'OpenSans';
 
 const textH1 = TextStyle(
     color: Colors.red,

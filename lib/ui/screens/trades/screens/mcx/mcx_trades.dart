@@ -1,46 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:research_mantra_official/ui/common_components/common_ontap_button.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/all_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/history_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/live_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/mcx/mcx_trades.dart';
 
-class TradeScreen extends StatefulWidget {
-  const TradeScreen({super.key});
+import 'package:research_mantra_official/ui/screens/trades/widgets/trade_ideas.dart';
+
+class McxTradesScreen extends StatefulWidget {
+  const McxTradesScreen({super.key});
 
   @override
-  State<TradeScreen> createState() => _TradeScreenState();
+  State<McxTradesScreen> createState() => _McxTradesScreenState();
 }
 
-class _TradeScreenState extends State<TradeScreen> {
+class _McxTradesScreenState extends State<McxTradesScreen> {
   int selectedTabIndex = 0;
 
-  final List<String> tabLabels = [
-    'Home',
-    'Live Trades',
-    'Closed Trades',
-    'MCX'
-  ];
+  final List<String> tabLabels = ['Open Trades', 'Closed Trades'];
   final List<Widget> tabScreens = [
-    AllTradesDetailsScreen(),
-    LiveTradesScreen(),
-    HistoryTradesScreen(),
-    McxTradesScreen(),
+    TradesIdeasWidget(tradeType: "Open Trades"),
+    TradesIdeasWidget(tradeType: "Closed Trades"),
   ];
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
       backgroundColor: theme.primaryColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTabBarOnTapButton(
+            isBorderEnabled: true,
             buttonTextColor: theme.primaryColorDark,
-            buttonBackgroundColor: theme.primaryColor,
-            backgroundColor: theme.shadowColor,
             tabLabels: tabLabels,
             selectedIndex: selectedTabIndex,
             onTabSelected: (index) {
