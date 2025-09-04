@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonOutlineButton extends StatelessWidget {
   final String text;
@@ -11,6 +12,7 @@ class CommonOutlineButton extends StatelessWidget {
   final double borderWidth;
   final TextStyle? textStyle;
   final EdgeInsetsGeometry? padding;
+  
 
   const CommonOutlineButton({
     super.key,
@@ -48,7 +50,7 @@ class CommonOutlineButton extends StatelessWidget {
           style: textStyle ??
               TextStyle(
                 color: textColor,
-                fontSize: 12,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w600,
               ),
         ),

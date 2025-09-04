@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_ontap_button.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/all_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/history_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/live_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/mcx/mcx_trades.dart';
+
+import 'package:research_mantra_official/ui/screens/trades/screens/live_history_trades.dart';
+import 'package:research_mantra_official/ui/screens/trades/screens/mcx_trades.dart';
 
 class TradeScreen extends StatefulWidget {
   const TradeScreen({super.key});
@@ -23,8 +24,12 @@ class _TradeScreenState extends State<TradeScreen> {
   ];
   final List<Widget> tabScreens = [
     AllTradesDetailsScreen(),
-    LiveTradesScreen(),
-    HistoryTradesScreen(),
+    LiveClosedTradesScreen(
+      title: 'Live',
+    ),
+    LiveClosedTradesScreen(
+      title: 'Closed',
+    ),
     McxTradesScreen(),
   ];
 
@@ -38,6 +43,7 @@ class _TradeScreenState extends State<TradeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTabBarOnTapButton(
+            fontSize: 10.sp,
             buttonTextColor: theme.primaryColorDark,
             buttonBackgroundColor: theme.primaryColor,
             backgroundColor: theme.shadowColor,

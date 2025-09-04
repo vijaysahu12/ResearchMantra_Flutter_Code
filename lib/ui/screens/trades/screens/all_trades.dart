@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/assets_storage.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
@@ -71,7 +72,7 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
           Text(
             'Pro Baskets',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 15.sp,
               fontWeight: FontWeight.w600,
               color: theme.primaryColorDark,
             ),
@@ -99,7 +100,7 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
                         child: Text(
                           item["title"],
                           style: textH4.copyWith(
-                              color: theme.primaryColorDark, fontSize: 11),
+                              color: theme.primaryColorDark, fontSize: 10.sp),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -124,7 +125,7 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
                         child: Text(
                           "Explore",
                           style: textH4.copyWith(
-                              color: theme.primaryColorDark, fontSize: 10),
+                              color: theme.primaryColorDark, fontSize: 10.sp),
                         ),
                       ),
                     ],
@@ -146,7 +147,7 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
           Text(
             'Ideas by Susmitha',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 15.sp,
               fontWeight: FontWeight.w600,
               color: theme.primaryColorDark,
             ),
@@ -158,7 +159,7 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
               return Column(
                 children: [
                   Container(
-                    width: 60,
+                    width: 45.sp,
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: theme.shadowColor,
@@ -178,18 +179,17 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
                   const SizedBox(height: 4),
                   Text(
                     item["title"],
-                    style: const TextStyle(
-                      fontSize: 14,
+                    style: TextStyle(
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black87,
+                      color: theme.primaryColorDark,
                     ),
                   ),
-                  const SizedBox(height: 2),
                   Text(
                     item["subtitle"],
                     style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
+                      fontSize: 9.sp,
+                      color: theme.focusColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

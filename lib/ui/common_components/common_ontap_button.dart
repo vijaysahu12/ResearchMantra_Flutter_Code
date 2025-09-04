@@ -18,7 +18,7 @@ class CustomTabBarOnTapButton extends StatelessWidget {
     required this.selectedIndex,
     required this.onTabSelected,
     this.borderRadius = 4.0,
-    this.fontSize = 12,
+    required this.fontSize,
     this.backgroundColor = Colors.transparent,
     this.buttonBackgroundColor = Colors.transparent,
     this.buttonTextColor = Colors.black,
@@ -30,7 +30,7 @@ class CustomTabBarOnTapButton extends StatelessWidget {
     final theme = Theme.of(context);
     return Container(
       color: backgroundColor,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Row(
         children: List.generate(
           tabLabels.length,
@@ -39,14 +39,12 @@ class CustomTabBarOnTapButton extends StatelessWidget {
               onTap: () => onTabSelected(index),
               child: Container(
                 margin: EdgeInsets.only(
-                    right: index < tabLabels.length - 1 ? 8 : 0),
+                    right: index < tabLabels.length - 1 ? 4 : 0),
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 decoration: BoxDecoration(
-                  color: isBorderEnabled
-                      ? null
-                      : selectedIndex == index
-                          ? buttonBackgroundColor
-                          : Colors.transparent,
+                  color: selectedIndex == index
+                      ? buttonBackgroundColor
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(borderRadius),
                   border: isBorderEnabled
                       ? Border.all(
@@ -60,12 +58,12 @@ class CustomTabBarOnTapButton extends StatelessWidget {
                   tabLabels[index],
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: selectedIndex == index
-                        ? buttonTextColor
-                        : theme.focusColor,
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w600,
-                  ),
+                      color: selectedIndex == index
+                          ? buttonTextColor
+                          : theme.focusColor,
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.w600,
+                      wordSpacing: 0.5),
                 ),
               ),
             ),

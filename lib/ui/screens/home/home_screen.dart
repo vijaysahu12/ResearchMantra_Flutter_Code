@@ -3,8 +3,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:research_mantra_official/constants/assets.dart';
+import 'package:research_mantra_official/constants/assets_storage.dart';
 import 'package:research_mantra_official/constants/env_config.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/constants/storage.dart';
@@ -24,6 +26,7 @@ import 'package:research_mantra_official/services/check_connectivity.dart';
 import 'package:research_mantra_official/services/secure_storage.dart';
 import 'package:research_mantra_official/services/url_launcher_helper.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
+import 'package:research_mantra_official/ui/Screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 import 'package:research_mantra_official/ui/components/app_video/app_video.dart';
 import 'package:research_mantra_official/ui/components/cacher_network_images/circular_cached_network_image.dart';
@@ -37,6 +40,7 @@ import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/screens/home/screens/ongoing_trades.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider_widget.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
+import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
@@ -547,7 +551,16 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                   children: [
                     CommonOutlineButton(
                       text: 'View All',
-                      onPressed: () => print('Pressed!'),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeNavigatorWidget(
+                              initialIndex: 1,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     Container(
                       width: 30,
@@ -646,23 +659,27 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     const List<Map<String, dynamic>> gridItems = [
       {
         'title': 'Multibagger',
-        'icon': Icons.trending_up,
+        'icon': screenerIconPath,
         'color': Colors.blue,
+        'screen': 'multibagger',
       },
       {
         'title': 'Up to 100%',
-        'icon': Icons.insights,
+        'icon': screenerIconPath,
         'color': Colors.blue,
+        'screen': 'upto100',
       },
       {
         'title': 'Commodity',
-        'icon': Icons.search,
+        'icon': screenerIconPath,
         'color': Colors.blue,
+        'screen': 'commodity',
       },
       {
         'title': 'Screeners',
-        'icon': Icons.medical_services,
+        'icon': screenerIconPath,
         'color': Colors.blue,
+        'screen': 'screeners',
       },
     ];
 
@@ -672,7 +689,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       crossAxisCount: 4, // 4 items per row
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
-      childAspectRatio: 1.2,
+      childAspectRatio: 1.6,
       children: gridItems.map((item) => _buildGridItem(item)).toList(),
     );
   }
@@ -693,42 +710,38 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Centered Icon
-                Container(
-                  width: 60,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: item['color'].withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    item['icon'],
-                    color: item['color'],
-                    size: 22,
-                  ),
+          borderRadius: BorderRadius.circular(8),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MultibaggersScreen(),
+
+                // HomeNavigatorWidget(
+                //   initialIndex: 2,
+                // ),
+              ),
+            );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Centered Icon
+              Image.asset(
+                item['icon'],
+                scale: 20,
+              ),
+              const SizedBox(height: 8),
+              // Title at the bottom
+              Text(
+                item['title'],
+                style: TextStyle(
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
                 ),
-                const SizedBox(height: 8),
-                // Title at the bottom
-                Text(
-                  item['title'],
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -754,7 +767,18 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
           ),
         ),
         Spacer(),
-        CommonOutlineButton(text: "View All", onPressed: () {})
+        CommonOutlineButton(
+            text: "View All",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeNavigatorWidget(
+                    initialIndex: 2,
+                  ),
+                ),
+              );
+            })
       ],
     );
   }

@@ -233,6 +233,7 @@ flutter:
     - assets/images/research_mantra/candlestick.png
     - assets/images/research_mantra/ingots.png
     - assets/images/research_mantra/options.png
+    - assets/images/research_mantra/trend.png
     # - ios/notification_tone.wav
 
   # To add assets to your application, add an assets section, like this:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PerformanceCard extends StatefulWidget {
   const PerformanceCard({super.key});
@@ -38,17 +39,12 @@ class _PerformanceCardState extends State<PerformanceCard> {
     },
   };
 
-  static const List<String> tabLabels = [
-    'Stocks',
-    'Futures',
-    'Options',
-    'Commodity'
-  ];
+  static const List<String> tabLabels = ['Stocks', 'Futures', 'Options', 'MCX'];
 
   @override
   Widget build(BuildContext context) {
     final currentData = performanceData[selectedTabIndex]!;
-
+    final theme = Theme.of(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -58,17 +54,17 @@ class _PerformanceCardState extends State<PerformanceCard> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildHeader(),
-          _buildTabBar(),
-          _buildPerformanceMetrics(currentData),
-          _buildActivateButton(),
-          _buildFooterNote(),
+          _buildHeader(theme),
+          _buildTabBar(theme),
+          _buildPerformanceMetrics(currentData, theme),
+          _buildActivateButton(theme),
+          _buildFooterNote(theme),
         ],
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(ThemeData theme) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
@@ -77,37 +73,30 @@ class _PerformanceCardState extends State<PerformanceCard> {
           Text(
             'Susmitha Performance',
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
+              color: theme.primaryColor,
+              fontSize: 13.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
           Row(
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.check_circle, color: Colors.white, size: 14),
-                    SizedBox(width: 4),
-                    Text(
-                      'SEBI Reg.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.check_circle,
+                      color: theme.primaryColor, size: 14.sp),
+                  SizedBox(width: 4),
+                  Text(
+                    'SEBI Reg.',
+                    style: TextStyle(
+                      color: theme.primaryColor,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(width: 8),
-              Icon(Icons.info_outline, color: Colors.grey[400], size: 20),
+              Icon(Icons.info_outline, color: theme.primaryColor, size: 16.sp),
             ],
           ),
         ],
@@ -115,7 +104,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
     );
   }
 
-  Widget _buildTabBar() {
+  Widget _buildTabBar(ThemeData theme) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -129,19 +118,22 @@ class _PerformanceCardState extends State<PerformanceCard> {
                     right: index < tabLabels.length - 1 ? 8 : 0),
                 padding: EdgeInsets.symmetric(vertical: 5),
                 decoration: BoxDecoration(
-                  color:
-                      selectedTabIndex == index ? Colors.orange : Colors.white,
+                  color: selectedTabIndex == index
+                      ? theme.secondaryHeaderColor
+                      : theme.primaryColor,
                   borderRadius: BorderRadius.circular(4),
                   border: selectedTabIndex == index
-                      ? Border.all(color: Colors.white)
+                      ? Border.all(
+                          color: theme.primaryColor,
+                        )
                       : Border.all(color: Colors.transparent),
                 ),
                 child: Text(
                   tabLabels[index],
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
+                    color: theme.primaryColorDark,
+                    fontSize: 10.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -153,7 +145,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
     );
   }
 
-  Widget _buildPerformanceMetrics(Map<String, dynamic> data) {
+  Widget _buildPerformanceMetrics(Map<String, dynamic> data, ThemeData theme) {
     return Container(
       margin: EdgeInsets.all(20),
       padding: EdgeInsets.all(20),
@@ -193,13 +185,26 @@ class _PerformanceCardState extends State<PerformanceCard> {
             color: Colors.grey[600],
           ),
           SizedBox(height: 16),
-          Text(
-            'Trades Hit Accuracy: ${data['accuracy']}',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Trades Hit Accuracy:',
+                style: TextStyle(
+                  color: theme.primaryColor,
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                ' ${data['accuracy']}',
+                style: TextStyle(
+                  color: theme.primaryColor,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -213,7 +218,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
           label,
           style: TextStyle(
             color: Colors.grey[400],
-            fontSize: 14,
+            fontSize: 13.sp,
           ),
           textAlign: TextAlign.center,
         ),
@@ -222,7 +227,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
           value,
           style: TextStyle(
             color: valueColor,
-            fontSize: 22,
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -230,17 +235,17 @@ class _PerformanceCardState extends State<PerformanceCard> {
     );
   }
 
-  Widget _buildActivateButton() {
+  Widget _buildActivateButton(ThemeData theme) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
       child: SizedBox(
         width: double.infinity,
-        height: 50,
+        height: 35.h,
         child: ElevatedButton(
           onPressed: _onActivateTrialPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
+            backgroundColor: theme.primaryColor,
+            foregroundColor: theme.primaryColorDark,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -249,8 +254,9 @@ class _PerformanceCardState extends State<PerformanceCard> {
           child: Text(
             'Activate Now',
             style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: theme.primaryColorDark,
             ),
           ),
         ),
@@ -258,21 +264,21 @@ class _PerformanceCardState extends State<PerformanceCard> {
     );
   }
 
-  Widget _buildFooterNote() {
+  Widget _buildFooterNote(ThemeData theme) {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             'Performance based on completed trades.',
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
+              color: theme.primaryColor,
+              fontSize: 11.sp,
             ),
           ),
           SizedBox(width: 8),
-          Icon(Icons.info_outline, color: Colors.grey[400], size: 16),
+          Icon(Icons.info_outline, color: theme.primaryColor, size: 16.sp),
         ],
       ),
     );
