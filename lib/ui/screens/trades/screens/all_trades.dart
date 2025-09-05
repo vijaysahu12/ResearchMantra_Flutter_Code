@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/assets_storage.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
+import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
+import 'package:research_mantra_official/ui/screens/research_stock_basket/stock_baskets.dart';
+import 'package:research_mantra_official/ui/screens/research_xclusive/xclusive_screen.dart';
+import 'package:research_mantra_official/ui/screens/trades/screens/live_history_trades.dart';
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 class AllTradesDetailsScreen extends StatefulWidget {
@@ -18,29 +22,54 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
       "title": "Stocks",
       "subtitle": "79 Live",
       "icon": arrowIconPath,
-    },
-    {
-      "title": "Options",
-      "subtitle": "5 Live",
-      "icon": candlestickIconPath,
+      "screen": LiveClosedTradesScreen(
+        title: 'Stocks',
+        initialSelectedTabIndex: 0,
+      ),
     },
     {
       "title": "Futures",
       "subtitle": "7 Live",
       "icon": bullMarketIconPath,
+      "screen": LiveClosedTradesScreen(
+        title: 'Stocks',
+        initialSelectedTabIndex: 2,
+      ),
+    },
+    {
+      "title": "Options",
+      "subtitle": "5 Live",
+      "icon": candlestickIconPath,
+      "screen": LiveClosedTradesScreen(
+        title: 'Stocks',
+        initialSelectedTabIndex: 3,
+      ),
     },
     {
       "title": "Commodity",
       "subtitle": "7 Live",
-      "icon": ingotsIconPath,
+      "icon": mcxIconPath,
+      "screen": LiveClosedTradesScreen(
+        title: 'Stocks',
+        initialSelectedTabIndex: 3,
+      ),
     },
   ];
 
   // 🔹 Pro Cards JSON Data
   final List<Map<String, dynamic>> proCards = [
-    {"title": "Stock Baskets", "icon": Icons.shopping_basket},
-    {"title": "Multibaggers", "icon": Icons.star},
-    {"title": "Xclusive Ideas", "icon": Icons.lightbulb},
+    {
+      "title": "Stock Baskets",
+      "screen": StockBasketsScreen(),
+    },
+    {
+      "title": "Multibaggers",
+      "screen": MultibaggersScreen(),
+    },
+    {
+      "title": "Xclusive Ideas",
+      "screen": XclusiveScreen(),
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -86,50 +115,58 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
             children: proCards.map((item) {
-              return Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: theme.shadowColor,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Stack(
-                    children: [
-                      // Top: Title
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                          item["title"],
-                          style: textH4.copyWith(
-                              color: theme.primaryColorDark, fontSize: 10.sp),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      // Center: Icon
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: theme.primaryColor.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Image.asset(
-                            bullMarketIconPath,
-                            scale: 12,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => item["screen"]),
+                  );
+                },
+                child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: theme.shadowColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Stack(
+                      children: [
+                        // Top: Title
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Text(
+                            item["title"],
+                            style: textH4.copyWith(
+                                color: theme.primaryColorDark, fontSize: 10.sp),
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                      ),
-                      // Bottom: Explore
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
-                          "Explore",
-                          style: textH4.copyWith(
-                              color: theme.primaryColorDark, fontSize: 10.sp),
+                        // Center: Icon
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: theme.primaryColor.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Image.asset(
+                              bullMarketIconPath,
+                              scale: 12,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ));
+                        // Bottom: Explore
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            "Explore",
+                            style: textH4.copyWith(
+                                color: theme.primaryColorDark, fontSize: 10.sp),
+                          ),
+                        ),
+                      ],
+                    )),
+              );
             }).toList(),
           )
         ],

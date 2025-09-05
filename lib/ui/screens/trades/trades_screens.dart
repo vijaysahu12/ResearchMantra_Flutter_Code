@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_ontap_button.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/all_trades.dart';
-
 import 'package:research_mantra_official/ui/screens/trades/screens/live_history_trades.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/mcx_trades.dart';
 
 class TradeScreen extends StatefulWidget {
-  const TradeScreen({super.key});
+  final int initialSelectedTabIndex;
+  const TradeScreen({super.key, this.initialSelectedTabIndex = 0});
 
   @override
   State<TradeScreen> createState() => _TradeScreenState();
 }
 
 class _TradeScreenState extends State<TradeScreen> {
-  int selectedTabIndex = 0;
-
   final List<String> tabLabels = [
     'Home',
     'Live Trades',
@@ -32,6 +30,12 @@ class _TradeScreenState extends State<TradeScreen> {
     ),
     McxTradesScreen(),
   ];
+  late int selectedTabIndex;
+  @override
+  void initState() {
+    super.initState();
+    selectedTabIndex = widget.initialSelectedTabIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

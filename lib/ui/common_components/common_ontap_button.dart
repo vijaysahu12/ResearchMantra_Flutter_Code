@@ -58,12 +58,13 @@ class CustomTabBarOnTapButton extends StatelessWidget {
                   tabLabels[index],
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: selectedIndex == index
-                          ? buttonTextColor
-                          : theme.focusColor,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w600,
-                      wordSpacing: 0.5),
+                    color: selectedIndex == index
+                        ? buttonTextColor
+                        : theme.focusColor,
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.w600,
+                    wordSpacing: 0.5,
+                  ),
                 ),
               ),
             ),

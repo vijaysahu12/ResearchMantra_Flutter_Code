@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/ui/common_components/trade_action_container.dart';
 
 class ClosedMultibaggersScreen extends StatelessWidget {
   final List<Map<String, dynamic>> data;
@@ -25,9 +26,7 @@ class ClosedMultibaggersScreen extends StatelessWidget {
           itemCount: data.length,
           itemBuilder: (context, index) {
             final item = data[index];
-            return 
-            
-            Container(
+            return Container(
               margin: EdgeInsets.all(8.w),
               padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
@@ -72,53 +71,10 @@ class ClosedMultibaggersScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 6.h),
-
+                  SizedBox(height: 2.h),
                   // ✅ Entry & Exit Details
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8.0.w),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          border: Border.all(
-                              color: theme.indicatorColor, width: 0.2),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Entry Price: ₹${item["entryPrice"]}",
-                                style: theme.textTheme.bodyMedium
-                                    ?.copyWith(fontSize: 11.sp)),
-                            Text("Date: ${item["entryDate"]}",
-                                style: theme.textTheme.bodySmall
-                                    ?.copyWith(fontSize: 10.sp)),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(8.0.w),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          border: Border.all(
-                              color: theme.indicatorColor, width: 0.2),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text("Exit Price: ₹${item["exitPrice"]}",
-                                style: theme.textTheme.bodyMedium
-                                    ?.copyWith(fontSize: 11.sp)),
-                            Text("Date: ${item["exitDate"]}",
-                                style: theme.textTheme.bodySmall
-                                    ?.copyWith(fontSize: 10.sp)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 6.h),
+                  TradeTable(actions: item["actions"]),
+                  SizedBox(height: 2.h),
 
                   // ✅ Bottom Action Row
                   Row(
@@ -145,8 +101,6 @@ class ClosedMultibaggersScreen extends StatelessWidget {
                 ],
               ),
             );
-         
-         
           },
         ),
       ],

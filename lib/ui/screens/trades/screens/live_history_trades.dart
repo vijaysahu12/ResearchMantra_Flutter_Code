@@ -4,8 +4,10 @@ import 'package:research_mantra_official/ui/common_components/common_ontap_butto
 import 'package:research_mantra_official/ui/screens/trades/widgets/trade_list.dart';
 
 class LiveClosedTradesScreen extends StatefulWidget {
+  final int initialSelectedTabIndex;
   final String title;
-  const LiveClosedTradesScreen({super.key, required this.title});
+  const LiveClosedTradesScreen(
+      {super.key, required this.title, this.initialSelectedTabIndex = 0});
 
   @override
   State<LiveClosedTradesScreen> createState() => _LiveClosedTradesScreenState();

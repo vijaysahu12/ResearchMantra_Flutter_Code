@@ -28,11 +28,6 @@ class _MultibaggersScreenState extends State<MultibaggersScreen> {
             "date": "09/06/25 | 02:50 PM",
             "price": "2,000"
           },
-          {
-            "action": "Exit Full",
-            "date": "09/06/25 | 02:50 PM",
-            "price": "3,900"
-          },
         ],
         "isPurchased": false,
       },
@@ -50,11 +45,6 @@ class _MultibaggersScreenState extends State<MultibaggersScreen> {
             "date": "09/06/25 | 02:50 PM",
             "price": "2,000"
           },
-          {
-            "action": "Exit Full",
-            "date": "09/06/25 | 02:50 PM",
-            "price": "3,900"
-          },
         ],
         "isPurchased": false,
       },
@@ -71,11 +61,6 @@ class _MultibaggersScreenState extends State<MultibaggersScreen> {
             "action": "Add 100%",
             "date": "09/06/25 | 02:50 PM",
             "price": "2,000"
-          },
-          {
-            "action": "Exit Full",
-            "date": "09/06/25 | 02:50 PM",
-            "price": "3,900"
           },
         ],
         "isPurchased": true,

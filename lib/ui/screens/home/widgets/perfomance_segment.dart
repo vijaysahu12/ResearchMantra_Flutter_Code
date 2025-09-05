@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/ui/common_components/shimmer_button.dart';
 
 class PerformanceCard extends StatefulWidget {
   const PerformanceCard({super.key});
@@ -237,31 +238,42 @@ class _PerformanceCardState extends State<PerformanceCard> {
 
   Widget _buildActivateButton(ThemeData theme) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
-      child: SizedBox(
-        width: double.infinity,
-        height: 35.h,
-        child: ElevatedButton(
-          onPressed: _onActivateTrialPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: theme.primaryColor,
-            foregroundColor: theme.primaryColorDark,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0,
-          ),
-          child: Text(
-            'Activate Now',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: theme.primaryColorDark,
-            ),
-          ),
-        ),
-      ),
-    );
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
+        child: ShimmerButton(
+          isShimmer: false,
+          width: 220,
+          height: 30,
+          fontSize: 10,
+          text: "Request Callback",
+          backgroundColor: theme.primaryColor,
+          textColor: theme.primaryColorDark,
+        )
+
+        //  SizedBox(
+        //   width: double.infinity,
+        //   height: 35.h,
+        //   child: ElevatedButton(
+        //     onPressed: _onActivateTrialPressed,
+        //     style: ElevatedButton.styleFrom(
+        //       backgroundColor: theme.primaryColor,
+        //       foregroundColor: theme.primaryColorDark,
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.circular(8),
+        //       ),
+        //       elevation: 0,
+        //     ),
+        //     child: Text(
+        //       'Activate Now',
+        //       style: TextStyle(
+        //         fontSize: 14.sp,
+        //         fontWeight: FontWeight.w600,
+        //         color: theme.primaryColorDark,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+
+        );
   }
 
   Widget _buildFooterNote(ThemeData theme) {

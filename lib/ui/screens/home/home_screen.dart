@@ -42,6 +42,7 @@ import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
 import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
+import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
 class HomeScreenWidget extends ConsumerStatefulWidget {
@@ -655,38 +656,40 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   }
 
 //Bottom Grid Multibaggers,commodity,screeners
-  Widget _buildBottomGrid() {
-    const List<Map<String, dynamic>> gridItems = [
-      {
-        'title': 'Multibagger',
-        'icon': screenerIconPath,
-        'color': Colors.blue,
-        'screen': 'multibagger',
-      },
-      {
-        'title': 'Up to 100%',
-        'icon': screenerIconPath,
-        'color': Colors.blue,
-        'screen': 'upto100',
-      },
-      {
-        'title': 'Commodity',
-        'icon': screenerIconPath,
-        'color': Colors.blue,
-        'screen': 'commodity',
-      },
-      {
-        'title': 'Screeners',
-        'icon': screenerIconPath,
-        'color': Colors.blue,
-        'screen': 'screeners',
-      },
-    ];
+  // 📌 Define your grid items once (outside the widget class if possible)
+  final List<GridItem> gridItems = [
+    GridItem(
+      title: 'Multibagger',
+      icon: screenerIconPath,
+      color: Colors.blue,
+      screen: const MultibaggersScreen(),
+    ),
+    GridItem(
+      title: 'Up to 100%',
+      icon: screenerIconPath,
+      color: Colors.blue,
+      screen: const MultibaggersScreen(),
+    ),
+    GridItem(
+      title: 'Commodity',
+      icon: mcxIconPath,
+      color: Colors.blue,
+      screen: const HomeNavigatorWidget(initialIndex: 1),
+    ),
+    GridItem(
+      title: 'Screeners',
+      icon: screenerIconPath,
+      color: Colors.blue,
+      screen: const HomeNavigatorWidget(initialIndex: 2),
+    ),
+  ];
 
+// 📌 Your bottom grid widget
+  Widget _buildBottomGrid() {
     return GridView.count(
-      shrinkWrap: true, // Important if inside a Column
-      physics: NeverScrollableScrollPhysics(), // Disable scrolling
-      crossAxisCount: 4, // 4 items per row
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 4,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
       childAspectRatio: 1.6,
@@ -694,7 +697,8 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     );
   }
 
-  Widget _buildGridItem(Map<String, dynamic> item) {
+// 📌 Individual grid item
+  Widget _buildGridItem(GridItem item) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -714,27 +718,16 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => MultibaggersScreen(),
-
-                // HomeNavigatorWidget(
-                //   initialIndex: 2,
-                // ),
-              ),
+              MaterialPageRoute(builder: (_) => item.screen),
             );
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Centered Icon
-              Image.asset(
-                item['icon'],
-                scale: 20,
-              ),
+              Image.asset(item.icon, scale: 20),
               const SizedBox(height: 8),
-              // Title at the bottom
               Text(
-                item['title'],
+                item.title,
                 style: TextStyle(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.w600,
@@ -933,4 +926,19 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       ),
     );
   }
+}
+
+// 📌 Simple model for safety
+class GridItem {
+  final String title;
+  final String icon;
+  final Color color;
+  final Widget screen;
+
+  const GridItem({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.screen,
+  });
 }
