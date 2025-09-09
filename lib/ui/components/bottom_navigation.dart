@@ -39,9 +39,9 @@ class BottomNavigation extends StatelessWidget {
           label: 'Screeners',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          activeIcon: Icon(Icons.person),
-          label: 'Profile',
+          icon: Icon(Icons.breakfast_dining_outlined),
+          activeIcon: Icon(Icons.breakfast_dining),
+          label: 'Market',
         ),
       ],
       type: BottomNavigationBarType.fixed,

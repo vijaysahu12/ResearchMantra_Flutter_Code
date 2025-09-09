@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TradeTable extends StatelessWidget {
-  final List<Map<String, String>> actions;
+  final List<Map<String, dynamic>> actions;
 
   const TradeTable({super.key, required this.actions});
 

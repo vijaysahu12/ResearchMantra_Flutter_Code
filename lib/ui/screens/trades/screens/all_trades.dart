@@ -5,11 +5,12 @@ import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segm
 import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
 import 'package:research_mantra_official/ui/screens/research_stock_basket/stock_baskets.dart';
 import 'package:research_mantra_official/ui/screens/research_xclusive/xclusive_screen.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/live_history_trades.dart';
+
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 class AllTradesDetailsScreen extends StatefulWidget {
-  const AllTradesDetailsScreen({super.key});
+  final void Function(int, int)? onTabSelected;
+  const AllTradesDetailsScreen({super.key, this.onTabSelected});
 
   @override
   State<AllTradesDetailsScreen> createState() => _AllTradesDetailsScreenState();
@@ -22,37 +23,29 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
       "title": "Stocks",
       "subtitle": "79 Live",
       "icon": arrowIconPath,
-      "screen": LiveClosedTradesScreen(
-        title: 'Stocks',
-        initialSelectedTabIndex: 0,
-      ),
+      "tabIndex": 1,
+      "subIndex": 0,
     },
     {
       "title": "Futures",
       "subtitle": "7 Live",
       "icon": bullMarketIconPath,
-      "screen": LiveClosedTradesScreen(
-        title: 'Stocks',
-        initialSelectedTabIndex: 2,
-      ),
+      "tabIndex": 1,
+      "subIndex": 3,
     },
     {
       "title": "Options",
       "subtitle": "5 Live",
       "icon": candlestickIconPath,
-      "screen": LiveClosedTradesScreen(
-        title: 'Stocks',
-        initialSelectedTabIndex: 3,
-      ),
+      "tabIndex": 1,
+      "subIndex": 4,
     },
     {
       "title": "Commodity",
       "subtitle": "7 Live",
       "icon": mcxIconPath,
-      "screen": LiveClosedTradesScreen(
-        title: 'Stocks',
-        initialSelectedTabIndex: 3,
-      ),
+      "tabIndex": 3,
+      "subIndex": 0,
     },
   ];
 
@@ -195,21 +188,27 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
             children: tradingSegments.map((item) {
               return Column(
                 children: [
-                  Container(
-                    width: 45.sp,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: theme.shadowColor,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
+                  GestureDetector(
+                    onTap: () {
+                      widget.onTabSelected
+                          ?.call(item['tabIndex'], item['subIndex'] ?? 0);
+                    },
                     child: Container(
+                      width: 45.sp,
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: theme.primaryColor.withOpacity(0.4),
+                        color: theme.shadowColor,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Image.asset(
-                        item["icon"],
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: theme.primaryColor.withOpacity(0.4),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Image.asset(
+                          item["icon"],
+                        ),
                       ),
                     ),
                   ),

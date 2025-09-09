@@ -59,29 +59,29 @@ class _AppBarScreenState extends State<AppBarScreen> {
           const ProfileImageAndUserName(),
           const Spacer(),
           // if (widget.selectedIndex == 3 || widget.selectedIndex == 4)
-            Row(
-              children: [
-                Stack(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, notifications,
-                            arguments: widget.selectedIndex);
-                      },
-                      icon: Icon(
-                        Icons.notifications,
-                        color: theme.primaryColorDark,
-                      ),
+          Row(
+            children: [
+              Stack(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, notifications,
+                          arguments: widget.selectedIndex);
+                    },
+                    icon: Icon(
+                      Icons.notifications,
+                      color: theme.primaryColorDark,
                     ),
-                    const Positioned(
-                      top: 2,
-                      right: 3,
-                      child: NotificationCountWidget(),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  const Positioned(
+                    top: 2,
+                    right: 3,
+                    child: NotificationCountWidget(),
+                  )
+                ],
+              ),
+            ],
+          ),
           // if (widget.selectedIndex != 3 && widget.selectedIndex != 4)
           //   InkWell(
           //     onTap: handleNavigateToJournalScreen,
@@ -119,9 +119,6 @@ class _AppBarScreenState extends State<AppBarScreen> {
           //       ),
           //     ),
           //   ),
-      
-      
-      
         ],
       ),
     );
@@ -167,7 +164,7 @@ class _CommonAppBarWithBackButtonState
       leading: IconButton(
         onPressed: widget.handleBackButton,
         icon: Icon(
-          Icons.arrow_back_ios,
+          Icons.arrow_back_rounded,
           color: theme.primaryColorDark,
           size: fontSize * 0.03,
         ),

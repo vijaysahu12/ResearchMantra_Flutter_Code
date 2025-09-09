@@ -42,7 +42,7 @@ import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
 import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
-import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
+import 'package:research_mantra_official/ui/screens/research_stock_basket/stock_baskets.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
 class HomeScreenWidget extends ConsumerStatefulWidget {
@@ -509,80 +509,90 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     );
   }
 
+  //Method to navigation
+  void handleToNavigateProTradeScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeNavigatorWidget(
+          initialIndex: 1,
+        ),
+      ),
+    );
+  }
+
   Widget _buildTopSection(theme) {
     return Row(
       children: [
         // PRO Trades Section
         Expanded(
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: theme.primaryColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: theme.primaryColorDark.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'PRO Trades',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: theme.primaryColorDark,
+          child: GestureDetector(
+            onTap: () {
+              handleToNavigateProTradeScreen();
+            },
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: theme.primaryColor,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.primaryColorDark.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: Offset(0, 2),
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Stocks + F&O',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: theme.focusColor,
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'PRO Trades',
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      color: theme.primaryColorDark,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonOutlineButton(
-                      text: 'View All',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomeNavigatorWidget(
-                              initialIndex: 1,
-                            ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Stocks + F&O',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: theme.focusColor,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CommonOutlineButton(
+                        text: 'View All',
+                        onPressed: () {
+                          handleToNavigateProTradeScreen();
+                        },
+                      ),
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Colors.blue, Colors.blue[700]!],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                        );
-                      },
-                    ),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.blue, Colors.blue[700]!],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        borderRadius: BorderRadius.circular(15),
+                        child: Icon(
+                          Icons.workspace_premium,
+                          color: Colors.white,
+                          size: 30,
+                        ),
                       ),
-                      child: Icon(
-                        Icons.workspace_premium,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -661,25 +671,23 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     GridItem(
       title: 'Multibagger',
       icon: screenerIconPath,
-      color: Colors.blue,
       screen: const MultibaggersScreen(),
     ),
     GridItem(
-      title: 'Up to 100%',
+      title: 'Prime Baskets',
       icon: screenerIconPath,
-      color: Colors.blue,
-      screen: const MultibaggersScreen(),
+      screen: const StockBasketsScreen(),
     ),
     GridItem(
       title: 'Commodity',
       icon: mcxIconPath,
-      color: Colors.blue,
-      screen: const HomeNavigatorWidget(initialIndex: 1),
+      screen: HomeNavigatorWidget(
+        initialIndex: 1,
+      ),
     ),
     GridItem(
       title: 'Screeners',
       icon: screenerIconPath,
-      color: Colors.blue,
       screen: const HomeNavigatorWidget(initialIndex: 2),
     ),
   ];
@@ -692,7 +700,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       crossAxisCount: 4,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
-      childAspectRatio: 1.6,
+      childAspectRatio: 1.5,
       children: gridItems.map((item) => _buildGridItem(item)).toList(),
     );
   }
@@ -725,7 +733,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(item.icon, scale: 20),
-              const SizedBox(height: 8),
+              const SizedBox(height: 3),
               Text(
                 item.title,
                 style: TextStyle(
@@ -932,13 +940,12 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
 class GridItem {
   final String title;
   final String icon;
-  final Color color;
+
   final Widget screen;
 
   const GridItem({
     required this.title,
     required this.icon,
-    required this.color,
     required this.screen,
   });
 }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 import 'package:research_mantra_official/ui/common_components/shimmer_button.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
+import 'package:research_mantra_official/ui/screens/research_stock_basket/screens/basket_stock_details.dart';
 
 class StockBasketsScreen extends StatefulWidget {
   const StockBasketsScreen({super.key});
@@ -129,103 +130,122 @@ class _MyStockBasketsScreenState extends State<StockBasketsScreen> {
     );
   }
 
+//Method to navigate BasketStockDetailsScreen
+
+  void handleToNavigateBasketStockDetailsScreen(title) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BasketStockDetailsScreen(
+          title: title,
+        ),
+      ),
+    );
+  }
+
   Widget buildStockBasketCard(
       BuildContext context, Map<String, dynamic> basket) {
     final theme = Theme.of(context);
 
-    return Container(
-      margin: const EdgeInsets.all(8.0),
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: theme.shadowColor),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 🖼️ Basket Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              basket['imageUrl'],
-              height: 80.sp,
-              width: 80.sp,
-              fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        handleToNavigateBasketStockDetailsScreen(basket['title']);
+      },
+      child: Container(
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: theme.shadowColor),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 🖼️ Basket Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                basket['imageUrl'],
+                height: 80.sp,
+                width: 80.sp,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
+            const SizedBox(width: 12),
 
-          // 📊 Basket Info
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title + Volatility
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        basket['title'],
-                        style: TextStyle(
-                          color: theme.primaryColorDark,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      basket['volatility'],
-                      style: TextStyle(
-                        color: theme.focusColor,
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12.sp),
-
-                // Timeframe + CAGR + View button
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          basket['timeFrame'],
+            // 📊 Basket Info
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title + Volatility
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          basket['title'],
                           style: TextStyle(
                             color: theme.primaryColorDark,
-                            fontSize: 11.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          "+${basket['cagr']}%",
-                          style: TextStyle(
-                            color: theme.secondaryHeaderColor,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w600,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        basket['volatility'],
+                        style: TextStyle(
+                          color: theme.focusColor,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12.sp),
+
+                  // Timeframe + CAGR + View button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            basket['timeFrame'],
+                            style: TextStyle(
+                              color: theme.primaryColorDark,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    CommonOutlineButton(
-                      borderColor: theme.shadowColor,
-                      textColor: theme.focusColor,
-                      text: "View",
-                      onPressed: () {
-                        // TODO: Navigate to detail screen
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                          Text(
+                            "+${basket['cagr']}%",
+                            style: TextStyle(
+                              color: theme.secondaryHeaderColor,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      CommonOutlineButton(
+                        borderColor: theme.shadowColor,
+                        textColor: theme.focusColor,
+                        text: "View",
+                        onPressed: () {
+                          handleToNavigateBasketStockDetailsScreen(
+                              basket['title']);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -261,17 +281,10 @@ class _MyStockBasketsScreenState extends State<StockBasketsScreen> {
           border: Border.all(color: theme.shadowColor)),
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => item.screen),
-          );
-        },
+        onTap: () {},
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Image.asset(item.icon, scale: 20),
-            // const SizedBox(height: 8),
             Text(
               item['title'],
               textAlign: TextAlign.center,

@@ -12,21 +12,21 @@ class CommonOutlineButton extends StatelessWidget {
   final double borderWidth;
   final TextStyle? textStyle;
   final EdgeInsetsGeometry? padding;
-  
+  final Color backgroundColor;
 
-  const CommonOutlineButton({
-    super.key,
-    required this.text,
-    this.onPressed,
-    this.width,
-    this.height,
-    this.borderRadius = 20.0,
-    this.borderColor = Colors.blue,
-    this.textColor = Colors.black,
-    this.borderWidth = 1.5,
-    this.textStyle,
-    this.padding,
-  });
+  const CommonOutlineButton(
+      {super.key,
+      required this.text,
+      this.onPressed,
+      this.width,
+      this.height,
+      this.borderRadius = 20.0,
+      this.borderColor = Colors.blue,
+      this.textColor = Colors.black,
+      this.borderWidth = 1.5,
+      this.textStyle,
+      this.padding,
+      this.backgroundColor = Colors.transparent});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class CommonOutlineButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: backgroundColor,
         ),
         child: Text(
           text,

@@ -244,9 +244,10 @@ class _PerformanceCardState extends State<PerformanceCard> {
           width: 220,
           height: 30,
           fontSize: 10,
-          text: "Request Callback",
+          text: "Activate Now",
           backgroundColor: theme.primaryColor,
           textColor: theme.primaryColorDark,
+          onPressed: _onActivateTrialPressed,
         )
 
         //  SizedBox(
@@ -306,5 +307,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
   }
 
   // Method called when Activate Trial button is pressed
-  void _onActivateTrialPressed() {}
+  void _onActivateTrialPressed() {
+    //Todo: Navigation Screen pending
+  }
 }

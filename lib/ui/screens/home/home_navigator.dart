@@ -9,6 +9,7 @@ import 'package:research_mantra_official/ui/components/bottom_navigation.dart';
 import 'package:research_mantra_official/ui/components/dynamic_promo_card/service/promo_manager.dart';
 import 'package:research_mantra_official/ui/components/dynamic_promo_card/watcher/promo_activator.dart';
 import 'package:research_mantra_official/ui/screens/home/home_screen.dart';
+import 'package:research_mantra_official/ui/screens/market/market_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/profile_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
 import 'package:research_mantra_official/ui/screens/scanners/scanners.dart';
@@ -220,9 +221,11 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
 
       // const BlogScreenBaseScreen(),
       // const ResearchScreen(),
-      const TradeScreen(),
+      const TradeScreen(
+        initialSelectedTabIndex: 0,
+      ),
       ScreenersHomeScreen(),
-      const ProfileWidget(),
+      const MarketScreen(),
     ];
 
     return SafeArea(

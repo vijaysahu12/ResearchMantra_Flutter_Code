@@ -16,8 +16,14 @@ class _McxTradesScreenState extends State<McxTradesScreen> {
 
   final List<String> tabLabels = ['Open Trades', 'Closed Trades'];
   final List<Widget> tabScreens = [
-    TradesIdeasListWidget(tradeType: "MCX Open"),
-    TradesIdeasListWidget(tradeType: "MCX Closed Trades"),
+    TradesIdeasListWidget(
+      tradeType: "MCX Open",
+      tradeIdeasJson: [],
+    ),
+    TradesIdeasListWidget(
+      tradeType: "MCX Closed Trades",
+      tradeIdeasJson: [],
+    ),
   ];
 
   @override
@@ -26,14 +32,16 @@ class _McxTradesScreenState extends State<McxTradesScreen> {
     return Scaffold(
       backgroundColor: theme.primaryColor,
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTabBarOnTapButton(
+              borderRadius: 12,
               fontSize: 10.sp,
               isBorderEnabled: true,
-              buttonTextColor: theme.primaryColorDark,
+              buttonTextColor: theme.primaryColor,
+              buttonBackgroundColor: theme.primaryColorDark,
               tabLabels: tabLabels,
               selectedIndex: selectedTabIndex,
               onTabSelected: (index) {

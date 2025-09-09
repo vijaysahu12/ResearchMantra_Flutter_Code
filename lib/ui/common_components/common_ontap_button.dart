@@ -11,6 +11,7 @@ class CustomTabBarOnTapButton extends StatelessWidget {
   final Color buttonBackgroundColor;
   final Color buttonTextColor;
   final bool isBorderEnabled;
+  final bool isScrollHorizontal; // 👈 new flag
 
   const CustomTabBarOnTapButton({
     super.key,
@@ -23,54 +24,60 @@ class CustomTabBarOnTapButton extends StatelessWidget {
     this.buttonBackgroundColor = Colors.transparent,
     this.buttonTextColor = Colors.black,
     this.isBorderEnabled = false,
+    this.isScrollHorizontal = true, // 👈 default scroll
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      color: backgroundColor,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      child: Row(
-        children: List.generate(
-          tabLabels.length,
-          (index) => Expanded(
-            child: GestureDetector(
-              onTap: () => onTabSelected(index),
-              child: Container(
-                margin: EdgeInsets.only(
-                    right: index < tabLabels.length - 1 ? 4 : 0),
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                decoration: BoxDecoration(
-                  color: selectedIndex == index
-                      ? buttonBackgroundColor
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(borderRadius),
-                  border: isBorderEnabled
-                      ? Border.all(
-                          color: selectedIndex == index
-                              ? Colors.black
-                              : Colors.transparent,
-                        )
-                      : null,
-                ),
-                child: Text(
-                  tabLabels[index],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
+
+    final tabWidgets = List.generate(
+      tabLabels.length,
+      (index) => GestureDetector(
+        onTap: () => onTabSelected(index),
+        child: Container(
+          margin: EdgeInsets.only(
+            right: index < tabLabels.length - 1 ? 8 : 2,
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
+          decoration: BoxDecoration(
+            color: selectedIndex == index
+                ? buttonBackgroundColor
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(borderRadius),
+            border: isBorderEnabled
+                ? Border.all(
                     color: selectedIndex == index
-                        ? buttonTextColor
-                        : theme.focusColor,
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w600,
-                    wordSpacing: 0.5,
-                  ),
-                ),
-              ),
+                        ? Colors.transparent
+                        : Colors.black,
+                  )
+                : null,
+          ),
+          child: Text(
+            tabLabels[index],
+            style: TextStyle(
+              color:
+                  selectedIndex == index ? buttonTextColor : theme.focusColor,
+              fontSize: fontSize,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
       ),
+    );
+
+    return Container(
+      color: backgroundColor,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: isScrollHorizontal
+          ? SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(children: tabWidgets),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: tabWidgets,
+            ),
     );
   }
 }
