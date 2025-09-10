@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:research_mantra_official/ui/themes/text_style.dart';
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 Color brandingPrimaryColor = const Color(0xffffffff);
@@ -29,13 +30,13 @@ ThemeData lightTheme = ThemeData(
   shadowColor: Colors.grey.withOpacity(0.27),
   focusColor: const Color(0xff595959),
   fontFamily: fontFamily,
-  textTheme: const TextTheme(
-    displayLarge: textH1,
-    headlineMedium: textH4,
-    headlineSmall: textH5,
-    titleMedium: textStandard,
-    titleSmall: textSmall,
-    bodyLarge: textInput,
+  textTheme: TextTheme(
+    displayLarge: AppTextStyles.h1,
+    headlineMedium: AppTextStyles.h2,
+    headlineSmall: AppTextStyles.stat,
+    titleMedium: AppTextStyles.captionMedium,
+    titleSmall: AppTextStyles.statStrong,
+    bodyLarge: AppTextStyles.body,
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xfff4f4f3),

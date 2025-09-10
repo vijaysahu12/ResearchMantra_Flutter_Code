@@ -7,6 +7,8 @@ import 'package:research_mantra_official/ui/components/youtube_play_list/youtube
 import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/router/auth_route_resolver.dart';
 import 'package:research_mantra_official/ui/screens/analysis/market_analysis_home_page.dart';
+import 'package:research_mantra_official/ui/screens/analysis/screens/postmarket/post_market_screen.dart';
+import 'package:research_mantra_official/ui/screens/analysis/screens/premarket/pre_market_screen.dart';
 import 'package:research_mantra_official/ui/screens/blogs/blogs_screen.dart';
 import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/screens/home/home_screen.dart';
@@ -96,15 +98,25 @@ class AppRouter {
         );
 
       case marketAnalysisScreen:
+        final args = routeSettings.arguments as MarketAnalysisiHomepage? ??
+            const MarketAnalysisiHomepage();
+
         return MaterialPageRoute(
-          builder: (_) => const MarketAnalysisiHomepage(),
+          builder: (_) => MarketAnalysisiHomepage(
+            initialTab: args.initialTab,
+          ),
         );
 
-      // //MarketAnalysisPage
-      // case marketanalysisscreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AllAnalysisPage(),
-      //   );
+      // //preMarketScreen
+      case preMarketScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PreMarketDataScreen(),
+        );
+
+      case postMarketScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AllPostMarketAnalysis(),
+        );
 
       // case blogPostScreen:
       //   return MaterialPageRoute(

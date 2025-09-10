@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/components/trading_journal/trading_journal_screen.dart';
 import 'package:research_mantra_official/ui/components/widget/notification_count_widget.dart';
 import 'package:research_mantra_official/ui/components/widget/username_profileimage_dashboard.dart';
@@ -158,7 +159,7 @@ class _CommonAppBarWithBackButtonState
         widget.appBarText,
         style: TextStyle(
             color: theme.primaryColorDark,
-            fontSize: fontSize * 0.02,
+            fontSize: 14.sp,
             fontWeight: FontWeight.bold),
       ),
       leading: IconButton(
@@ -166,7 +167,7 @@ class _CommonAppBarWithBackButtonState
         icon: Icon(
           Icons.arrow_back_rounded,
           color: theme.primaryColorDark,
-          size: fontSize * 0.03,
+          size: 20.sp,
         ),
       ),
     );

@@ -3,35 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/providers/check_connection_provider.dart';
-import 'package:research_mantra_official/providers/market_analysis/pre_market_analysis/all_pre_market_analysis_provider.dart';
+import 'package:research_mantra_official/providers/market_analysis/post_market_analysis/all_post_market_provider.dart';
+import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/common_error/oops_screen.dart';
 import 'package:research_mantra_official/ui/components/empty_contents/no_content_widget.dart';
 import 'package:research_mantra_official/ui/components/king_research_loader/kingresearch_loader.dart';
-import 'package:research_mantra_official/ui/screens/analysis/widget/market_analysis_container.dart';
+import 'package:research_mantra_official/ui/screens/analysis/widget/post_market_tile.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
-class AllAnalysisPage extends ConsumerStatefulWidget {
-  const AllAnalysisPage({
-    super.key,
-  });
+class AllPostMarketAnalysis extends ConsumerStatefulWidget {
+  const AllPostMarketAnalysis({super.key});
 
   @override
-  ConsumerState<AllAnalysisPage> createState() => _AllAnalysisPageState();
+  ConsumerState<AllPostMarketAnalysis> createState() =>
+      _AllPostMarketAnalysisState();
 }
 
-class _AllAnalysisPageState extends ConsumerState<AllAnalysisPage> {
-  bool isLoading = false;
+class _AllPostMarketAnalysisState extends ConsumerState<AllPostMarketAnalysis> {
+  // bool isLoading = false;
   late ScrollController _scrollController;
   int pageNumber = 1;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _checkAndFetchData(false, 1);
-
-      _scrollController.addListener(_scrollListener);
     });
+
+    _scrollController.addListener(_scrollListener);
   }
 
   Future<void> _checkAndFetchData(isRefresh, int id) async {
@@ -45,22 +46,24 @@ class _AllAnalysisPageState extends ConsumerState<AllAnalysisPage> {
         .read(connectivityProvider.notifier)
         .updateConnectionStatus(isConnection);
     if (isConnection) {
-      await getAllPreMarketAnalysis(
+      await getAllPostMarketAnalysis(
           isRefresh, id); // Ensure this method is properly awaiting.
     } else {
       ToastUtils.showToast(noInternetConnectionText, "");
     }
   }
 
-  Future<void> getAllPreMarketAnalysis(isRefresh, int id) async {
+  Future<void> getAllPostMarketAnalysis(isRefresh, int id) async {
     // if (isRefresh) {
     //   setState(() {
     //     isLoading = true;
     //   });
     // }
     await ref
-        .read(preMarketAnalysisProvider.notifier)
-        .getPreMarketAnalysisData(id);
+        .read(allPostMarketAnalysisProvider.notifier)
+        .getAllPostMarketAnalysisData(
+          id,
+        );
 
     // setState(() {
     //   isLoading = false;
@@ -69,7 +72,8 @@ class _AllAnalysisPageState extends ConsumerState<AllAnalysisPage> {
 
   @override
   Widget build(BuildContext context) {
-    final allAnalysisData = ref.watch(preMarketAnalysisProvider);
+    final allAnalysisData = ref.watch(allPostMarketAnalysisProvider);
+
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -79,16 +83,18 @@ class _AllAnalysisPageState extends ConsumerState<AllAnalysisPage> {
   }
 
   Widget buildListAnalysis(allAnalysisData, theme) {
-    if (allAnalysisData.isLoading || isLoading) {
+    if (allAnalysisData.isLoading) {
       return const CommonLoaderGif();
-    } else if (allAnalysisData.preMarketAnalysisDataModel == null ||
-        allAnalysisData.preMarketAnalysisDataModel.isEmpty) {
-      pageNumber = 1;
+    } else if (allAnalysisData.allpostmarketStockreport == null ||
+        allAnalysisData.allpostmarketStockreport.isEmpty) {
       return RefreshIndicator(
-        onRefresh: () => _checkAndFetchData(true, 1),
+        onRefresh: () async {
+          pageNumber = 1;
+          await _checkAndFetchData(true, 1);
+        },
         child: const NoContentWidget(
           message:
-              "Analysis is on its way. Check back later for fresh insights!",
+              " Post Market Analysis is on its way. Check back later for fresh insights!",
         ),
       );
     } else if (allAnalysisData.error != null) {
@@ -102,13 +108,11 @@ class _AllAnalysisPageState extends ConsumerState<AllAnalysisPage> {
         child: ListView.builder(
           controller: _scrollController,
           padding: const EdgeInsets.all(8.0),
-          itemCount: allAnalysisData.preMarketAnalysisDataModel?.length ?? 0,
+          itemCount: allAnalysisData.allpostmarketStockreport!.length ?? 0,
           itemBuilder: (context, index) {
-            final data = allAnalysisData.preMarketAnalysisDataModel?[index];
+            final data = allAnalysisData.allpostmarketStockreport?[index];
 
-            return MarketAnalysisListContainer(
-              data: data,
-            );
+            return PostMarketTile(data: data);
           },
         ),
       );

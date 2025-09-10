@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:research_mantra_official/ui/screens/analysis/screens/postmarket/all_post_market_analysis.dart';
-import 'package:research_mantra_official/constants/generic_message.dart';
-import 'package:research_mantra_official/ui/screens/analysis/screens/premarket/all_analysis_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/ui/screens/analysis/screens/postmarket/post_market_screen.dart';
+
+import 'package:research_mantra_official/ui/screens/analysis/screens/premarket/pre_market_screen.dart';
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 class MarketAnalysisiHomepage extends StatefulWidget {
-  const MarketAnalysisiHomepage({
-    super.key,
-  });
+  /// The initial tab index: 0 = Pre Market, 1 = Post Market
+  final int initialTab;
+
+  const MarketAnalysisiHomepage({super.key, this.initialTab = 0});
+
   @override
   State<MarketAnalysisiHomepage> createState() =>
       _MarketAnalysisiHomepageState();
@@ -20,9 +23,10 @@ class _MarketAnalysisiHomepageState extends State<MarketAnalysisiHomepage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
 
-    // _tabController.animateTo(wid);
+    // Initialize TabController
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.index = widget.initialTab;
   }
 
   @override
@@ -35,59 +39,65 @@ class _MarketAnalysisiHomepageState extends State<MarketAnalysisiHomepage>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fontSize = MediaQuery.of(context).size.height;
+
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          marketAnalysis,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize * 0.02,
+          "Market Analysis",
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.primaryColorDark,
           ),
         ),
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: Icon(
-            Icons.arrow_back_ios,
+            Icons.arrow_back_outlined,
             color: theme.primaryColorDark,
-            size: fontSize * 0.03,
+            size: 22.sp,
           ),
         ),
-        bottom: TabBar(
-          dividerColor: theme.shadowColor,
-          labelColor: theme.disabledColor,
-          indicatorColor: theme.disabledColor,
-          indicatorSize: TabBarIndicatorSize.tab,
-
-          padding: const EdgeInsets.all(4),
-        //  tabAlignment: TabAlignment.start,
-
-          isScrollable: false,
-          controller: _tabController,
-          tabs: [
-            Tab(
-                child: Text(
-              "Pre Market",
-              style: textH5.copyWith(
-                  fontSize: fontSize * 0.015, fontWeight: FontWeight.bold),
-            )),
-            Tab(
-                child: Text(
-              "Post Market",
-              style: textH5.copyWith(
-                  fontSize: fontSize * 0.015, fontWeight: FontWeight.bold),
-            )),
-          ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(fontSize * 0.06),
+          child: Material(
+            color: theme.appBarTheme.backgroundColor,
+            child: TabBar(
+              controller: _tabController,
+              isScrollable: false, // set true if you want many tabs
+              indicatorColor: theme.disabledColor,
+              labelColor: theme.disabledColor,
+              unselectedLabelColor: theme.hintColor,
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(
+                  child: Text(
+                    "Pre Market",
+                    style: textH5.copyWith(
+                        fontSize: fontSize * 0.015,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "Post Market",
+                    style: textH5.copyWith(
+                        fontSize: fontSize * 0.015,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
-
-        children: const [AllAnalysisPage(), AllPostMarketAnalysis()],
-
+        physics: const BouncingScrollPhysics(), // allows swipe left/right
+        children: const [
+          PreMarketDataScreen(),
+          AllPostMarketAnalysis(),
+        ],
       ),
     );
   }

@@ -10,6 +10,7 @@ import 'package:research_mantra_official/providers/community/community_details/c
 import 'package:research_mantra_official/services/check_connectivity.dart';
 import 'package:research_mantra_official/services/hive_service.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
+import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/common_buttons/common_button.dart';
 import 'package:research_mantra_official/ui/components/king_research_loader/kingresearch_loader.dart';
 import 'package:research_mantra_official/ui/screens/blogs/screens/bloglist/blog_list.dart';
@@ -126,6 +127,10 @@ class _BlogScreenBaseScreenState extends ConsumerState<BlogScreenBaseScreen>
     }
 
     return Scaffold(
+      appBar: CommonAppBarWithBackButton(
+        appBarText: "Market News",
+        handleBackButton: () => Navigator.pop(context),
+      ),
       backgroundColor: theme.primaryColor,
       body: _buildCommunity(tabs, theme),
     );

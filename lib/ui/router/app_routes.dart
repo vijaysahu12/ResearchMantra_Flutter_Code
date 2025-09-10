@@ -22,7 +22,7 @@ const youtubeVideoPlayerWidget = '/youtubevideoplayerWidget';
 const youtubeVideoPlayerPlaylistWidget = '/youtubevideoplayerplaylistWidget';
 
 const productdetailsContentWidget = '/productdetailscontentWidget';
-const homeNavigator="/homeNavigatorWidget";
+const homeNavigator = "/homeNavigatorWidget";
 //Blogs
 const blogPostScreen = '/blogpostscreen';
 
@@ -30,7 +30,9 @@ const blogPostScreen = '/blogpostscreen';
 const ticketsScreen = "/ticketsScreen";
 
 // //marketAnalsysisScreen
-// const marketAnalysisScreen = '/marketAnalysisScreen';
+
+const preMarketScreen = '/preMarketScreen';
+const postMarketScreen = '/postMarketScreen';
 
 //PerformanceScreen
 const performancescreen = '/performancescreen';
@@ -72,7 +74,6 @@ const getAllBlogs = '/getAllBlogs'; //Blogs screen
 //webview screen
 const webviewscreen = '/webviewscreen';
 
-
 //Sip Calculator screen
 
 const sipCalculatorScreen = '/sipCalculatorScreen';
@@ -82,4 +83,3 @@ const inflationscreen = '/inflationscreen';
 
 //Risk Reward Screen
 const riskRewardScreen = '/riskrewardScreen';
-
