@@ -24,7 +24,6 @@ class FinancialCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Stack(
       children: [
@@ -41,8 +40,8 @@ class FinancialCard extends StatelessWidget {
         ),
         // Actual content
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10.0),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5),
+          margin: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
             border: Border.all(color: theme.shadowColor, width: 2.0),
             gradient: LinearGradient(
@@ -59,15 +58,9 @@ class FinancialCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    futurePlansTitleText,
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                      color: theme.primaryColorDark,
-                      fontFamily: fontFamily,
-                    ),
-                  ),
+                  Text(futurePlansTitleText,
+                      style: theme.textTheme.titleSmall
+                          ?.copyWith(color: theme.primaryColorDark)),
                 ],
               ),
               // Arrow button (no ripple here anymore)

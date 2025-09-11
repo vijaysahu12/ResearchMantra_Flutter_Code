@@ -557,7 +557,6 @@ class _TradeScreenState extends ConsumerState<TradeScreen> {
     'Home',
     'Live Trades',
     'Closed Trades',
-    'MCX'
   ];
   final List<Widget> tabScreens = [];
 

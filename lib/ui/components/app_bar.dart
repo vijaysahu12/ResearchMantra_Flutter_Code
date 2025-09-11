@@ -59,7 +59,6 @@ class _AppBarScreenState extends State<AppBarScreen> {
         children: [
           const ProfileImageAndUserName(),
           const Spacer(),
-          // if (widget.selectedIndex == 3 || widget.selectedIndex == 4)
           Row(
             children: [
               Stack(
@@ -151,7 +150,7 @@ class _CommonAppBarWithBackButtonState
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final fontSize = MediaQuery.of(context).size.height;
+
     return AppBar(
       scrolledUnderElevation: 0,
       backgroundColor: theme.appBarTheme.backgroundColor,

@@ -37,20 +37,24 @@ import 'package:research_mantra_official/ui/components/popupscreens/quotepopup/d
 import 'package:research_mantra_official/ui/components/popupscreens/userregistrationpopup/user_registration_popup.dart';
 import 'package:research_mantra_official/ui/components/shimmers/home_shimmer.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
+import 'package:research_mantra_official/ui/screens/demat/open_demat.dart';
 import 'package:research_mantra_official/ui/screens/home/screens/ongoing_trades.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider_widget.dart';
+import 'package:research_mantra_official/ui/screens/home/widgets/inflation_container.dart';
+import 'package:research_mantra_official/ui/screens/home/widgets/live_calls.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
 import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
+import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
 import 'package:research_mantra_official/ui/screens/research_stock_basket/stock_baskets.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
 class HomeScreenWidget extends ConsumerStatefulWidget {
-  final Function(int, bool) navigateToIndex;
+  // final Function(int, bool) navigateToIndex;
 
   const HomeScreenWidget({
     super.key,
-    required this.navigateToIndex,
+    // required this.navigateToIndex,
   });
 
   @override
@@ -82,22 +86,22 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_scrollListener);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (!mounted) return;
-      final isCalled = ref.read(isCalledProvider);
-      if (isCalled) return;
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   if (!mounted) return;
+    //   final isCalled = ref.read(isCalledProvider);
+    //   if (isCalled) return;
 
-      setState(() => isLoadingAll = true); // Show shimmer only on first load
+    //   setState(() => isLoadingAll = true); // Show shimmer only on first load
 
-      try {
-        await checkInternetConnection();
-      } catch (e) {
-        print('Error during internet check: $e');
-      }
+    //   try {
+    //     await checkInternetConnection();
+    //   } catch (e) {
+    //     print('Error during internet check: $e');
+    //   }
 
-      if (!mounted) return;
-      ref.read(isCalledProvider.notifier).setCalled(true); // Mark API as called
-    });
+    //   if (!mounted) return;
+    //   ref.read(isCalledProvider.notifier).setCalled(true); // Mark API as called
+    // });
   }
 
   // Function to check internet and fetch data
@@ -399,29 +403,23 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
               padding: const EdgeInsets.only(bottom: 15),
               children: [
                 _buildSinglePromotion(),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 8.0,
-                      ),
-                      child: Text(
-                        "Explore Now",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.8,
+                    child: LiveCallTradesScreen()),
+
+                GestureDetector(
+                  onTap: navigateToInflationScreen,
+                  child: const GradientContainer(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _buildBottomGrid(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: _buildTopSection(theme),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: _buildBottomGrid(),
-                ),
                 // Dashboard image slider
                 DashboardCarouselSlider(
                   dashboardImageState: dashboardImages,
@@ -456,37 +454,6 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: _buildScreenerList(context, theme),
                 ),
-
-                // Footer (GIF or dashboard images)
-                // DashboardFooterImageWidget(
-                //   dashboardImages: dashboardImages,
-                //   theme: theme,
-                //   displayImage: displayImage,
-                // ),
-                // const SizedBox(height: 5),
-                // Inflation screen card
-                // GestureDetector(
-                //   onTap: navigateToInflationScreen,
-                //   child: const GradientContainer(),
-                // ),
-                // SizedBox(
-                //     height: MediaQuery.of(context).size.height * 0.8,
-                //     child: const TradingDashboard()),
-                // Dashboard Services (Grid)
-                // GridServicesWidget(
-                //   theme: theme,
-                //   navigateToIndex: widget.navigateToIndex,
-                //   getDashBoardServices: dashboardServices,
-                //   updateButtonType: updateButtonType,
-                // ),
-                // Top 3 products
-                // TopThreeProductsWidget(getTopProductsImages: topProducts),
-                // const SizedBox(height: 5),
-                // Top gainers and losers with market index
-                // SizedBox(
-                //   height: MediaQuery.of(context).size.height * 0.48,
-                //   child: TopGainersAndTimeWidget(hasConnection: hasConnection),
-                // ),
               ],
             ),
     );
@@ -514,152 +481,130 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeNavigatorWidget(
-          initialIndex: 1,
-        ),
+        builder: (context) => ResearchScreen(),
       ),
     );
+    // OpenDematAccountScreen()
   }
 
-  Widget _buildTopSection(theme) {
-    return Row(
+  Widget _buildTopSection(ThemeData theme) {
+    final List<Map<String, dynamic>> gridData = [
+      {
+        'title': 'Research Reports',
+        'subtitle': 'Stocks',
+        'buttonText': 'View All',
+        'icon': Icons.workspace_premium,
+        'screen': ResearchScreen(),
+      },
+      {
+        'title': 'Open Demat',
+        'subtitle': 'No hidden Brokerage',
+        'buttonText': 'Start now',
+        'icon': Icons.brightness_low_outlined,
+        'screen': OpenDematAccountScreen(),
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // PRO Trades Section
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              handleToNavigateProTradeScreen();
-            },
-            child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.primaryColorDark.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'PRO Trades',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                      color: theme.primaryColorDark,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Stocks + F&O',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: theme.focusColor,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CommonOutlineButton(
-                        text: 'View All',
-                        onPressed: () {
-                          handleToNavigateProTradeScreen();
-                        },
-                      ),
-                      Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.blue, Colors.blue[700]!],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Icon(
-                          Icons.workspace_premium,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+        Padding(
+          padding: const EdgeInsets.all(
+            8.0,
+          ),
+          child: Text(
+            "Explore Now",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
-        SizedBox(width: 16),
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: theme.primaryColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Open Demat',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: theme.primaryColorDark,
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // 👉 2 per row
+            mainAxisSpacing: 12.h,
+            crossAxisSpacing: 12.w,
+            childAspectRatio: 1.5,
+          ),
+          itemCount: gridData.length,
+          itemBuilder: (context, index) {
+            final item = gridData[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => item['screen'],
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'No hidden Brokerage',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: theme.focusColor,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonOutlineButton(
-                      text: 'Start now',
-                      onPressed: () => print('Pressed!'),
-                    ),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.blue, Colors.blue[700]!],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Icon(
-                        Icons.brightness_low_outlined,
-                        color: Colors.white,
-                        size: 30,
-                      ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: theme.primaryColor,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['title'],
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: theme.primaryColorDark,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      item['subtitle'],
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontSize: 10.sp,
+                        color: theme.focusColor,
+                      ),
+                    ),
+                    const Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CommonOutlineButton(
+                          text: item['buttonText'],
+                          onPressed: item['onTap'],
+                          borderColor: theme.shadowColor,
+                          textStyle: theme.textTheme.titleSmall?.copyWith(
+                              color: theme.primaryColorDark, fontSize: 10.sp),
+                        ),
+                        Container(
+                          width: 30.w,
+                          height: 30.w,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.blue, Colors.blue[700]!],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(17.r),
+                          ),
+                          child: Icon(
+                            item['icon'],
+                            color: Colors.white,
+                            size: 22.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ],
     );

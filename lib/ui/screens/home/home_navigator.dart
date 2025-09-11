@@ -6,13 +6,10 @@ import 'package:research_mantra_official/providers/services_buttons_provider.dar
 import 'package:research_mantra_official/services/secure_storage.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/bottom_navigation.dart';
-import 'package:research_mantra_official/ui/components/dynamic_promo_card/service/promo_manager.dart';
 import 'package:research_mantra_official/ui/components/dynamic_promo_card/watcher/promo_activator.dart';
 import 'package:research_mantra_official/ui/screens/home/home_screen.dart';
 import 'package:research_mantra_official/ui/screens/market/market_screen.dart';
-import 'package:research_mantra_official/ui/screens/profile/profile_screen.dart';
-import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
-import 'package:research_mantra_official/ui/screens/scanners/scanners.dart';
+
 import 'package:research_mantra_official/ui/screens/screeners/screeners_home_screen.dart';
 import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -43,6 +40,8 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
   @override
   void initState() {
     super.initState();
+    final navNotifier = ref.read(navigationProvider.notifier);
+    navNotifier.setIndex(0);
     scannerKey = GlobalKey();
     pref = SharedPref();
     _checkishownorNot();
@@ -203,24 +202,10 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    final bool updateButton = ref.watch(servicesButtonNotifierProvider);
-
+    final currentIndex = ref.watch(navigationProvider);
+    final navNotifier = ref.read(navigationProvider.notifier);
     final List<Widget> children = [
-      HomeScreenWidget(
-        navigateToIndex: (index, isResetTabSelection) {
-          setState(() {
-            isFromHome = updateButton;
-            _selectedIndex = index;
-          });
-        },
-      ),
-      // AllProducts(
-      //   isFromHome: updateButton,
-      // ),
-
-      // const BlogScreenBaseScreen(),
-      // const ResearchScreen(),
+      HomeScreenWidget(),
       const TradeScreen(
         initialSelectedTabIndex: 0,
       ),
@@ -245,16 +230,7 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              _selectedIndex == 0
-                  ? HomeScreenWidget(
-                      navigateToIndex: (index, isResetTabSelection) async {
-                        setState(() {
-                          isFromHome = isResetTabSelection;
-                          _selectedIndex = index;
-                        });
-                      },
-                    )
-                  : children[_selectedIndex],
+              children[currentIndex],
               PromoActivatorObserver(),
             ],
           ),
@@ -262,13 +238,9 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
         bottomNavigationBar: Container(
           color: Colors.transparent,
           child: BottomNavigation(
-            selectedIndex: _selectedIndex,
+            selectedIndex: currentIndex,
             onItemTapped: (index) async {
-              setState(() {
-                isFromHome = false;
-                _selectedIndex = index;
-              });
-              await PromoManager().tryShowPromo(context);
+              navNotifier.setIndex(index);
             },
           ),
         ),
@@ -276,3 +248,17 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
     );
   }
 }
+
+// StateNotifier is cleaner than ChangeNotifier in Riverpod
+class NavigationNotifier extends StateNotifier<int> {
+  NavigationNotifier() : super(0);
+
+  void setIndex(int index) {
+    state = index;
+  }
+}
+
+// Global provider
+final navigationProvider = StateNotifierProvider<NavigationNotifier, int>(
+  (ref) => NavigationNotifier(),
+);

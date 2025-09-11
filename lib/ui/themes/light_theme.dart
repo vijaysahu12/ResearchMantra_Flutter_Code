@@ -35,7 +35,7 @@ ThemeData lightTheme = ThemeData(
     headlineMedium: AppTextStyles.h2,
     headlineSmall: AppTextStyles.stat,
     titleMedium: AppTextStyles.captionMedium,
-    titleSmall: AppTextStyles.statStrong,
+    titleSmall: AppTextStyles.caption,
     bodyLarge: AppTextStyles.body,
   ),
   appBarTheme: const AppBarTheme(

@@ -26,7 +26,7 @@ class _MarketScreenState extends State<MarketScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 145.h,
+                height: MediaQuery.of(context).size.width * 0.45,
                 child: FiiDiiActivityWidget(),
               ),
               SizedBox(
@@ -39,7 +39,7 @@ class _MarketScreenState extends State<MarketScreen> {
                   height: 50
                       .h, // 👈 avoid sp for fixed heights, use responsive only if needed
                   decoration: BoxDecoration(
-                    color: theme.shadowColor,
+                    color: theme.shadowColor.withOpacity(0.1),
                     border: Border.all(color: theme.shadowColor),
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -76,9 +76,11 @@ class _MarketScreenState extends State<MarketScreen> {
                       Padding(
                         padding: const EdgeInsets.only(right: 12),
                         child: CommonOutlineButton(
+                          borderColor: theme.shadowColor,
                           text: "Get Trades Free",
                           backgroundColor: theme.primaryColor,
                           borderWidth: 0.5,
+                          borderRadius: 8,
                         ),
                       ),
                     ],
@@ -175,6 +177,4 @@ class _MarketScreenState extends State<MarketScreen> {
       ),
     );
   }
-
-//Widget Bulk and Block Deals
 }

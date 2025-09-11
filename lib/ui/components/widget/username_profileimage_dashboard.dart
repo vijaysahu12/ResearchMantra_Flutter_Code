@@ -31,7 +31,7 @@ class _ProfileImageAndUserNameState
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const PersonalProfileDetailsScreen(),
+        builder: (context) => const ProfileWidget(),
       ),
     );
   }

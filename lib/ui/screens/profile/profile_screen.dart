@@ -140,12 +140,12 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
 
     return Scaffold(
       backgroundColor: theme.primaryColor,
-      // appBar: CommonAppBarWithBackButton(
-      //   appBarText: profileScreenAppBarText,
-      //   handleBackButton: () {
-      //     Navigator.pop(context);
-      //   },
-      // ),
+      appBar: CommonAppBarWithBackButton(
+        appBarText: profileScreenAppBarText,
+        handleBackButton: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SingleChildScrollView(
         child: AnimationConfiguration.synchronized(
           duration: const Duration(milliseconds: 500),

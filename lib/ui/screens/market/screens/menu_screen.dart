@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/assets_storage.dart';
-import 'package:research_mantra_official/data/models/blogs/blog_api_response_model.dart';
+
 import 'package:research_mantra_official/ui/Screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/screens/blogs/blogs_screen.dart';
-import 'package:research_mantra_official/ui/screens/market/screens/ipo.dart';
-import 'package:research_mantra_official/ui/screens/market/screens/results.dart';
-import 'package:research_mantra_official/ui/screens/market/screens/sharks.dart';
-import 'package:research_mantra_official/ui/screens/research/widgets/results_cards.dart';
+import 'package:research_mantra_official/ui/screens/market/screens/ipo/ipo.dart';
+import 'package:research_mantra_official/ui/screens/market/screens/results/results.dart';
+import 'package:research_mantra_official/ui/screens/market/screens/sharks/sharks.dart';
+
 
 // 📌 Model
 class GridItem {

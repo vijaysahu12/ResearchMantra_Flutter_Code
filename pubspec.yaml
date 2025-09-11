@@ -236,6 +236,8 @@ flutter:
     - assets/images/research_mantra/trend.png
     - assets/images/research_mantra/pre_market.jpg
     - assets/images/research_mantra/post-market.jpg
+    - assets/images/research_mantra/bitcoin.png
+
 
     # - ios/notification_tone.wav
 

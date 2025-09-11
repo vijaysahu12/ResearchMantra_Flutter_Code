@@ -54,12 +54,17 @@ class LiveClosedTradesScreen extends ConsumerWidget {
             isBorderEnabled: true,
             buttonTextColor: theme.primaryColor,
             buttonBackgroundColor: theme.primaryColorDark,
-            tabLabels: ['Short', 'Medium', 'Long', 'Futures', 'Options'],
+            tabLabels: [
+              'Nifty Intrady',
+              'Nifty Positional',
+              'MCX Positional',
+              'Crypto AI Trading',
+            ],
             selectedIndex: selectedTabIndex,
             onTabSelected: (index) {
               ref.read(subTabProvider(mainIndex).notifier).state = index;
             },
-            isScrollHorizontal: false,
+            isScrollHorizontal: true,
           ),
           Expanded(
             child: tabScreens[selectedTabIndex],

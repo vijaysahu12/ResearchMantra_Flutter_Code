@@ -479,7 +479,7 @@ const myJournalButtonText = 'Trading Journal';
 const bonusProductText = 'Checkout now to see the bonus products!';
 //plan your future
 const futurePlansText = "Plan Your Financial Growth";
-const futurePlansTitleText = "Start Your Financial Journey";
+const futurePlansTitleText = "Plan Your Future Financial Freedom With Us.";
 //plan your future subtitle
 const futurePlansSubText = "Get expert insights and real-time market analysis";
 

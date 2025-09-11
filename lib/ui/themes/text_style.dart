@@ -49,7 +49,7 @@ class AppTextStyles {
   static final TextStyle caption = TextStyle(
     fontFamily: 'OpenSans',
     fontSize: 12.sp,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
   );
 
   static final TextStyle captionMedium = TextStyle(

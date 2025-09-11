@@ -60,7 +60,19 @@ class OngoingTradesSection extends StatelessWidget {
                 CommonOutlineButton(
                     borderRadius: 5,
                     text: "Active",
-                    onPressed: () => onSubscribe(section["title"]!))
+                    onPressed: () {
+                      //Todo:Need to navigation
+                      //  WidgetsBinding.instance.addPostFrameCallback((_) {
+                      //                     print("calling live call buttons");
+
+                      //                     ref.read(mainTabProvider.notifier).state =
+                      //                         tab["tabIndex"];
+                      //                     ref.read(subTabProvider(tab["tabIndex"]).notifier).state =
+                      //                         tab["subIndex"];
+
+                      //                     navNotifier.setIndex(1);
+                      //                   });
+                    })
               ],
             ),
           ),

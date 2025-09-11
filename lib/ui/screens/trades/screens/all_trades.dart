@@ -20,32 +20,32 @@ class _AllTradesDetailsScreenState extends State<AllTradesDetailsScreen> {
   // 🔹 Trading Segments JSON Data
   final List<Map<String, dynamic>> tradingSegments = [
     {
-      "title": "Stocks",
-      "subtitle": "79 Live",
-      "icon": arrowIconPath,
-      "tabIndex": 1,
-      "subIndex": 0,
-    },
-    {
       "title": "Futures",
       "subtitle": "7 Live",
       "icon": bullMarketIconPath,
       "tabIndex": 1,
-      "subIndex": 3,
+      "subIndex": 1,
     },
     {
       "title": "Options",
       "subtitle": "5 Live",
       "icon": candlestickIconPath,
       "tabIndex": 1,
-      "subIndex": 4,
+      "subIndex": 0,
     },
     {
       "title": "Commodity",
       "subtitle": "7 Live",
       "icon": mcxIconPath,
-      "tabIndex": 3,
-      "subIndex": 0,
+      "tabIndex": 1,
+      "subIndex": 2,
+    },
+    {
+      "title": "Crypto AI",
+      "subtitle": "79 Live",
+      "icon": bitCoinImagePath,
+      "tabIndex": 1,
+      "subIndex": 3,
     },
   ];
 

@@ -11,6 +11,7 @@ import 'package:research_mantra_official/providers/check_connection_provider.dar
 import 'package:research_mantra_official/providers/research/baskets/basket_provider.dart';
 import 'package:research_mantra_official/services/secure_storage.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
+import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/common_error/no_connection.dart';
 import 'package:research_mantra_official/ui/components/common_error/oops_screen.dart';
 import 'package:research_mantra_official/ui/components/empty_contents/no_content_widget.dart';
@@ -148,6 +149,7 @@ class _ResearchScreenState extends ConsumerState<ResearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final getBasket = ref.watch(getBasketProvider);
     List<BasketDataModel> getAllBasketDataModel =
         getBasket.getAllBasketDataModel;
@@ -175,21 +177,37 @@ class _ResearchScreenState extends ConsumerState<ResearchScreen> {
         );
       }
       if (getBasket.getAllBasketDataModel.isNotEmpty) {
-        return RefreshIndicator(
-            onRefresh: () => getBasketList(true),
-            child: Column(children: [
-              Expanded(child: _buildForReserchContainer(getAllBasketDataModel))
-            ]));
+        return Scaffold(
+          backgroundColor: theme.primaryColor,
+          appBar: CommonAppBarWithBackButton(
+            appBarText: "Research Stocks",
+            handleBackButton: () => Navigator.pop(context),
+          ),
+          body: RefreshIndicator(
+              onRefresh: () => getBasketList(true),
+              child: Column(children: [
+                Expanded(
+                    child: _buildForReserchContainer(getAllBasketDataModel))
+              ])),
+        );
       } else {
         return const ErrorScreenWidget();
       }
     } else {
       if (getBasket.getAllBasketDataModel.isNotEmpty) {
-        return RefreshIndicator(
-            onRefresh: () => getBasketList(true),
-            child: Column(children: [
-              Expanded(child: _buildForReserchContainer(getAllBasketDataModel))
-            ]));
+        return Scaffold(
+          backgroundColor: theme.primaryColor,
+          appBar: CommonAppBarWithBackButton(
+            appBarText: "Research Stocks",
+            handleBackButton: () => Navigator.pop(context),
+          ),
+          body: RefreshIndicator(
+              onRefresh: () => getBasketList(true),
+              child: Column(children: [
+                Expanded(
+                    child: _buildForReserchContainer(getAllBasketDataModel))
+              ])),
+        );
       }
       if (isLoadingLocalData) {
         // Show a loading indicator until local data is fetched
@@ -201,12 +219,19 @@ class _ResearchScreenState extends ConsumerState<ResearchScreen> {
         );
       } else {
         return SingleChildScrollView(
-          child: RefreshIndicator(
-            onRefresh: () => getBasketList(true),
-            child: Column(
-              children: [
-                _buildForReserchContainer(getAllBasketDataFromLocalDb),
-              ],
+          child: Scaffold(
+            backgroundColor: theme.primaryColor,
+            appBar: CommonAppBarWithBackButton(
+              appBarText: "Research Stocks",
+              handleBackButton: () => Navigator.pop(context),
+            ),
+            body: RefreshIndicator(
+              onRefresh: () => getBasketList(true),
+              child: Column(
+                children: [
+                  _buildForReserchContainer(getAllBasketDataFromLocalDb),
+                ],
+              ),
             ),
           ),
         );
@@ -236,35 +261,29 @@ class _ResearchScreenState extends ConsumerState<ResearchScreen> {
       itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
         position: index,
         duration: const Duration(milliseconds: 250),
-        child: SlideAnimation(
-          verticalOffset: 100.0,
-          child: FadeInAnimation(
-            child: GestureDetector(
-              onTap: () => handleCompanyNavigation(
-                context,
-                index + 1,
-                getAllBasketDataModel[index].title ?? "",
-                getAllBasketDataModel[index].id ?? 0,
-              ),
-              child: ResearchCards(
-                isFree: getAllBasketDataModel[index].isFree ?? false,
-                cardDescription: getAllBasketDataModel[index].companyCount ==
-                        null
-                    ? "-"
-                    : getAllBasketDataModel[index].companyCount == 1
-                        ? "${getAllBasketDataModel[index].companyCount} Company in this Bucket "
-                        : "${getAllBasketDataModel[index].companyCount} Companies in this Bucket ",
-                cardTitle: getAllBasketDataModel[index].title ?? "",
-                buttonTitle: "View",
-                onTap: () => handleCompanyNavigation(
-                  context,
-                  index + 1,
-                  getAllBasketDataModel[index].title ?? "",
-                  getAllBasketDataModel[index].id ?? 0,
-                ),
-                cardSubHeading: getAllBasketDataModel[index].description ?? "",
-              ),
+        child: GestureDetector(
+          onTap: () => handleCompanyNavigation(
+            context,
+            index + 1,
+            getAllBasketDataModel[index].title ?? "",
+            getAllBasketDataModel[index].id ?? 0,
+          ),
+          child: ResearchCards(
+            isFree: getAllBasketDataModel[index].isFree ?? false,
+            cardDescription: getAllBasketDataModel[index].companyCount == null
+                ? "-"
+                : getAllBasketDataModel[index].companyCount == 1
+                    ? "${getAllBasketDataModel[index].companyCount} Company in this Bucket "
+                    : "${getAllBasketDataModel[index].companyCount} Companies in this Bucket ",
+            cardTitle: getAllBasketDataModel[index].title ?? "",
+            buttonTitle: "View",
+            onTap: () => handleCompanyNavigation(
+              context,
+              index + 1,
+              getAllBasketDataModel[index].title ?? "",
+              getAllBasketDataModel[index].id ?? 0,
             ),
+            cardSubHeading: getAllBasketDataModel[index].description ?? "",
           ),
         ),
       ),

@@ -20,7 +20,6 @@ import 'package:research_mantra_official/ui/screens/learning/screen/indicator_sc
 import 'package:research_mantra_official/ui/screens/learning/widgets/examples_screen.dart';
 import 'package:research_mantra_official/ui/screens/learning/screen/indicator_screens/indicator_screen.dart';
 import 'package:research_mantra_official/ui/screens/notification/notification_screen.dart';
-
 import 'package:research_mantra_official/ui/screens/products/product_screen.dart';
 import 'package:research_mantra_official/ui/components/splash/splash_screen.dart';
 import 'package:research_mantra_official/ui/screens/products/screens/details/product_details_screen.dart';
@@ -72,8 +71,8 @@ class AppRouter {
       case home:
         return MaterialPageRoute(
           builder: (_) => HomeScreenWidget(
-            navigateToIndex: (int, isResetTabSelection) {},
-          ),
+              // navigateToIndex: (int, isResetTabSelection) {},
+              ),
         );
 
       case researchScreen:
