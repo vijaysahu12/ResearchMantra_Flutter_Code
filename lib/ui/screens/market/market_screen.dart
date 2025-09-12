@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/assets_storage.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 import 'package:research_mantra_official/ui/common_components/image_button.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/screens/analysis/market_analysis_home_page.dart';
+import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/screens/market/screens/fii_dii_activity.dart';
 import 'package:research_mantra_official/ui/screens/market/screens/menu_screen.dart';
 import 'package:research_mantra_official/ui/screens/market/widgets/bulk_block_deals.dart';
 
-class MarketScreen extends StatefulWidget {
+class MarketScreen extends ConsumerStatefulWidget {
   const MarketScreen({super.key});
 
   @override
-  State<MarketScreen> createState() => _MarketScreenState();
+  ConsumerState<MarketScreen> createState() => _MarketScreenState();
 }
 
-class _MarketScreenState extends State<MarketScreen> {
+class _MarketScreenState extends ConsumerState<MarketScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -34,56 +36,61 @@ class _MarketScreenState extends State<MarketScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Container(
-                  width: double.infinity,
-                  height: 50
-                      .h, // 👈 avoid sp for fixed heights, use responsive only if needed
-                  decoration: BoxDecoration(
-                    color: theme.shadowColor.withOpacity(0.1),
-                    border: Border.all(color: theme.shadowColor),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // space between text & button
-                    crossAxisAlignment: CrossAxisAlignment
-                        .center, // ✅ vertically center children
-                    children: [
-                      // Text Column
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center, // ✅ center texts vertically
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "Research Mantra",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Smart Entry Smart Exit",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 13),
-                            ),
-                          ],
+                child: GestureDetector(
+                  onTap: () {
+                    ref.read(bottomNavProvider.notifier).state = 1;
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50
+                        .h, // 👈 avoid sp for fixed heights, use responsive only if needed
+                    decoration: BoxDecoration(
+                      color: theme.shadowColor.withOpacity(0.1),
+                      border: Border.all(color: theme.shadowColor),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .spaceBetween, // space between text & button
+                      crossAxisAlignment: CrossAxisAlignment
+                          .center, // ✅ vertically center children
+                      children: [
+                        // Text Column
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment
+                                .center, // ✅ center texts vertically
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Research Mantra",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                "Smart Entry Smart Exit",
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 13),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
 
-                      // Button
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: CommonOutlineButton(
-                          borderColor: theme.shadowColor,
-                          text: "Get Trades Free",
-                          backgroundColor: theme.primaryColor,
-                          borderWidth: 0.5,
-                          borderRadius: 8,
+                        // Button
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: CommonOutlineButton(
+                            borderColor: theme.shadowColor,
+                            text: "Get Trades Free",
+                            backgroundColor: theme.primaryColor,
+                            borderWidth: 0.5,
+                            borderRadius: 8,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

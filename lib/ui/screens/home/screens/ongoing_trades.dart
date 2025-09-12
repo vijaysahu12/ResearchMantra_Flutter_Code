@@ -4,12 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 
 class OngoingTradesSection extends StatelessWidget {
-  final void Function(String tab) onSubscribe;
   final void Function(dynamic subIndex, dynamic mainIndex) handleToNavigate;
 
   const OngoingTradesSection({
     super.key,
-    required this.onSubscribe,
     required this.handleToNavigate,
   });
 

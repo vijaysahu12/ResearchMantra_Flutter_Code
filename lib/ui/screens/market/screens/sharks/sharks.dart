@@ -40,7 +40,7 @@ class _SharksScreenState extends State<SharksScreen>
     return Scaffold(
       backgroundColor: theme.primaryColor,
       appBar: CommonAppBarWithBackButton(
-        appBarText: "Sharks",
+        appBarText: "Shark portfolios",
         handleBackButton: () => Navigator.pop(context),
       ),
       body: Column(

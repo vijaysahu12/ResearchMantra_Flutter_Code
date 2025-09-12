@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ import 'package:research_mantra_official/services/check_connectivity.dart';
 import 'package:research_mantra_official/services/secure_storage.dart';
 import 'package:research_mantra_official/services/url_launcher_helper.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
-import 'package:research_mantra_official/ui/Screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 import 'package:research_mantra_official/ui/components/app_video/app_video.dart';
 import 'package:research_mantra_official/ui/components/cacher_network_images/circular_cached_network_image.dart';
@@ -38,6 +38,8 @@ import 'package:research_mantra_official/ui/components/popupscreens/userregistra
 import 'package:research_mantra_official/ui/components/shimmers/home_shimmer.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/screens/demat/open_demat.dart';
+import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
+
 import 'package:research_mantra_official/ui/screens/home/screens/ongoing_trades.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider_widget.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/inflation_container.dart';
@@ -393,14 +395,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   void handleToNavigateTradeScreenTab(subIndex, mainIndex) {
     ref.read(mainTabProvider.notifier).state = mainIndex;
     ref.read(subTabProvider(1).notifier).state = subIndex;
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (_) => HomeNavigatorWidget(
-                initialIndex: 1,
-              )),
-    );
+    ref.read(bottomNavProvider.notifier).state = 1;
   }
 
 //Modify your RefreshIndicator
@@ -458,10 +453,6 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: OngoingTradesSection(
                     handleToNavigate: handleToNavigateTradeScreenTab,
-                    // ref: ref,
-                    onSubscribe: (tab) {
-                      print("Subscribe for $tab clicked!");
-                    },
                   ),
                 ),
 
@@ -637,26 +628,28 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       icon: screenerIconPath,
       screen: const MultibaggersScreen(),
       subIndex: 0,
+      mainBottomIndex: 0,
     ),
     GridItem(
       title: 'Prime Baskets',
       icon: screenerIconPath,
       screen: const StockBasketsScreen(),
       subIndex: 0,
+      mainBottomIndex: 0,
     ),
     GridItem(
       title: 'Commodity',
       icon: mcxIconPath,
-      screen: HomeNavigatorWidget(
-        initialIndex: 1,
-      ),
+      screen: HomeNavigatorWidget(),
       subIndex: 2,
+      mainBottomIndex: 1,
     ),
     GridItem(
       title: 'Screeners',
       icon: screenerIconPath,
-      screen: const HomeNavigatorWidget(initialIndex: 2),
+      screen: HomeNavigatorWidget(),
       subIndex: 0,
+      mainBottomIndex: 2,
     ),
   ];
 
@@ -693,16 +686,16 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
           borderRadius: BorderRadius.circular(8),
           onTap: () {
             // Update providers
-            //Todo: Logic need to add for commidyt and screenerss
-            if (item.subIndex != 0) {
+            if (item.mainBottomIndex != 0) {
               ref.read(mainTabProvider.notifier).state = 1;
               ref.read(subTabProvider(1).notifier).state = item.subIndex;
+              ref.read(bottomNavProvider.notifier).state = item.mainBottomIndex;
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => item.screen),
+              );
             }
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => item.screen),
-            );
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -746,14 +739,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
         CommonOutlineButton(
             text: "View All",
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeNavigatorWidget(
-                    initialIndex: 2,
-                  ),
-                ),
-              );
+              ref.read(bottomNavProvider.notifier).state = 2;
             })
       ],
     );
@@ -916,6 +902,7 @@ class GridItem {
   final String title;
   final String icon;
   final int subIndex;
+  final int mainBottomIndex;
 
   final Widget screen;
 
@@ -924,5 +911,6 @@ class GridItem {
     required this.icon,
     required this.screen,
     required this.subIndex,
+    required this.mainBottomIndex,
   });
 }

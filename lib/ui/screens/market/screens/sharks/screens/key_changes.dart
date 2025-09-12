@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 
 class KeyChangesScreen extends StatefulWidget {
   const KeyChangesScreen({super.key});
@@ -203,7 +204,7 @@ class _KeyChangesScreenState extends State<KeyChangesScreen> {
                                 child: VerticalDivider(
                                   color: theme.primaryColorDark,
                                   thickness: 0.5,
-                                  width: 10.w, // space around divider
+                                  width: 15.w, // space around divider
                                 ),
                               ),
                               Text(
@@ -218,6 +219,52 @@ class _KeyChangesScreenState extends State<KeyChangesScreen> {
                       ),
                     ],
                   ),
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(investorDetails[index]['stockSymbol']),
+                          Text(investorDetails[index]['companyName'])
+                        ],
+                      ),
+                      CommonOutlineButton(
+                          textStyle: TextStyle(
+                              fontSize: 10.sp, color: theme.primaryColor),
+                          borderColor: Colors.transparent,
+                          borderRadius: 4.0,
+                          backgroundColor: theme.secondaryHeaderColor,
+                          text: investorDetails[index]['tradeType'])
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Qty"),
+                          Text(investorDetails[index]['qtyHeld'])
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("Qty"),
+                          Text(investorDetails[index]['qtyChange'])
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("Qty"),
+                          Text(investorDetails[index]['currentChange'])
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
