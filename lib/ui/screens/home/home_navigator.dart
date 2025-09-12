@@ -40,8 +40,7 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
   @override
   void initState() {
     super.initState();
-    final navNotifier = ref.read(navigationProvider.notifier);
-    navNotifier.setIndex(0);
+
     scannerKey = GlobalKey();
     pref = SharedPref();
     _checkishownorNot();
@@ -202,8 +201,7 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final currentIndex = ref.watch(navigationProvider);
-    final navNotifier = ref.read(navigationProvider.notifier);
+
     final List<Widget> children = [
       HomeScreenWidget(),
       const TradeScreen(
@@ -230,7 +228,7 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              children[currentIndex],
+              children[_selectedIndex],
               PromoActivatorObserver(),
             ],
           ),
@@ -238,9 +236,11 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
         bottomNavigationBar: Container(
           color: Colors.transparent,
           child: BottomNavigation(
-            selectedIndex: currentIndex,
+            selectedIndex: _selectedIndex,
             onItemTapped: (index) async {
-              navNotifier.setIndex(index);
+              setState(() {
+                _selectedIndex = index;
+              });
             },
           ),
         ),
@@ -248,17 +248,3 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
     );
   }
 }
-
-// StateNotifier is cleaner than ChangeNotifier in Riverpod
-class NavigationNotifier extends StateNotifier<int> {
-  NavigationNotifier() : super(0);
-
-  void setIndex(int index) {
-    state = index;
-  }
-}
-
-// Global provider
-final navigationProvider = StateNotifierProvider<NavigationNotifier, int>(
-  (ref) => NavigationNotifier(),
-);

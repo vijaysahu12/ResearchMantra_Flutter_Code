@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 
 class OngoingTradesSection extends StatelessWidget {
   final void Function(String tab) onSubscribe;
+  final void Function(dynamic subIndex, dynamic mainIndex) handleToNavigate;
 
   const OngoingTradesSection({
     super.key,
     required this.onSubscribe,
+    required this.handleToNavigate,
   });
 
   @override
@@ -14,66 +18,77 @@ class OngoingTradesSection extends StatelessWidget {
     final theme = Theme.of(context);
 
     // Example data: you can fetch this from API later
-    final List<Map<String, String>> tradeSections = [
-      {"title": "Futures", "avg": "Avg 12.5%"},
-      {"title": "Options", "avg": "Avg 9.2%"},
-      {"title": "MCX", "avg": "Avg 14.8%"},
+    final List<Map<String, dynamic>> tradeSections = [
+      {
+        "title": "Futures",
+        "avg": "Avg 12.5%",
+        "subIndex": 0,
+      },
+      {
+        "title": "Options",
+        "avg": "Avg 9.2%",
+        "subIndex": 1,
+      },
+      {
+        "title": "MCX",
+        "avg": "Avg 14.8%",
+        "subIndex": 2,
+      },
     ];
 
     return Row(
       children: tradeSections.map((section) {
         return Expanded(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 4),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: theme.primaryColor,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  section["title"]!,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: theme.primaryColorDark,
+          child: GestureDetector(
+            onTap: () {
+              handleToNavigate(section["subIndex"], 1);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: theme.primaryColor,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  section["avg"]!,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: theme.focusColor,
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    section["title"],
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: theme.primaryColorDark,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                CommonOutlineButton(
-                    borderRadius: 5,
+                  const SizedBox(height: 6),
+                  Text(
+                    section["avg"],
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: theme.focusColor,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  CommonOutlineButton(
+                    borderColor: theme.shadowColor,
+                    borderRadius: 16.0,
+                    textStyle:
+                        TextStyle(fontSize: 10.sp, color: theme.indicatorColor),
                     text: "Active",
                     onPressed: () {
-                      //Todo:Need to navigation
-                      //  WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //                     print("calling live call buttons");
-
-                      //                     ref.read(mainTabProvider.notifier).state =
-                      //                         tab["tabIndex"];
-                      //                     ref.read(subTabProvider(tab["tabIndex"]).notifier).state =
-                      //                         tab["subIndex"];
-
-                      //                     navNotifier.setIndex(1);
-                      //                   });
-                    })
-              ],
+                      handleToNavigate(section["subIndex"], 1);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

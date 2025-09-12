@@ -47,6 +47,7 @@ import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.da
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
 import 'package:research_mantra_official/ui/screens/research_stock_basket/stock_baskets.dart';
+import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
 class HomeScreenWidget extends ConsumerStatefulWidget {
@@ -388,6 +389,20 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     );
   }
 
+  //Navigation
+  void handleToNavigateTradeScreenTab(subIndex, mainIndex) {
+    ref.read(mainTabProvider.notifier).state = mainIndex;
+    ref.read(subTabProvider(1).notifier).state = subIndex;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (_) => HomeNavigatorWidget(
+                initialIndex: 1,
+              )),
+    );
+  }
+
 //Modify your RefreshIndicator
   Widget buildDashboardContent(bool hasConnection, ThemeData theme) {
     final dashboardImages = ref.watch(dashBoardImagesProvider);
@@ -405,7 +420,9 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                 _buildSinglePromotion(),
                 SizedBox(
                     height: MediaQuery.of(context).size.width * 0.8,
-                    child: LiveCallTradesScreen()),
+                    child: LiveCallTradesScreen(
+                      handleToNavigate: handleToNavigateTradeScreenTab,
+                    )),
 
                 GestureDetector(
                   onTap: navigateToInflationScreen,
@@ -440,6 +457,8 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: OngoingTradesSection(
+                    handleToNavigate: handleToNavigateTradeScreenTab,
+                    // ref: ref,
                     onSubscribe: (tab) {
                       print("Subscribe for $tab clicked!");
                     },
@@ -617,11 +636,13 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       title: 'Multibagger',
       icon: screenerIconPath,
       screen: const MultibaggersScreen(),
+      subIndex: 0,
     ),
     GridItem(
       title: 'Prime Baskets',
       icon: screenerIconPath,
       screen: const StockBasketsScreen(),
+      subIndex: 0,
     ),
     GridItem(
       title: 'Commodity',
@@ -629,11 +650,13 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
       screen: HomeNavigatorWidget(
         initialIndex: 1,
       ),
+      subIndex: 2,
     ),
     GridItem(
       title: 'Screeners',
       icon: screenerIconPath,
       screen: const HomeNavigatorWidget(initialIndex: 2),
+      subIndex: 0,
     ),
   ];
 
@@ -669,6 +692,13 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
         child: InkWell(
           borderRadius: BorderRadius.circular(8),
           onTap: () {
+            // Update providers
+            //Todo: Logic need to add for commidyt and screenerss
+            if (item.subIndex != 0) {
+              ref.read(mainTabProvider.notifier).state = 1;
+              ref.read(subTabProvider(1).notifier).state = item.subIndex;
+            }
+
             Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => item.screen),
@@ -885,6 +915,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
 class GridItem {
   final String title;
   final String icon;
+  final int subIndex;
 
   final Widget screen;
 
@@ -892,5 +923,6 @@ class GridItem {
     required this.title,
     required this.icon,
     required this.screen,
+    required this.subIndex,
   });
 }

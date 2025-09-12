@@ -1,14 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/constants/assets_storage.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 
 class LiveCallTradesScreen extends ConsumerStatefulWidget {
-  const LiveCallTradesScreen({super.key});
+  final void Function(dynamic subIndex, dynamic mainIndex) handleToNavigate;
+  const LiveCallTradesScreen({super.key, required this.handleToNavigate});
 
   @override
   ConsumerState<LiveCallTradesScreen> createState() =>
@@ -22,7 +22,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
       "title": "Intraday Nifty",
       "subtitle": "Options",
       "button": "View All",
-      "icon": Icons.show_chart,
+      "icon": bullMarketIconPath,
       "tabIndex": 1,
       "subIndex": 0,
     },
@@ -30,7 +30,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
       "title": "Nifty Positional",
       "subtitle": "Swing Trades",
       "button": "Learn",
-      "icon": Icons.trending_up,
+      "icon": candlestickIconPath,
       "tabIndex": 1,
       "subIndex": 1,
     },
@@ -38,7 +38,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
       "title": "MCX Positional",
       "subtitle": "Commodity Trading",
       "button": "Start Now",
-      "icon": Icons.account_balance_wallet,
+      "icon": mcxIconPath,
       "tabIndex": 1,
       "subIndex": 2,
     },
@@ -46,7 +46,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
       "title": "Crypto AI Trading",
       "subtitle": "Smart Algo",
       "button": "Explore",
-      "icon": Icons.currency_bitcoin,
+      "icon": bitCoinImagePath,
       "tabIndex": 1,
       "subIndex": 3,
     },
@@ -55,7 +55,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final navNotifier = ref.read(navigationProvider.notifier);
+
     return Scaffold(
       backgroundColor: theme.appBarTheme.backgroundColor,
       body: Padding(
@@ -97,16 +97,9 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                 final tab = _tabs[index];
                 return GestureDetector(
                   onTap: () {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      print("calling live call buttons");
-
-                      ref.read(mainTabProvider.notifier).state =
-                          tab["tabIndex"];
-                      ref.read(subTabProvider(tab["tabIndex"]).notifier).state =
-                          tab["subIndex"];
-
-                      navNotifier.setIndex(1);
-                    });
+                    final tabIndex = tab["tabIndex"];
+                    final subIndex = tab["subIndex"];
+                    widget.handleToNavigate(subIndex, tabIndex);
                   },
                   child: Container(
                     padding: EdgeInsets.all(12.w),
@@ -146,27 +139,23 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                           children: [
                             CommonOutlineButton(
                               borderColor: theme.shadowColor,
+                              borderRadius: 20,
                               textStyle: theme.textTheme.titleSmall?.copyWith(
-                                  color: theme.primaryColorDark,
-                                  fontSize: 10.sp),
+                                color: theme.primaryColorDark,
+                                fontSize: 10.sp,
+                              ),
                               text: tab["button"],
                               onPressed: tab["onTap"],
                             ),
                             Container(
-                              width: 30.w,
-                              height: 30.w,
+                              width: 40.w,
+                              height: 40.w,
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [Colors.blue, Colors.blue[700]!],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(17.r),
+                                borderRadius: BorderRadius.circular(100),
                               ),
-                              child: Icon(
+                              child: Image.asset(
                                 tab["icon"],
-                                color: Colors.white,
-                                size: 22.sp,
                               ),
                             ),
                           ],

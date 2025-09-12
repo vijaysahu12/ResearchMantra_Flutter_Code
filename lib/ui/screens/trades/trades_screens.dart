@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_ontap_button.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/all_trades.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/live_history_trades.dart';
-import 'package:research_mantra_official/ui/screens/trades/screens/mcx_trades.dart';
 
 class TradeScreen extends ConsumerStatefulWidget {
   final int initialSelectedTabIndex;
@@ -580,7 +579,6 @@ class _TradeScreenState extends ConsumerState<TradeScreen> {
         // title: 'Closed',
         tradesList: tradesList['Closed'], mainIndex: 2,
       ),
-      McxTradesScreen(),
     ];
 
     return Scaffold(

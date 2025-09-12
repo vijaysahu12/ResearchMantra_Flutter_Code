@@ -40,7 +40,12 @@ class _PerformanceCardState extends State<PerformanceCard> {
     },
   };
 
-  static const List<String> tabLabels = ['Stocks', 'Futures', 'Options', 'MCX'];
+  static const List<String> tabLabels = [
+    'Futures',
+    'Options',
+    'MCX',
+    'Crypto',
+  ];
 
   @override
   Widget build(BuildContext context) {

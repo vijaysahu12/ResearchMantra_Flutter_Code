@@ -500,7 +500,7 @@ const youtubeSubUrl =
     'https://www.youtube.com/@KingresearchAcademy?sub_confirmation=1';
 
 const updatePopupTitleText =
-    "Update now for a smoother, smarter financial experience with King Research!";
+    "Please update your app to latest version. Current version is no longer valid";
 
 //Empty Scanner Screen Text
 const emptyScannerScreenTextTitleOne =
