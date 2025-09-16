@@ -15,19 +15,53 @@ class _IposScreenState extends State<IposScreen>
   final List<String> _mainTabs = ["Open", "Closed"];
   late TabController _tabController;
 
-  int _subTabIndex = 0;
+  final Map<String, List<Map<String, dynamic>>> ipoData = {
+    "Open": [
+      {
+        "stockSymbol": "ABCIPO",
+        "companyName": "ABC Technologies Ltd",
+        "companyType": "MainBoard",
+        "openClosedDates": "2025-09-15 - 2025-09-18",
+        "minInvestment": "₹15,000",
+        "issueSize": "₹1,200 Cr",
+        "gmp": "+85",
+      },
+      {
+        "stockSymbol": "XYZSME",
+        "companyName": "XYZ Agro Industries",
+        "companyType": "SME",
+        "openClosedDates": "2025-09-15 - 2025-09-18",
+        "minInvestment": "₹1,20,000",
+        "issueSize": "₹42 Cr",
+        "gmp": "+12",
+      },
+    ],
+    "Closed": [
+      {
+        "stockSymbol": "LMNIPO",
+        "companyName": "LMN Healthcare Pvt Ltd",
+        "companyType": "MainBoard",
+        "openClosedDates": "2025-09-15 - 2025-09-18",
+        "minInvestment": "₹14,000",
+        "issueSize": "₹900 Cr",
+        "gmp": "+40",
+      },
+      {
+        "stockSymbol": "PQRRSME",
+        "companyName": "PQR Retail Solutions",
+        "companyType": "SME",
+        "openClosedDates": "2025-09-15 - 2025-09-18",
+        "minInvestment": "₹1,50,000",
+        "issueSize": "₹55 Cr",
+        "gmp": "-5",
+      },
+    ],
+  };
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: _mainTabs.length, vsync: this);
-    _tabController.addListener(() {
-      if (_tabController.indexIsChanging) {
-        setState(() {
-          _subTabIndex = 0;
-        });
-      }
-    });
   }
 
   @override
@@ -36,7 +70,7 @@ class _IposScreenState extends State<IposScreen>
     return Scaffold(
       backgroundColor: theme.primaryColor,
       appBar: CommonAppBarWithBackButton(
-        appBarText: "Ipos",
+        appBarText: "IPO Dashboard",
         handleBackButton: () => Navigator.pop(context),
       ),
       body: Column(
@@ -47,23 +81,19 @@ class _IposScreenState extends State<IposScreen>
             tabTitles: _mainTabs,
           ),
 
-          // ✅ TabBarView
-          // 👇 Replace TabBarView with simple conditional rendering
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
                 // 👉 Individuals Tab Content
                 IpoDetailsScreen(
-                    // investorSharksDetails:
-                    //     investorSharksDetails[investorKeys[_subTabIndex]] ?? [],
-                    ),
+                  ipoDataList: ipoData["Open"] ?? [],
+                ),
 
                 // 👉 Institutional / FIIs Tab Content
                 IpoDetailsScreen(
-                    // investorDetails:
-                    //     investorDetails[investorKeys[_subTabIndex]] ?? [],
-                    ),
+                  ipoDataList: ipoData["Closed"] ?? [],
+                ),
               ],
             ),
           ),

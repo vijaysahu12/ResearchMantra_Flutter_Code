@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/ui/screens/market/screens/sharks/widget/sharks_stocks_details.dart';
 
 class SharksListScreen extends StatefulWidget {
   final List<Map<String, dynamic>> investorSharksDetails;
@@ -28,7 +29,12 @@ class _SharksListScreenState extends State<SharksListScreen> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              //Todo:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SharksStocksDetails(),
+                ),
+              );
             },
             child: Container(
               margin: EdgeInsets.all(10),

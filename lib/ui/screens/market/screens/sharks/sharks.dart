@@ -282,6 +282,9 @@ class _SharksScreenState extends State<SharksScreen>
             tabController: _tabController,
             tabTitles: _mainTabs,
           ),
+          SizedBox(
+            height: 5.h,
+          ),
           CustomTabBarOnTapButton(
             borderRadius: 12,
             fontSize: 10.sp,
