@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,17 +29,27 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.width * 0.45,
+                height: 10.h,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.3,
                 child: FiiDiiActivityWidget(),
               ),
               SizedBox(
-                height: 5.h,
+                height: 10.h,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GestureDetector(
                   onTap: () {
-                    ref.read(bottomNavProvider.notifier).state = 1;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HomeNavigatorWidget(
+                          initialIndex: 1,
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     width: double.infinity,

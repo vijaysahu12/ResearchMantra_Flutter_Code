@@ -395,7 +395,15 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   void handleToNavigateTradeScreenTab(subIndex, mainIndex) {
     ref.read(mainTabProvider.notifier).state = mainIndex;
     ref.read(subTabProvider(1).notifier).state = subIndex;
-    ref.read(bottomNavProvider.notifier).state = 1;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => HomeNavigatorWidget(
+          initialIndex: 1,
+        ),
+      ),
+    );
   }
 
 //Modify your RefreshIndicator
@@ -689,7 +697,15 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
             if (item.mainBottomIndex != 0) {
               ref.read(mainTabProvider.notifier).state = 1;
               ref.read(subTabProvider(1).notifier).state = item.subIndex;
-              ref.read(bottomNavProvider.notifier).state = item.mainBottomIndex;
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => HomeNavigatorWidget(
+                    initialIndex: item.mainBottomIndex,
+                  ),
+                ),
+              );
             } else {
               Navigator.push(
                 context,
@@ -739,7 +755,14 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
         CommonOutlineButton(
             text: "View All",
             onPressed: () {
-              ref.read(bottomNavProvider.notifier).state = 2;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => HomeNavigatorWidget(
+                    initialIndex: 2,
+                  ),
+                ),
+              );
             })
       ],
     );

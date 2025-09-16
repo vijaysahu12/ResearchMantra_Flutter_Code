@@ -3,79 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SharksListScreen extends StatefulWidget {
-  const SharksListScreen({super.key});
+  final List<Map<String, dynamic>> investorSharksDetails;
+  const SharksListScreen({super.key, required this.investorSharksDetails});
 
   @override
   State<SharksListScreen> createState() => _SharksListScreenState();
 }
 
 class _SharksListScreenState extends State<SharksListScreen> {
-  final List<Map<String, dynamic>> investorDetails = [
-    {
-      "Id": 1,
-      "Name": "Rakesh Jhunjhunwala & Assoc",
-      "Holdings": "24",
-      "investedAmount": "38,338",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 5,
-      "Name": "Radhakishan Damani",
-      "Holdings": "15",
-      "investedAmount": "27,540",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 66,
-      "Name": "Mukul Agrawal",
-      "Holdings": "12",
-      "investedAmount": "18,920",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 43,
-      "Name": "Azim Premji",
-      "Holdings": "20",
-      "investedAmount": "45,100",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 53,
-      "Name": "Ashish Dhawan",
-      "Holdings": "10",
-      "investedAmount": "12,780",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 95,
-      "Name": "Ashish Kacholia",
-      "Holdings": "18",
-      "investedAmount": "22,360",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 50,
-      "Name": "Anil Kumar",
-      "Holdings": "8",
-      "investedAmount": "9,840",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 875,
-      "Name": "Vijay Kedia",
-      "Holdings": "14",
-      "investedAmount": "19,250",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-    {
-      "Id": 775,
-      "Name": "Ajay Upendra",
-      "Holdings": "6",
-      "investedAmount": "7,430",
-      "profileImageUrl": "https://etimg.etb2bimg.com/photo/90351120.cms"
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -87,6 +22,7 @@ class _SharksListScreenState extends State<SharksListScreen> {
 
   //Widget for Investor profile
   Widget _buildInvestorsProfile(ThemeData theme) {
+    final investorDetails = widget.investorSharksDetails;
     return ListView.builder(
         itemCount: investorDetails.length,
         itemBuilder: (context, index) {

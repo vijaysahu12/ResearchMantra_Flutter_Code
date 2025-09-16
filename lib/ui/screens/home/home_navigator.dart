@@ -201,7 +201,7 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final currentIndex = ref.watch(bottomNavProvider);
+
     final List<Widget> children = [
       HomeScreenWidget(),
       const TradeScreen(
@@ -219,21 +219,23 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
       child: Scaffold(
         backgroundColor: theme.primaryColor,
         appBar: AppBarScreen(
-          selectedIndex: currentIndex,
+          selectedIndex: _selectedIndex,
           scannerkey: scannerKey,
         ),
         // ignore: deprecated_member_use
         body: IndexedStack(
-          index: currentIndex, // 👈 only changes visibility
+          index: _selectedIndex, // 👈 only changes visibility
           children: children,
         ),
 
         bottomNavigationBar: Container(
           color: Colors.transparent,
           child: BottomNavigation(
-            selectedIndex: currentIndex,
+            selectedIndex: _selectedIndex,
             onItemTapped: (index) async {
-              ref.read(bottomNavProvider.notifier).state = index;
+              setState(() {
+                _selectedIndex = index;
+              });
             },
           ),
         ),
@@ -241,5 +243,3 @@ class _HomeWidgetState extends ConsumerState<HomeNavigatorWidget> {
     );
   }
 }
-
-final bottomNavProvider = StateProvider<int>((ref) => 0);

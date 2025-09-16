@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:research_mantra_official/constants/assets.dart';
+
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/services/url_launcher_helper.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
-import 'package:research_mantra_official/ui/components/button.dart';
-import 'package:research_mantra_official/ui/components/dynamic_promo_card/service/promo_manager.dart';
+
 import 'package:research_mantra_official/ui/router/auth_route_resolver.dart';
 
 class UpdateScreen extends StatefulWidget {
