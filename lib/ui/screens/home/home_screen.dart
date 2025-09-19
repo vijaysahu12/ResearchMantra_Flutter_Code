@@ -353,10 +353,10 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     final connectivityResult = ref.watch(connectivityStreamProvider);
     final hasConnection = connectivityResult.value != ConnectivityResult.none;
 
-    if (!hasConnection) {
-      ToastUtils.showToast(noInternetConnectionText, "");
-      hasRefreshed = false;
-    }
+    // if (!hasConnection) {
+    //   ToastUtils.showToast(noInternetConnectionText, "");
+    //   hasRefreshed = false;
+    // }
 
     return Scaffold(
       backgroundColor: theme.appBarTheme.backgroundColor,

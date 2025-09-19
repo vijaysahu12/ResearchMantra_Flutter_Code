@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:research_mantra_official/providers/newversion/new_version_provider.dart';
 import 'package:research_mantra_official/services/check_connectivity.dart';
-import 'package:research_mantra_official/ui/components/indicator.dart';
 import 'package:research_mantra_official/ui/components/update_screen/update_screen.dart';
 import 'package:research_mantra_official/ui/router/auth_route_resolver.dart';
 import 'package:research_mantra_official/utils/utils.dart';

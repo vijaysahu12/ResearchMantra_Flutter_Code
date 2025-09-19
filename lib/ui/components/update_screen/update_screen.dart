@@ -129,7 +129,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
     return CommonOutlineButton(
       text: "Update",
       onPressed: _handleUpdateNavigation,
-      borderColor: Colors.transparent,
+      borderColor: theme.focusColor,
       textStyle: TextStyle(fontSize: 14.sp, color: theme.primaryColorDark),
     );
   }

@@ -147,53 +147,47 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
         },
       ),
       body: SingleChildScrollView(
-        child: AnimationConfiguration.synchronized(
-          duration: const Duration(milliseconds: 500),
-          child: SlideAnimation(
-            child: FadeInAnimation(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    UserDetails(
-                      handleToNavigateUserBlockedScreen:
-                          handleToNavigateUserBlockedScreen,
-                      getUserPersonalDetails:
-                          getUserPersonalDetails.userPersonalDetails,
-                    ),
-                    SizedBox(height: 6.h),
-                    MyBucketAndTickets(
-                      handleNavigateToTicketsScreen:
-                          handleNavigateToTicketsScreen,
-                      handleNavigateToMyBucketScreen:
-                          handleNavigateToMyBucketScreen,
-                    ),
-                    SizedBox(height: 6.h),
-                    PartnerAccountAndPerformance(
-                      handleNavigateToPerformancescreenScreen:
-                          handleNavigateToPerformancescreenScreen,
-                      handleNavigateToPartnerAccount:
-                          handleNavigateToPartnerAccount,
-                    ),
-                    SizedBox(height: 6.h),
-                    AboutAndContactUs(getMobileNumber: getMobileNumber),
-                    SizedBox(height: 6.h),
-                    const RateAndShareApp(),
-                    SizedBox(height: 6.h),
-                    DarkLightModeWidget(handleLogoutPopUp: handleLogoutPopUp),
-                    SizedBox(height: 6.h),
-                    AspectRatio(
-                      aspectRatio: 4 / 3,
-                      child: Container(
-                        child: _buildAdvertisementSection(context, theme),
-                      ),
-                    ),
-                    _buildFollowWidget(context, getMobileNumber)
-                  ],
-                ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              UserDetails(
+                handleToNavigateUserBlockedScreen:
+                    handleToNavigateUserBlockedScreen,
+                getUserPersonalDetails:
+                    getUserPersonalDetails.userPersonalDetails,
               ),
-            ),
+              // UnivestWidget(),
+              // SizedBox(height: 6.h),
+              // _buildProfileContainerSection(theme), //New Add
+              SizedBox(height: 6.h),
+
+              MyBucketAndTickets(
+                handleNavigateToTicketsScreen: handleNavigateToTicketsScreen,
+                handleNavigateToMyBucketScreen: handleNavigateToMyBucketScreen,
+              ),
+              SizedBox(height: 6.h),
+              PartnerAccountAndPerformance(
+                handleNavigateToPerformancescreenScreen:
+                    handleNavigateToPerformancescreenScreen,
+                handleNavigateToPartnerAccount: handleNavigateToPartnerAccount,
+              ),
+              SizedBox(height: 6.h),
+              AboutAndContactUs(getMobileNumber: getMobileNumber),
+              SizedBox(height: 6.h),
+              const RateAndShareApp(),
+              SizedBox(height: 6.h),
+              DarkLightModeWidget(handleLogoutPopUp: handleLogoutPopUp),
+              SizedBox(height: 6.h),
+              // AspectRatio(
+              //   aspectRatio: 4 / 3,
+              //   child: Container(
+              //     child: _buildAdvertisementSection(context, theme),
+              //   ),
+              // ),
+              _buildFollowWidget(context, getMobileNumber)
+            ],
           ),
         ),
       ),
@@ -320,6 +314,144 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
             fontWeight: fontWeight,
           ),
         ),
+      ],
+    );
+  }
+
+//Widget for Profile Section
+  Widget _buildProfileContainerSection(ThemeData theme) {
+    return Row(
+      children: [
+        Container(
+          color: theme.shadowColor,
+          padding: EdgeInsets.all(10),
+          child: Icon(Icons.settings),
+        ),
+        Container(
+          color: theme.shadowColor,
+          padding: EdgeInsets.all(10),
+          child: Icon(Icons.settings),
+        ),
+        Container(
+          color: theme.shadowColor,
+          padding: EdgeInsets.all(10),
+          child: Icon(Icons.settings),
+        )
+      ],
+    );
+  }
+}
+
+class UnivestWidget extends StatelessWidget {
+  const UnivestWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Top icons row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _iconWithLabel(Icons.settings, "Settings"),
+              _iconWithLabel(Icons.headset_mic, "Help"),
+              _iconWithLabel(Icons.currency_rupee, "Refer & Earn"),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // Login section
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Login into Univest Web",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    side: const BorderSide(color: Colors.orange),
+                  ),
+                  onPressed: () {},
+                  icon: const Icon(Icons.qr_code, size: 20),
+                  label: const Text("Scan the QR"),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Univest Demat card
+          const Text(
+            "Univest Demat",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            color: Colors.green[600],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Smart Research\nSmarter Trades",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.green[700],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text("Get 25 FREE trades"),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _iconWithLabel(IconData icon, String label) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, size: 28, color: Colors.black87),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(fontSize: 14)),
       ],
     );
   }
