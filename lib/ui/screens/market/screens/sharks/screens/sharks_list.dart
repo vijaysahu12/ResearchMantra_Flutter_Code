@@ -32,7 +32,9 @@ class _SharksListScreenState extends State<SharksListScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SharksStocksDetails(),
+                  builder: (context) => SharksStocksDetails(
+                    name: investorDetails[index]['Name'],
+                  ),
                 ),
               );
             },

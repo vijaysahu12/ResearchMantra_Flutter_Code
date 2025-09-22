@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
+import 'package:research_mantra_official/ui/screens/market/screens/sharks/widget/sharks_stocks_details.dart';
 
 class KeyChangesScreen extends StatefulWidget {
   final List<Map<String, dynamic>> investorDetails;
@@ -31,7 +32,13 @@ class _KeyChangesScreenState extends State<KeyChangesScreen> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              //Todo:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SharksStocksDetails(
+                      name: widget.investorDetails[index]['Name']),
+                ),
+              );
             },
             child: Container(
               margin: EdgeInsets.all(10),
@@ -117,7 +124,7 @@ class _KeyChangesScreenState extends State<KeyChangesScreen> {
                           Text(
                             "Qty. held",
                             style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.primaryColorDark, fontSize: 10.sp),
+                                color: theme.focusColor, fontSize: 10.sp),
                           ),
                           Text(
                             "₹${widget.investorDetails[index]['qtyHeld']} Cr",
@@ -131,7 +138,7 @@ class _KeyChangesScreenState extends State<KeyChangesScreen> {
                           Text(
                             "C. Holding(%)",
                             style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.primaryColorDark, fontSize: 10.sp),
+                                color: theme.focusColor, fontSize: 10.sp),
                           ),
                           Text(
                             widget.investorDetails[index]['qtyChange'],
@@ -145,7 +152,7 @@ class _KeyChangesScreenState extends State<KeyChangesScreen> {
                           Text(
                             "Qty. Change(%)",
                             style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.primaryColorDark, fontSize: 10.sp),
+                                color: theme.focusColor, fontSize: 10.sp),
                           ),
                           Text(
                             "${widget.investorDetails[index]['currentChange']}",
