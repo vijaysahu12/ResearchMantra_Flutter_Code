@@ -13,3 +13,4 @@ const String screenerIconPath = '$_baseResearchMantraPath/trend.png';
 const String preMarketImagePath = '$_baseResearchMantraPath/pre_market.jpg';
 const String postMarketImagePath = '$_baseResearchMantraPath/post-market.jpg';
 const String bitCoinImagePath = '$_baseResearchMantraPath/bitcoin.png';
+

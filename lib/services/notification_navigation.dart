@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
-import 'package:research_mantra_official/data/models/product_api_response_model.dart';
 import 'package:research_mantra_official/data/repositories/interfaces/INotification_repository.dart';
 import 'package:research_mantra_official/main.dart';
-
 import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
-import 'package:research_mantra_official/ui/screens/products/screens/details/product_details_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
 import 'package:research_mantra_official/ui/screens/subscription/subsription_screen.dart';
 import 'package:research_mantra_official/utils/utils.dart';

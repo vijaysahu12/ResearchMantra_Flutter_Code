@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,8 +20,8 @@ class NotificationListWidget extends StatefulWidget {
   final Function(String) onNotificationTap; // Function for notification tap
   final VoidCallback onPullToRefresh; // Function for pull-to-refresh
   final void Function(String notificationId) onDeleteNotification;
- bool  showUnreadOnly;
-   NotificationListWidget({
+  bool showUnreadOnly;
+  NotificationListWidget({
     super.key,
     required this.notifications,
     required this.onReachEnd,
@@ -126,7 +124,7 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
         final String productName =
             widget.notifications[index].productName ?? 'King Research';
         final dynamic productId = widget.notifications[index].productId;
-      
+
         if (widget.notifications[index].screenName.isNotEmpty) {
           UrlLauncherHelper.handleToNavigatePathScreen(
               context,
@@ -181,7 +179,6 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
                 Expanded(
                   child: Column(
                     children: [
-                
                       Row(
                         crossAxisAlignment: CrossAxisAlignment
                             .start, // Aligns content to the top
@@ -201,7 +198,7 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
                             ),
                           ),
                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Row(
                                 children: [

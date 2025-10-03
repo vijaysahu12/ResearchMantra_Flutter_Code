@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/providers/check_connection_provider.dart';
 import 'package:research_mantra_official/providers/market_analysis/pre_market_analysis/all_pre_market_analysis_provider.dart';
-import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/common_error/oops_screen.dart';
 import 'package:research_mantra_official/ui/components/empty_contents/no_content_widget.dart';
 import 'package:research_mantra_official/ui/components/king_research_loader/kingresearch_loader.dart';

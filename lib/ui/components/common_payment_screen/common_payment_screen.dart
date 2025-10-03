@@ -7,8 +7,6 @@ import 'package:research_mantra_official/data/models/payment_model/payment_model
 import 'package:research_mantra_official/main.dart';
 import 'package:research_mantra_official/providers/payment_gateway/payment_gateway_provider.dart';
 import 'package:research_mantra_official/providers/products/single/single_product_provider.dart';
-import 'package:research_mantra_official/providers/research/baskets/basket_provider.dart';
-import 'package:research_mantra_official/providers/research/companies/companies_provider.dart';
 import 'package:research_mantra_official/services/common_payment_gateway.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
 import 'package:research_mantra_official/ui/components/bottom_sheet/failed_payment.dart';

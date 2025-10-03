@@ -49,7 +49,6 @@ class _AppBarScreenState extends State<AppBarScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final fontSize = MediaQuery.of(context).size.height;
 
     return AppBar(
       scrolledUnderElevation: 0,

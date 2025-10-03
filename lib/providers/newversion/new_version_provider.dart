@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/data/models/app_version_response_model.dart';
 import 'package:research_mantra_official/data/repositories/interfaces/IUser_repository.dart';
 import 'package:research_mantra_official/main.dart';

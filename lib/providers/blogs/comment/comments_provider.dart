@@ -108,7 +108,7 @@ class GetCommentsStateNotifier extends StateNotifier<GetCommentsState> {
             blogId,
           );
         } else {
-          await _allCommunityDataNotifier.updateCommentsCount(blogId, "add",0);
+          await _allCommunityDataNotifier.updateCommentsCount(blogId, "add", 0);
         }
         // // Fetch updated comments from the repository
         // await _blogRepository.getBlogComments(blogId, pageNumber, pageSize);
@@ -145,19 +145,16 @@ class GetCommentsStateNotifier extends StateNotifier<GetCommentsState> {
             await _blogsListNotifier.manageCommentDeleteCountBlogById(
                 objectId, blogId, createdBy, replyCount);
           } else {
-  
             await _allCommunityDataNotifier.updateCommentsCount(
-                blogId, "remove" ,replyCount);
+                blogId, "remove", replyCount);
           }
         } else if (type == "REPLY") {
-
-            manageCommentDeleteReplyCount(
-              objectId,
-              blogId,
-              createdBy,
-              endPoints,
-            );
-         
+          manageCommentDeleteReplyCount(
+            objectId,
+            blogId,
+            createdBy,
+            endPoints,
+          );
         }
 
         final updateComments = state.blogCommentsModel
@@ -234,7 +231,8 @@ class GetCommentsStateNotifier extends StateNotifier<GetCommentsState> {
           if (endPoints == null) {
             manageCommentAddReplyCount(userObjectId, blogId, commentid);
           } else {
-            await _allCommunityDataNotifier.updateCommentsCount(blogId, "add",0);
+            await _allCommunityDataNotifier.updateCommentsCount(
+                blogId, "add", 0);
           }
         }
       } else {
@@ -281,11 +279,8 @@ class GetCommentsStateNotifier extends StateNotifier<GetCommentsState> {
         await _blogsListNotifier.manageCommentDeleteCountBlogById(
             userObejctId, blogId, commentId, 0);
       } else {
-             await _allCommunityDataNotifier.updateCommentsCount(
-                blogId, "remove",0);
-
-
-
+        await _allCommunityDataNotifier.updateCommentsCount(
+            blogId, "remove", 0);
       }
       state = GetCommentsState.loaded(updatedComment);
     } catch (e) {

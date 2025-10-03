@@ -6,7 +6,6 @@ import 'package:research_mantra_official/providers/services_buttons_provider.dar
 import 'package:research_mantra_official/services/secure_storage.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/bottom_navigation.dart';
-import 'package:research_mantra_official/ui/components/dynamic_promo_card/watcher/promo_activator.dart';
 import 'package:research_mantra_official/ui/screens/home/home_screen.dart';
 import 'package:research_mantra_official/ui/screens/market/market_screen.dart';
 

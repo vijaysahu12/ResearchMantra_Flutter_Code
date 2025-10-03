@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/assets_storage.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
-import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
-import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 
 class LiveCallTradesScreen extends ConsumerStatefulWidget {
   final void Function(dynamic subIndex, dynamic mainIndex) handleToNavigate;

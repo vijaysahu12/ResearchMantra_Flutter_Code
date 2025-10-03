@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:research_mantra_official/providers/images/dashboard/dashboard_provider.dart';
 import 'package:research_mantra_official/ui/screens/profile/profile_screen.dart';
-import 'package:research_mantra_official/ui/screens/profile/screens/personaldetails/personal_profile_screen.dart';
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 class ProfileImageAndUserName extends ConsumerStatefulWidget {

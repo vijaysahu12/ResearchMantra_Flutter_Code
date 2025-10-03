@@ -1,6 +1,4 @@
-// Import necessary packages for Firebase Cloud Messaging and local notifications
 
-import 'dart:developer';
 import 'dart:typed_data';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:research_mantra_official/data/network/http_client.dart';
-import 'package:research_mantra_official/constants/env_config.dart';
 import 'package:research_mantra_official/main.dart';
 
 class ReceivedNotification {

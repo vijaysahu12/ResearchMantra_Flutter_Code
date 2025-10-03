@@ -8,7 +8,6 @@ import 'package:research_mantra_official/ui/screens/market/screens/ipo/ipo.dart'
 import 'package:research_mantra_official/ui/screens/market/screens/results/results.dart';
 import 'package:research_mantra_official/ui/screens/market/screens/sharks/sharks.dart';
 
-
 // 📌 Model
 class GridItem {
   final String title;
@@ -43,11 +42,15 @@ class _MenuWidgetState extends State<MenuWidget> {
 
     // ✅ Convert static data into GridItem objects
     gridItems = [
-      {"title": "Screeners", "icon": arrowIconPath, "screen": "ScreenerScreen"},
-      {"title": "IPO", "icon": arrowIconPath, "screen": "IpoScreen"},
+      {
+        "title": "Screeners",
+        "icon": screenerIconPath,
+        "screen": "ScreenerScreen"
+      },
+      {"title": "IPO", "icon": bitCoinImagePath, "screen": "IpoScreen"},
       {"title": "Sharks", "icon": arrowIconPath, "screen": "SharksScreen"},
-      {"title": "Blogs", "icon": arrowIconPath, "screen": "BlogsScreen"},
-      {"title": "Results", "icon": arrowIconPath, "screen": "ResultsScreen"},
+      {"title": "Blogs", "icon": candlestickIconPath, "screen": "BlogsScreen"},
+      {"title": "Results", "icon": optionsIconPath, "screen": "ResultsScreen"},
     ].map((e) => GridItem.fromJson(e)).toList();
   }
 
