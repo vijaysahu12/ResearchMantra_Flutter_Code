@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 
 import 'package:research_mantra_official/providers/get_support_mobile/support_mobile_state.dart';
@@ -58,20 +59,28 @@ class _AboutAndContactUsState extends State<AboutAndContactUs> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        CommonBoxShadowButtons(
-          buttonText: aboutText,
-          iconTextName: Icons.info_outline,
-          handleNavigateToScreen: aboutUs,
+        Row(
+          children: [
+            CommonBoxShadowButtons(
+              buttonText: aboutText,
+              iconTextName: Icons.info_outline,
+              handleNavigateToScreen: aboutUs,
+            ),
+          ],
         ),
-        const SizedBox(
-          width: 8,
+        SizedBox(
+          height: 10.h,
         ),
-        CommonBoxShadowButtons(
-          buttonText: contactText,
-          iconTextName: Icons.call_outlined,
-          handleNavigateToScreen: makeCallTo,
+        Row(
+          children: [
+            CommonBoxShadowButtons(
+              buttonText: contactText,
+              iconTextName: Icons.call_outlined,
+              handleNavigateToScreen: makeCallTo,
+            ),
+          ],
         ),
       ],
     );

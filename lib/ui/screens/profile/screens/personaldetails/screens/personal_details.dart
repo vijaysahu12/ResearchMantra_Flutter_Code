@@ -104,7 +104,7 @@ class _PersonalProfileDetailsWidgetState
         selectedGender = userPersonalDetails.gender;
         ref.read(getGenderProvider.notifier).updateGender(selectedGender ?? "");
         _secureStorage.write(userGender, selectedGender);
-            });
+      });
     } else {
       loadUserDetailsFromSecureStorage();
     }
@@ -295,30 +295,30 @@ class _PersonalProfileDetailsWidgetState
                 children: [
                   // Profile image picker widget
 
-                  widget.profileImageDeleted
-                      ? Center(
-                          child: Container(
-                            padding: const EdgeInsets.only(bottom: 30),
-                            child: const CircleAvatar(
-                              radius: 30,
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        )
-                      : ProfileImagePicker(
-                          isGenderChange: widget.isGenderChange,
-                          profileImage: widget.getPersonalDetails != null &&
-                                  widget.getPersonalDetails?.profileImage !=
-                                      null
-                              ? getProfileImageURL(
-                                  widget.getPersonalDetails!.profileImage ?? '')
-                              : profileImageUrl,
-                          onImageSelected: (File? image) {
-                            _image = image;
-                          },
-                          selectedGender: selectedGender,
-                          onProfileImageDelete: widget.onProfileImageDelete,
-                        ),
+                  // widget.profileImageDeleted
+                  //     ? Center(
+                  //         child: Container(
+                  //           padding: const EdgeInsets.only(bottom: 30),
+                  //           child: const CircleAvatar(
+                  //             radius: 30,
+                  //             child: CircularProgressIndicator(),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : ProfileImagePicker(
+                  //         isGenderChange: widget.isGenderChange,
+                  //         profileImage: widget.getPersonalDetails != null &&
+                  //                 widget.getPersonalDetails?.profileImage !=
+                  //                     null
+                  //             ? getProfileImageURL(
+                  //                 widget.getPersonalDetails!.profileImage ?? '')
+                  //             : profileImageUrl,
+                  //         onImageSelected: (File? image) {
+                  //           _image = image;
+                  //         },
+                  //         selectedGender: selectedGender,
+                  //         onProfileImageDelete: widget.onProfileImageDelete,
+                  //       ),
 
                   SizedBox(height: 5.h),
                   // Text field for user name
@@ -354,12 +354,12 @@ class _PersonalProfileDetailsWidgetState
                   DeleteAndDeactivateButtons(
                     handleDeleteAccountPopUp: handleNavigateDeleteAccountPopUp,
                   ),
-                  SizedBox(height: 20.h),
+                  // SizedBox(height: 20.h),
 
-                  Center(
-                    child: DevelopedByText(),
-                  ),
-                  SizedBox(height: 5.h),
+                  // Center(
+                  //   child: DevelopedByText(),
+                  // ),
+                  // SizedBox(height: 5.h),
                 ],
               ),
             ),
@@ -384,5 +384,4 @@ class _PersonalProfileDetailsWidgetState
   }
 
   //widget for Developed text
-
 }

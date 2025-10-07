@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/ui/components/common_box_buttons/box_shadow_buttons.dart';
@@ -68,20 +69,28 @@ class _RateAndShareAppState extends State<RateAndShareApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        CommonBoxShadowButtons(
-          buttonText: shareButtonText,
-          iconTextName: Icons.share_outlined,
-          handleNavigateToScreen: handleToShareTheApp,
+        Row(
+          children: [
+            CommonBoxShadowButtons(
+              buttonText: shareButtonText,
+              iconTextName: Icons.share_outlined,
+              handleNavigateToScreen: handleToShareTheApp,
+            ),
+          ],
         ),
-        const SizedBox(
-          width: 8,
+        SizedBox(
+          height: 10.h,
         ),
-        CommonBoxShadowButtons(
-          buttonText: rateAppButtonText,
-          iconTextName: Icons.star_border,
-          handleNavigateToScreen: handleToRateTheApp,
+        Row(
+          children: [
+            CommonBoxShadowButtons(
+              buttonText: rateAppButtonText,
+              iconTextName: Icons.star_border,
+              handleNavigateToScreen: handleToRateTheApp,
+            ),
+          ],
         ),
       ],
     );

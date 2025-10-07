@@ -21,18 +21,10 @@ class CommonBoxShadowButtons extends StatelessWidget {
       child: GestureDetector(
         onTap: () => handleNavigateToScreen(),
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: theme.primaryColor,
-            boxShadow: [
-              BoxShadow(
-                color: theme.focusColor.withOpacity(0.4),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: const Offset(0, 1),
-              ),
-            ],
           ),
           child: Row(
             children: [
@@ -51,6 +43,12 @@ class CommonBoxShadowButtons extends StatelessWidget {
                   fontSize: height * 0.015,
                   fontWeight: FontWeight.w600,
                 ),
+              ),
+              Spacer(),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: theme.primaryColorDark,
               ),
             ],
           ),

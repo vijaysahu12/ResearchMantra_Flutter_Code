@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:research_mantra_official/providers/theme_provider/theme_provider.dart';
@@ -27,130 +28,122 @@ class _DarkLightModeWidget extends ConsumerState<DarkLightModeWidget> {
     final themeModeController = ref.read(themeModeProvider.notifier);
     final themeMode = ref.watch(themeModeProvider);
     final height = MediaQuery.of(context).size.height;
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: GestureDetector(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: theme.primaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.focusColor.withOpacity(0.4),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(0, 1),
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: theme.primaryColor,
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  themeMode == ThemeModeType.dark
-                      ? Icon(
-                          Icons.nightlight_outlined,
+                  child: Row(
+                    children: [
+                      themeMode == ThemeModeType.dark
+                          ? Icon(
+                              Icons.nightlight_outlined,
+                              color: theme.primaryColorDark,
+                            )
+                          : Icon(
+                              Icons.wb_sunny,
+                              color: theme.primaryColorDark,
+                            ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        modeButttonText,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
                           color: theme.primaryColorDark,
-                        )
-                      : Icon(
-                          Icons.wb_sunny,
-                          color: theme.primaryColorDark,
+                          fontFamily: fontFamily,
+                          fontSize: height * 0.015,
                         ),
-                  const SizedBox(
-                    width: 12,
+                      ),
+                      const Spacer(),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                                color: theme.primaryColorDark.withOpacity(0.4),
+                                width: 1)),
+                        child: Row(
+                          children: [
+                            SlidingSwitch(
+                                value: themeMode == ThemeModeType.light
+                                    ? false
+                                    : true,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    themeModeController.toggleThemeMode();
+                                  });
+                                },
+                                onTap: () {},
+                                onDoubleTap: () {},
+                                onSwipe: () {},
+                                height: 20,
+                                width: 40,
+                                animationDuration:
+                                    const Duration(milliseconds: 0),
+                                textOn: '',
+                                textOff: '',
+                                background: theme.shadowColor,
+                                buttonColor:
+                                    theme.primaryColorDark.withOpacity(0.7))
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    modeButttonText,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: theme.primaryColorDark,
-                      fontFamily: fontFamily,
-                      fontSize: height * 0.015,
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                            color: theme.primaryColorDark.withOpacity(0.4),
-                            width: 1)),
-                    child: Row(
-                      children: [
-                        SlidingSwitch(
-                            value:
-                                themeMode == ThemeModeType.light ? false : true,
-                            onChanged: (bool value) {
-                              setState(() {
-                                themeModeController.toggleThemeMode();
-                              });
-                            },
-                            onTap: () {},
-                            onDoubleTap: () {},
-                            onSwipe: () {},
-                            height: 20,
-                            width: 40,
-                            animationDuration: const Duration(milliseconds: 0),
-                            textOn: '',
-                            textOff: '',
-                            background: theme.shadowColor,
-                            buttonColor:
-                                theme.primaryColorDark.withOpacity(0.7))
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
-        const SizedBox(
-          width: 8,
+        SizedBox(
+          height: 10.h,
         ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () => widget.handleLogoutPopUp(context),
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: theme.primaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.focusColor.withOpacity(0.4),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(0, 1),
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => widget.handleLogoutPopUp(context),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: theme.primaryColor,
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.power_settings_new_outlined,
-                    color: theme.primaryColorDark,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.power_settings_new_outlined,
+                        color: theme.primaryColorDark,
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        // locale.logout,
+                        "Logout",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: theme.primaryColorDark,
+                          fontFamily: fontFamily,
+                          fontSize: height * 0.015,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    // locale.logout,
-                    "Logout",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: theme.primaryColorDark,
-                      fontFamily: fontFamily,
-                      fontSize: height * 0.015,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ],
     );
-
-
   }
 }

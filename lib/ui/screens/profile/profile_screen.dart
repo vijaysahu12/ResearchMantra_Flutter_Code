@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/constants/assets.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/providers/get_support_mobile/support_mobile_provider.dart';
 import 'package:research_mantra_official/providers/images/profile_images/profile_image_provider.dart';
 import 'package:research_mantra_official/providers/userpersonaldetails/user_personal_details_provider.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
+import 'package:research_mantra_official/ui/components/event_screen/common_event_screen.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/components/popupscreens/logout_popup/logout_popup.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/settings/block_users.dart';
+import 'package:research_mantra_official/ui/screens/profile/screens/settings/settings_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/about_contact.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/share_and_rate_app.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/theme_logout.dart';
@@ -114,8 +117,13 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
     Navigator.pushNamed(context, notificationsSettings);
   }
 
-  void handleNavigateToSettingsScreen(BuildContext context) {
-    Navigator.pushNamed(context, settingsScreen);
+  void handleNavigateToSettingsScreen(
+      BuildContext context, getMobileNumber, handleLogoutPopUp) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return SettingsScreen(
+          getMobileNumber: getMobileNumber,
+          handleLogoutPopUp: handleLogoutPopUp);
+    }));
   }
 
 //handle to navigate blocked screen
@@ -153,7 +161,9 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
                 getUserPersonalDetails:
                     getUserPersonalDetails.userPersonalDetails,
               ),
+              SizedBox(height: 12.h),
 
+              _buildAddWidget(theme),
               // SizedBox(height: 6.h),
               // _buildProfileContainerSection(theme), //New Add
               SizedBox(height: 12.h),
@@ -163,24 +173,25 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
               SizedBox(height: 12.h),
               _buildDematAccountWidget(theme),
               SizedBox(height: 12.h),
-
-              MyBucketAndTickets(
-                handleNavigateToTicketsScreen: handleNavigateToTicketsScreen,
-                handleNavigateToMyBucketScreen: handleNavigateToMyBucketScreen,
-              ),
-              SizedBox(height: 6.h),
-              PartnerAccountAndPerformance(
-                handleNavigateToPerformancescreenScreen:
-                    handleNavigateToPerformancescreenScreen,
-                handleNavigateToPartnerAccount: handleNavigateToPartnerAccount,
-              ),
-              SizedBox(height: 6.h),
-              AboutAndContactUs(getMobileNumber: getMobileNumber),
-              SizedBox(height: 6.h),
-              const RateAndShareApp(),
-              SizedBox(height: 6.h),
-              DarkLightModeWidget(handleLogoutPopUp: handleLogoutPopUp),
-              SizedBox(height: 6.h),
+              _buildSettingWidget(theme, getMobileNumber),
+              SizedBox(height: 12.h),
+              // MyBucketAndTickets(
+              //   handleNavigateToTicketsScreen: handleNavigateToTicketsScreen,
+              //   handleNavigateToMyBucketScreen: handleNavigateToMyBucketScreen,
+              // ),
+              // SizedBox(height: 6.h),
+              // PartnerAccountAndPerformance(
+              //   handleNavigateToPerformancescreenScreen:
+              //       handleNavigateToPerformancescreenScreen,
+              //   handleNavigateToPartnerAccount: handleNavigateToPartnerAccount,
+              // ),
+              // SizedBox(height: 6.h),
+              // AboutAndContactUs(getMobileNumber: getMobileNumber),
+              // SizedBox(height: 6.h),
+              // const RateAndShareApp(),
+              // SizedBox(height: 6.h),
+              // DarkLightModeWidget(handleLogoutPopUp: handleLogoutPopUp),
+              // SizedBox(height: 6.h),
               // AspectRatio(
               //   aspectRatio: 4 / 3,
               //   child: Container(
@@ -506,6 +517,141 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+//Widget for Settings
+  Widget _buildSettingWidget(ThemeData theme, getMobileNumber) {
+    return GestureDetector(
+      onTap: () {
+        //Todo: Navigate to settings screen
+        handleNavigateToSettingsScreen(
+            context, getMobileNumber, handleLogoutPopUp);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: theme.primaryColor,
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 4,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF2196F3), Color(0xFF03DAC6)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'Settings',
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.primaryColorDark,
+                  ),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.settings,
+                  size: 16,
+                  color: theme.focusColor,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: theme.focusColor.withOpacity(0.5),
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Access and customize your app settings easily.',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    fontSize: 10.sp,
+                    color: theme.primaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+//Widget for Add
+  Widget _buildAddWidget(ThemeData theme) {
+    return GestureDetector(
+      onTap: () {
+//Todo: Navigate To Resitration Screen
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const CommonEventScreen()));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: theme.primaryColor,
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 4,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF2196F3), Color(0xFF03DAC6)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'Webinar & Events',
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.primaryColorDark,
+                  ),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.event_seat,
+                  size: 16,
+                  color: theme.focusColor,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Image.asset(
+                dashBoardBottomSlider, // Replace with your image path
+                fit: BoxFit.cover,
               ),
             ),
           ],

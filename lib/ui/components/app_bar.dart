@@ -152,7 +152,7 @@ class _CommonAppBarWithBackButtonState
 
     return AppBar(
       scrolledUnderElevation: 0,
-      backgroundColor: theme.appBarTheme.backgroundColor,
+      backgroundColor: theme.primaryColor,
       title: Text(
         widget.appBarText,
         style: TextStyle(
