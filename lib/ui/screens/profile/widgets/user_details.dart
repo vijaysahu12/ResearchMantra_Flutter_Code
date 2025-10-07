@@ -83,16 +83,9 @@ class _UserDetailsState extends State<UserDetails> {
       onTap: () => navigateToPersonalDetailsScreen(context),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: theme.primaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: theme.focusColor.withOpacity(0.4),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(0, 1),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: theme.shadowColor, width: 1),
+          color: theme.appBarTheme.backgroundColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -101,27 +94,20 @@ class _UserDetailsState extends State<UserDetails> {
               const SizedBox(
                 width: 10,
               ),
-              // // Display user profile image
-              if (profileImageUrl != null)
-                CircularCachedNetworkImage(
-                  imageURL: profileImageUrl!,
-                  size: 45,
-                  borderColor: theme.shadowColor,
-                  type: 'profile',
-                ),
 
-              // Display default profile image if user profile image is not available
-              if (profileImageUrl == null)
-                CircleAvatar(
-                  radius: 20,
-                  child: SvgPicture.asset(
-                    height: 50,
-                    selectedGender.toString().toLowerCase() == maleGenderValue
-                        ? maleUserProfileSvgFilePath
-                        : feamleUserProfileSvgFilePath,
-                    fit: BoxFit.cover, // Ensure the SVG covers the avatar
-                  ),
+              CircleAvatar(
+                radius: 20,
+                child: Text(
+                  userName != null && userName!.isNotEmpty
+                      ? userName![0].toUpperCase()
+                      : 'R',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: theme.indicatorColor,
+                      fontSize: fontSize * 0.035,
+                      fontFamily: fontFamily),
                 ),
+              ),
               const SizedBox(
                 width: 15,
               ),
@@ -137,21 +123,20 @@ class _UserDetailsState extends State<UserDetails> {
                         fontSize: fontSize * 0.035,
                         fontFamily: fontFamily),
                   ),
-                  Text(
-                    userEmailId ?? 'user****@gmail.com',
-                    style: TextStyle(
-                        fontSize: fontSize * 0.025,
-                        fontWeight: FontWeight.w600,
-                        color: theme.primaryColorDark,
-                        fontFamily: fontFamily),
-                  ),
                 ],
               ),
               const Spacer(),
-              InkWell(
-                  onTap: widget.handleToNavigateUserBlockedScreen,
-                  child: Icon(Icons.lock_person_outlined,
-                      color: theme.disabledColor)),
+              Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: theme.shadowColor,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: InkWell(
+                    onTap: widget.handleToNavigateUserBlockedScreen,
+                    child: Icon(Icons.lock_person_outlined,
+                        color: theme.disabledColor)),
+              ),
               const SizedBox(
                 width: 10,
               ),

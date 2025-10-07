@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/common_ontap_button.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/all_trades.dart';
+import 'package:research_mantra_official/ui/screens/trades/screens/live_commentary.dart';
 import 'package:research_mantra_official/ui/screens/trades/screens/live_history_trades.dart';
 
 class TradeScreen extends ConsumerStatefulWidget {
@@ -556,6 +557,7 @@ class _TradeScreenState extends ConsumerState<TradeScreen> {
     'Home',
     'Live Trades',
     'Closed Trades',
+    'Live Commentary'
   ];
   final List<Widget> tabScreens = [];
 
@@ -579,6 +581,7 @@ class _TradeScreenState extends ConsumerState<TradeScreen> {
         // title: 'Closed',
         tradesList: tradesList['Closed'], mainIndex: 2,
       ),
+      LiveCommentaryScreen(),
     ];
 
     return Scaffold(
@@ -587,7 +590,7 @@ class _TradeScreenState extends ConsumerState<TradeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTabBarOnTapButton(
-            isScrollHorizontal: false,
+            isScrollHorizontal: true,
             fontSize: 10.sp,
             buttonTextColor: theme.primaryColorDark,
             buttonBackgroundColor: theme.primaryColor,

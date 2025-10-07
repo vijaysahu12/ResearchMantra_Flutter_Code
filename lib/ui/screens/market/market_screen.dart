@@ -81,7 +81,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                 children: [
                   Text(
                     "Market Report",
-                    style: theme.textTheme.headlineSmall?.copyWith(
+                    style: theme.textTheme.titleSmall?.copyWith(
                       color: theme.primaryColorDark,
                     ),
                   ),

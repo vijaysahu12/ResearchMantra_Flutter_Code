@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:research_mantra_official/constants/assets.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/providers/get_support_mobile/support_mobile_provider.dart';
 import 'package:research_mantra_official/providers/images/profile_images/profile_image_provider.dart';
 import 'package:research_mantra_official/providers/userpersonaldetails/user_personal_details_provider.dart';
-import 'package:research_mantra_official/services/url_launcher_helper.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
@@ -16,12 +13,10 @@ import 'package:research_mantra_official/ui/screens/profile/screens/settings/blo
 import 'package:research_mantra_official/ui/screens/profile/widgets/about_contact.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/share_and_rate_app.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/theme_logout.dart';
-import 'package:research_mantra_official/ui/screens/profile/widgets/extra_adds.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/social_media_links.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/my_bucket_tickets.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/partner_account_performance.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/user_details.dart';
-import 'package:shimmer/shimmer.dart';
 
 final providerContainer = ProviderContainer();
 
@@ -139,7 +134,7 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
     final getMobileNumber = ref.watch(getSupportMobileStateProvider);
 
     return Scaffold(
-      backgroundColor: theme.primaryColor,
+      backgroundColor: theme.appBarTheme.backgroundColor,
       appBar: CommonAppBarWithBackButton(
         appBarText: profileScreenAppBarText,
         handleBackButton: () {
@@ -158,10 +153,16 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
                 getUserPersonalDetails:
                     getUserPersonalDetails.userPersonalDetails,
               ),
-              // UnivestWidget(),
+
               // SizedBox(height: 6.h),
               // _buildProfileContainerSection(theme), //New Add
-              SizedBox(height: 6.h),
+              SizedBox(height: 12.h),
+              _buildHelpAndSupportWidget(theme),
+              SizedBox(height: 12.h),
+              _buildMyBucketWidget(theme),
+              SizedBox(height: 12.h),
+              _buildDematAccountWidget(theme),
+              SizedBox(height: 12.h),
 
               MyBucketAndTickets(
                 handleNavigateToTicketsScreen: handleNavigateToTicketsScreen,
@@ -194,71 +195,59 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
     );
   }
 
-  Widget _buildAdvertisementSection(BuildContext context, theme) {
-    final getAdvertisementDetailsList = ref.watch(profileScreenImagesProvider);
+  // Widget _buildAdvertisementSection(BuildContext context, theme) {
+  //   final getAdvertisementDetailsList = ref.watch(profileScreenImagesProvider);
 
-    // Handle the expiration logic
-    final expireOnStr =
-        getAdvertisementDetailsList.profileScreenImage.isNotEmpty
-            ? getAdvertisementDetailsList.profileScreenImage[0].expireOn
-            : null;
+  //   // Handle the expiration logic
+  //   final expireOnStr =
+  //       getAdvertisementDetailsList.profileScreenImage.isNotEmpty
+  //           ? getAdvertisementDetailsList.profileScreenImage[0].expireOn
+  //           : null;
 
-    final DateTime? expireOn =
-        expireOnStr != null ? DateTime.parse(expireOnStr) : null;
+  //   final DateTime? expireOn =
+  //       expireOnStr != null ? DateTime.parse(expireOnStr) : null;
 
-    // Show loading indicator only if it's the first load
-    if (getAdvertisementDetailsList.isLoading && isLoading) {
-      return Shimmer.fromColors(
-        baseColor: theme.shadowColor,
-        highlightColor: theme.shadowColor,
-        child: Container(
-          color: theme.appBarTheme.backgroundColor,
-        ),
-      );
-    }
+  //   // Show loading indicator only if it's the first load
+  //   if (getAdvertisementDetailsList.isLoading && isLoading) {
+  //     return Shimmer.fromColors(
+  //       baseColor: theme.shadowColor,
+  //       highlightColor: theme.shadowColor,
+  //       child: Container(
+  //         color: theme.appBarTheme.backgroundColor,
+  //       ),
+  //     );
+  //   }
 
-    // If the list is empty or expired, show the default image
-    final bool isExpired =
-        expireOn != null ? DateTime.now().isAfter(expireOn) : false;
-    if (getAdvertisementDetailsList.profileScreenImage.isEmpty || isExpired) {
-      return GestureDetector(
-        onTap: () {
-          UrlLauncherHelper.launchUrlIfPossible(youtubeSubUrl);
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(5),
-          child: Image.asset(
-            profileScreenDefaultImage,
-            fit: BoxFit.fitHeight,
-            width: double.infinity,
-          ),
-        ),
-      );
-    }
+  //   // If the list is empty or expired, show the default image
+  //   final bool isExpired =
+  //       expireOn != null ? DateTime.now().isAfter(expireOn) : false;
+  //   if (getAdvertisementDetailsList.profileScreenImage.isEmpty || isExpired) {
+  //     return GestureDetector(
+  //       onTap: () {
+  //         UrlLauncherHelper.launchUrlIfPossible(youtubeSubUrl);
+  //       },
+  //       child: ClipRRect(
+  //         borderRadius: BorderRadius.circular(5),
+  //         child: Image.asset(
+  //           profileScreenDefaultImage,
+  //           fit: BoxFit.fitHeight,
+  //           width: double.infinity,
+  //         ),
+  //       ),
+  //     );
+  //   }
 
-    // Show the advertisement image if available and not expired
-    return ExtraAddsWidget(
-      getProfileScreenImages: getAdvertisementDetailsList.profileScreenImage,
-    );
-  }
+  //   // Show the advertisement image if available and not expired
+  //   return ExtraAddsWidget(
+  //     getProfileScreenImages: getAdvertisementDetailsList.profileScreenImage,
+  //   );
+  // }
 
   //Widget to show the social media links
   Widget _buildFollowWidget(BuildContext context, getMobileNumber) {
     final theme = Theme.of(context);
 
     return Container(
-      decoration: BoxDecoration(
-        color: theme.primaryColor,
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: [
-          BoxShadow(
-            color: theme.focusColor.withOpacity(0.4),
-            spreadRadius: 0.5,
-            blurRadius: 0.5,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(top: 10),
       child: Column(
@@ -318,141 +307,210 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
     );
   }
 
-//Widget for Profile Section
-  Widget _buildProfileContainerSection(ThemeData theme) {
-    return Row(
-      children: [
-        Container(
-          color: theme.shadowColor,
-          padding: EdgeInsets.all(10),
-          child: Icon(Icons.settings),
+  //Widget for Help and Support
+  Widget _buildHelpAndSupportWidget(ThemeData theme) {
+    return GestureDetector(
+      onTap: handleNavigateToTicketsScreen,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: theme.primaryColor,
         ),
-        Container(
-          color: theme.shadowColor,
-          padding: EdgeInsets.all(10),
-          child: Icon(Icons.settings),
-        ),
-        Container(
-          color: theme.shadowColor,
-          padding: EdgeInsets.all(10),
-          child: Icon(Icons.settings),
-        )
-      ],
-    );
-  }
-}
-
-class UnivestWidget extends StatelessWidget {
-  const UnivestWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Top icons row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _iconWithLabel(Icons.settings, "Settings"),
-              _iconWithLabel(Icons.headset_mic, "Help"),
-              _iconWithLabel(Icons.currency_rupee, "Refer & Earn"),
-            ],
-          ),
-          const SizedBox(height: 20),
-
-          // Login section
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          children: [
+            Row(
               children: [
-                const Text(
-                  "Login into Univest Web",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.orange,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                Container(
+                  width: 4,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF2196F3), Color(0xFF03DAC6)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                    side: const BorderSide(color: Colors.orange),
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  onPressed: () {},
-                  icon: const Icon(Icons.qr_code, size: 20),
-                  label: const Text("Scan the QR"),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'Help & Support',
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.primaryColorDark,
+                  ),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.support_agent,
+                  size: 16,
+                  color: theme.focusColor,
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 20),
-
-          // Univest Demat card
-          const Text(
-            "Univest Demat",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+            SizedBox(
+              height: 10.h,
             ),
-            color: Colors.green[600],
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Smart Research\nSmarter Trades",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: theme.focusColor.withOpacity(0.5),
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'For any assistance, please reach out to our support team.',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    fontSize: 10.sp,
+                    color: theme.primaryColor,
+                    fontWeight: FontWeight.w600,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.green[700],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: const Text("Get 25 FREE trades"),
-                  )
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _iconWithLabel(IconData icon, String label) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(icon, size: 28, color: Colors.black87),
+//Widget for My bucket
+  Widget _buildMyBucketWidget(ThemeData theme) {
+    return GestureDetector(
+      onTap: handleNavigateToMyBucketScreen,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: theme.primaryColor,
         ),
-        const SizedBox(height: 8),
-        Text(label, style: const TextStyle(fontSize: 14)),
-      ],
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 4,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF2196F3), Color(0xFF03DAC6)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'My Bucket',
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.primaryColorDark,
+                  ),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.shopping_bag_outlined,
+                  size: 16,
+                  color: theme.focusColor,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: theme.focusColor.withOpacity(0.5),
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Easily manage your purchased items and access them anytime.',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    fontSize: 10.sp,
+                    color: theme.primaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+//Widget for Demat Account
+  Widget _buildDematAccountWidget(ThemeData theme) {
+    return GestureDetector(
+      onTap: handleNavigateToPartnerAccount,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: theme.primaryColor,
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 4,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF2196F3), Color(0xFF03DAC6)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'Demat Account',
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.primaryColorDark,
+                  ),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.account_balance_wallet,
+                  size: 16,
+                  color: theme.focusColor,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: theme.focusColor.withOpacity(0.5),
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Manage your Demat account details all in one place.',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    fontSize: 10.sp,
+                    color: theme.primaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
