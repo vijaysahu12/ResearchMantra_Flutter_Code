@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:research_mantra_official/ui/components/trading_journal/trading_journal_screen.dart';
 import 'package:research_mantra_official/ui/components/widget/notification_count_widget.dart';
 import 'package:research_mantra_official/ui/components/widget/username_profileimage_dashboard.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
 import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
+import 'package:research_mantra_official/ui/screens/subscription_screen/common_subscription_screen.dart';
 
 class AppBarScreen extends StatefulWidget implements PreferredSizeWidget {
   final int selectedIndex;
@@ -37,11 +37,11 @@ class _AppBarScreenState extends State<AppBarScreen> {
     );
   }
 
-  void handleNavigateToJournalScreen() {
+  void handleNavigateToPaymentScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => TradingJournalScreen(),
+        builder: (_) => PaymentScreen(),
       ),
     );
   }
@@ -82,42 +82,24 @@ class _AppBarScreenState extends State<AppBarScreen> {
             ],
           ),
           // if (widget.selectedIndex != 3 && widget.selectedIndex != 4)
-          //   InkWell(
-          //     onTap: handleNavigateToJournalScreen,
-          //     borderRadius: BorderRadius.circular(6),
-          //     child: Container(
-          //       padding:
-          //           const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-          //       decoration: BoxDecoration(
-          //         gradient: LinearGradient(
-          //           colors: [
-          //             theme.disabledColor.withOpacity(0.9),
-          //             theme.disabledColor.withOpacity(0.7),
-          //           ],
-          //           begin: Alignment.topLeft,
-          //           end: Alignment.bottomRight,
-          //         ),
-          //         borderRadius: BorderRadius.circular(6),
-          //         boxShadow: [
-          //           BoxShadow(
-          //             color: theme.shadowColor.withOpacity(0.1),
-          //             blurRadius: 6,
-          //             offset: const Offset(0, 2),
-          //           ),
-          //         ],
-          //       ),
-          //       child: Text(
-          //         myJournalButtonText,
-          //         style: TextStyle(
-          //           fontSize: fontSize * 0.012,
-          //           fontFamily: fontFamily,
-          //           fontWeight: FontWeight.w600,
-          //           color: theme.floatingActionButtonTheme.foregroundColor,
-          //           letterSpacing: 0.2,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
+          InkWell(
+            onTap: handleNavigateToPaymentScreen,
+            borderRadius: BorderRadius.circular(6),
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.indicatorColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+              child: Text(
+                "Subscribe",
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.floatingActionButtonTheme.foregroundColor,
+                  fontSize: 10.sp,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

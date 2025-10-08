@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/ui/common_components/shimmer_button.dart';
+import 'package:research_mantra_official/ui/screens/subscription_screen/common_subscription_screen.dart';
 
 class PerformanceCard extends StatefulWidget {
   const PerformanceCard({super.key});
@@ -314,5 +315,11 @@ class _PerformanceCardState extends State<PerformanceCard> {
   // Method called when Activate Trial button is pressed
   void _onActivateTrialPressed() {
     //Todo: Navigation Screen pending
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PaymentScreen(),
+      ),
+    );
   }
 }
