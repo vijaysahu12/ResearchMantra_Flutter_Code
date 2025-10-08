@@ -1,22 +1,21 @@
- 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/utils/utils.dart';
- 
+
 class WebViewScreen extends StatefulWidget {
   final String url;
- 
+
   const WebViewScreen({super.key, required this.url});
- 
+
   @override
   State<WebViewScreen> createState() => _WebViewScreenState();
 }
- 
+
 class _WebViewScreenState extends State<WebViewScreen> {
   InAppWebViewController? webViewController;
   bool isLoading = true;
- 
+
   Future<void> _handleBack() async {
     if (isGetIOSPlatform()) {
       await webViewController?.loadUrl(
@@ -26,11 +25,17 @@ class _WebViewScreenState extends State<WebViewScreen> {
     }
     if (mounted) Navigator.pop(context);
   }
- 
+
+  @override
+  void dispose() {
+    webViewController?.dispose(); // Clean up the controller
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
- 
+
     return Scaffold(
       appBar: CommonAppBarWithBackButton(
         appBarText: '',
@@ -68,4 +73,3 @@ class _WebViewScreenState extends State<WebViewScreen> {
     );
   }
 }
- 

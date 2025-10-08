@@ -603,8 +603,12 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
     return GestureDetector(
       onTap: () {
 //Todo: Navigate To Resitration Screen
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CommonEventScreen()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const CommonEventScreen(
+                      url: 'https://mis.kingresearch.co.in/',
+                    )));
       },
       child: Container(
         padding: const EdgeInsets.all(10),
