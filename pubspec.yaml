@@ -141,7 +141,7 @@ flutter_native_splash:
   web: true
   android_12:
     color: "#FF0000"
-    image: "assets/images/splash/splash_logo.png"
+    image: "assets/images/splash/logo.jpg"
   #  icon_background_color: "#FF0000"
   #  icon_background_color_dark: "#FF0000"
 
@@ -205,7 +205,6 @@ flutter:
     - assets/images/const/images/coupon.png
     - assets/images/const/images/homscreen.gif
     - assets/mp3/design.wav
-    - assets/images/splash/splash_logo.png
     - assets/images/lottie/
     - assets/images/const/images/success.gif
     - assets/images/const/images/failure.png
