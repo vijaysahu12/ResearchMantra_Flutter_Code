@@ -6,7 +6,6 @@ import 'package:research_mantra_official/data/models/my_bucket_list_api_response
 import 'package:research_mantra_official/data/models/product_api_response_model.dart';
 import 'package:research_mantra_official/providers/check_connection_provider.dart';
 import 'package:research_mantra_official/ui/components/cacher_network_images/circular_cached_network_image.dart';
-import 'package:research_mantra_official/ui/screens/products/screens/details/product_details_screen.dart';
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
@@ -70,17 +69,16 @@ class MyBucketListWidget extends ConsumerWidget {
         buyButtonText: item.buyButtonText,
       );
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProductDetailsScreenWidget(
-            product: product,
-            buttonName: item.categoryName,
-            isFromNotification: false,
- 
-          ),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => ProductDetailsScreenWidget(
+      //       product: product,
+      //       buttonName: item.categoryName,
+      //       isFromNotification: false,
+      //     ),
+      //   ),
+      // );
     }
 
     return GestureDetector(

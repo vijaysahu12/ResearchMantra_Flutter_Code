@@ -20,9 +20,7 @@ import 'package:research_mantra_official/ui/screens/learning/screen/indicator_sc
 import 'package:research_mantra_official/ui/screens/learning/widgets/examples_screen.dart';
 import 'package:research_mantra_official/ui/screens/learning/screen/indicator_screens/indicator_screen.dart';
 import 'package:research_mantra_official/ui/screens/notification/notification_screen.dart';
-import 'package:research_mantra_official/ui/screens/products/product_screen.dart';
 import 'package:research_mantra_official/ui/components/splash/splash_screen.dart';
-import 'package:research_mantra_official/ui/screens/products/screens/details/product_details_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/profile_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/notifications/notification_settings_widget.dart';
@@ -142,30 +140,6 @@ class AppRouter {
           ),
         );
 
-      case productDetailsScreenWidget:
-        var datavalue = routeSettings.arguments as Map<String, dynamic>;
-
-        return MaterialPageRoute(
-          builder: (_) => ProductDetailsScreenWidget(
-            product: ProductApiResponseModel(
-              groupName: datavalue['groupName'],
-              description: datavalue['description'],
-              id: datavalue['id'],
-              listImage: datavalue['listImage'],
-              name: datavalue['name'],
-              price: datavalue['price'],
-              overAllRating: datavalue['overAllRating'],
-              heartsCount: datavalue['heartsCount'],
-              userRating: datavalue['userRating'],
-              userHasHeart: datavalue['userHasHeart'],
-              isInMyBucket: datavalue['isInMyBucket'],
-              isInValidity: datavalue['isInValidity'],
-              buyButtonText: datavalue['buyButtonText'],
-            ),
-            isFromNotification: false,
-          ),
-        );
-
       case getAllBlogs:
         return MaterialPageRoute(
           builder: (_) => const BlogsScreen(),
@@ -184,20 +158,6 @@ class AppRouter {
           builder: (_) => const PartnerAccountScreen(),
         );
 
-      case productscreen:
-        return MaterialPageRoute(
-          builder: (_) => const AllProducts(
-            isFromHome: false,
-          ),
-        );
-
-      // case webviewscreen:
-      //   final String viewChartUrl = routeSettings.arguments as String;
-      //   return MaterialPageRoute(
-      //     builder: (_) => WebViewScreen(
-      //       url: viewChartUrl,
-      //     ),
-      //   );
       case webviewscreen:
         final String viewChartUrl = routeSettings.arguments as String;
         return PageRouteBuilder(

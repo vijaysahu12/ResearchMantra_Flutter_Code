@@ -14,7 +14,6 @@ import 'package:research_mantra_official/services/no_screen_shot.dart';
 import 'package:research_mantra_official/ui/components/common_error/no_connection.dart';
 import 'package:research_mantra_official/ui/components/empty_contents/no_content_widget.dart';
 import 'package:research_mantra_official/ui/components/king_research_loader/kingresearch_loader.dart';
-import 'package:research_mantra_official/ui/screens/products/screens/details/product_details_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/screen/bucket_details_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/widgets/filter_bottom_sheet.dart';
 import 'package:research_mantra_official/ui/screens/research/widgets/results_cards.dart';
@@ -110,7 +109,6 @@ class _CompaniesListScreenUiState extends ConsumerState<CompaniesListScreenUi>
         await CheckInternetConnection().checkInternetConnection();
 
     if (checkConnection) {
-
       await ref.read(companiesDetailsProvider.notifier).getCompaniesDataModel({
         id: widget.id,
         primaryKey: primaryKeyData,
@@ -135,19 +133,19 @@ class _CompaniesListScreenUiState extends ConsumerState<CompaniesListScreenUi>
         isFromProductDetailsScreen = true;
       });
       // Navigate to Details Screen
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProductDetailsScreenWidget(
-            product: product,
-            isFromResearch: true,
-            reasearchbasketId: basektId,
-            publicKey: widget.publicKey,
-            pageNumber: widget.pageNUmber,
-            isFromNotification: false,
-          ),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => ProductDetailsScreenWidget(
+      //       product: product,
+      //       isFromResearch: true,
+      //       reasearchbasketId: basektId,
+      //       publicKey: widget.publicKey,
+      //       pageNumber: widget.pageNUmber,
+      //       isFromNotification: false,
+      //     ),
+      //   ),
+      // );
     }
   }
 
