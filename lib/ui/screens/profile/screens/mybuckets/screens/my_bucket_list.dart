@@ -10,7 +10,6 @@ import 'package:research_mantra_official/ui/components/common_error/no_connectio
 import 'package:research_mantra_official/ui/components/common_error/oops_screen.dart';
 import 'package:research_mantra_official/ui/components/king_research_loader/kingresearch_loader.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/widget/my_bucket.dart';
-import 'package:research_mantra_official/ui/screens/scanners/screens/widgets/subscribe_scanners_card.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 import '../../../../../../providers/mybucket/my_bucket_list_provider.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
@@ -106,8 +105,7 @@ class _MyBucketListState extends ConsumerState<MyBucketList> with RouteAware {
     //If My bucket Screen is Empty Subscription Card is Visible
     if (getMyBucketdata.myBucketListApiResponseModel.isEmpty) {
       return Center(
-        child:
-            ExclusiveTradingInsightsCard(isResearch: false, isScanner: false),
+        child: Text('Your bucket is empty. Please add items to your bucket.'),
       );
     }
     //Added pull to refresh indicator
