@@ -83,9 +83,8 @@ class _UserDetailsState extends State<UserDetails> {
       onTap: () => navigateToPersonalDetailsScreen(context),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: theme.shadowColor, width: 1),
-          color: theme.appBarTheme.backgroundColor,
+          borderRadius: BorderRadius.circular(5),
+          color: theme.primaryColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(5.0),

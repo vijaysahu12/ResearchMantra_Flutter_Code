@@ -320,20 +320,20 @@ class _PersonalProfileDetailsWidgetState
                   //         onProfileImageDelete: widget.onProfileImageDelete,
                   //       ),
 
-                  SizedBox(height: 5.h),
+                  // SizedBox(height: 5.h),
                   // Text field for user name
                   NameTextField(userNameController: _userNameController),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 10.h),
                   // Widget for selecting date of birth
                   DateOfBirthWidget(
                       userDateOfBirthController: _userDateOfBirthController),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 15.h),
                   // Widget for selecting gender
                   GenderSelection(
                     selectedGender: selectedGender,
                     onGenderChanged: onGenderChanged,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 15.h),
                   // Text for contact details
                   _buildContactDetailsText(),
                   SizedBox(height: 8.h),
@@ -342,7 +342,7 @@ class _PersonalProfileDetailsWidgetState
                     userMobileController: _userMobileController,
                     userCityController: _userCityController,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   // Text field for email ID
                   EmailIdTextField(userEmailController: _userEmailController),
                   SizedBox(height: 25.h),
@@ -350,10 +350,10 @@ class _PersonalProfileDetailsWidgetState
                   UpdatePersonalDetailsButton(
                     handleManageUserDetails: handleUpdateAndShowValues,
                   ),
-                  SizedBox(height: 20.h),
-                  DeleteAndDeactivateButtons(
-                    handleDeleteAccountPopUp: handleNavigateDeleteAccountPopUp,
-                  ),
+                  // SizedBox(height: 20.h),
+                  // DeleteAndDeactivateButtons(
+                  //   handleDeleteAccountPopUp: handleNavigateDeleteAccountPopUp,
+                  // ),
                   // SizedBox(height: 20.h),
 
                   // Center(
@@ -371,17 +371,15 @@ class _PersonalProfileDetailsWidgetState
 
   // Widget for displaying contact details text
   Widget _buildContactDetailsText() {
-    return const SizedBox(
+    return SizedBox(
       child: Text(
         'Contact Details',
         style: TextStyle(
-          fontSize: 12,
+          fontSize: 12.sp,
           fontWeight: FontWeight.bold,
           fontFamily: fontFamily,
         ),
       ),
     );
   }
-
-  //widget for Developed text
 }

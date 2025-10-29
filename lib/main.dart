@@ -70,7 +70,6 @@ import 'package:research_mantra_official/services/auto_bottom_observer.dart';
 import 'package:research_mantra_official/services/notification_navigation.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
 import 'package:research_mantra_official/ui/Screens/home/home_navigator.dart';
-
 import 'package:research_mantra_official/ui/components/restart_widget.dart';
 import 'package:research_mantra_official/ui/components/splash/splash_screen.dart';
 import 'package:research_mantra_official/ui/router/app_routes.dart';
@@ -83,7 +82,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:research_mantra_official/constants/l10n/localizations.dart';
 import 'package:research_mantra_official/data/network/http_client.dart';
 import 'package:research_mantra_official/services/secure_storage.dart';
 import 'package:research_mantra_official/ui/router/routes.dart';
@@ -100,7 +98,6 @@ import 'firebase_options.dart';
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(message) async {
   await Firebase.initializeApp();
-
   ////If your notifications contain a notification payload (handled by FCM automatically), then you don't need showNotification  .
 }
 

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/providers/get_support_mobile/support_mobile_state.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/common_box_buttons/box_shadow_buttons.dart';
-import 'package:research_mantra_official/ui/screens/profile/screens/personaldetails/widgets/deactivate_delete_buttons.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/about_contact.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/share_and_rate_app.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/theme_logout.dart';

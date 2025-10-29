@@ -4,7 +4,8 @@ class PaymentBottomBar extends StatelessWidget {
   final double amount;
   final VoidCallback onPressed;
 
-  const PaymentBottomBar({super.key, 
+  const PaymentBottomBar({
+    super.key,
     required this.amount,
     required this.onPressed,
   });
@@ -13,16 +14,6 @@ class PaymentBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, -5),
-          ),
-        ],
-      ),
       child: SafeArea(
         child: SizedBox(
           width: double.infinity,
