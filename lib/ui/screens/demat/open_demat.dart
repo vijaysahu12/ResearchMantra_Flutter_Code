@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 import 'package:research_mantra_official/ui/common_components/shimmer_button.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 
@@ -107,9 +106,6 @@ class _OpenDematAccountScreenState extends State<OpenDematAccountScreen> {
                     title: Text(broker),
                     onTap: () {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Selected $broker")),
-                      );
                     },
                   );
                 },
@@ -252,7 +248,9 @@ class _OpenDematAccountScreenState extends State<OpenDematAccountScreen> {
       text: "Open Demat Account",
       backgroundColor: theme.primaryColorDark,
       textColor: theme.primaryColor,
-      onPressed: () => print("Shimmer button pressed!"),
+      onPressed: () {
+        _showBrokerBottomSheet();
+      },
     );
   }
 

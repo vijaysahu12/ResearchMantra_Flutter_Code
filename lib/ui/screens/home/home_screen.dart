@@ -48,6 +48,7 @@ import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.da
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
 import 'package:research_mantra_official/ui/screens/research_stock_basket/stock_baskets.dart';
+import 'package:research_mantra_official/ui/screens/trades/screens/pro_basket.dart';
 import 'package:research_mantra_official/ui/screens/trades/trades_screens.dart';
 import 'package:research_mantra_official/utils/toast_utils.dart';
 
@@ -471,6 +472,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: _buildScreenerList(context, theme),
                 ),
+                ProBasketContainer(),
               ],
             ),
     );
