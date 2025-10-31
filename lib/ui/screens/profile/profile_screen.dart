@@ -126,13 +126,6 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
     }));
   }
 
-//handle to navigate blocked screen
-  //handle to navigate to blocked user screen
-  void handleToNavigateUserBlockedScreen() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const BlockUserScreen()));
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -156,8 +149,6 @@ class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               UserDetails(
-                handleToNavigateUserBlockedScreen:
-                    handleToNavigateUserBlockedScreen,
                 getUserPersonalDetails:
                     getUserPersonalDetails.userPersonalDetails,
               ),

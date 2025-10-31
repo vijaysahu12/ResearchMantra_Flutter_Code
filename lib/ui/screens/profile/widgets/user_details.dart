@@ -1,26 +1,20 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:research_mantra_official/constants/assets.dart';
 import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/data/models/user_login_response_model.dart';
 import 'package:research_mantra_official/data/models/user_personal_details_api_response_model.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
-import 'package:research_mantra_official/ui/components/cacher_network_images/circular_cached_network_image.dart';
-
 import 'package:research_mantra_official/ui/router/app_routes.dart';
-
 import 'package:research_mantra_official/ui/themes/text_styles.dart';
 
 // Widget for displaying user details
 class UserDetails extends StatefulWidget {
   final UserPersonalDetailsModel? getUserPersonalDetails;
-  final void Function() handleToNavigateUserBlockedScreen;
+
   const UserDetails({
     super.key,
     this.getUserPersonalDetails,
-    required this.handleToNavigateUserBlockedScreen,
   });
 
   @override
@@ -123,21 +117,6 @@ class _UserDetailsState extends State<UserDetails> {
                         fontFamily: fontFamily),
                   ),
                 ],
-              ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: theme.shadowColor,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: InkWell(
-                    onTap: widget.handleToNavigateUserBlockedScreen,
-                    child: Icon(Icons.lock_person_outlined,
-                        color: theme.disabledColor)),
-              ),
-              const SizedBox(
-                width: 10,
               ),
             ],
           ),

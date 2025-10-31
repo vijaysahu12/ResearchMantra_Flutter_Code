@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/providers/get_support_mobile/support_mobile_state.dart';
 import 'package:research_mantra_official/ui/components/app_bar.dart';
 import 'package:research_mantra_official/ui/components/common_box_buttons/box_shadow_buttons.dart';
+import 'package:research_mantra_official/ui/screens/profile/screens/settings/block_users.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/about_contact.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/share_and_rate_app.dart';
 import 'package:research_mantra_official/ui/screens/profile/widgets/theme_logout.dart';
@@ -21,6 +22,11 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  void handleToNavigateUserBlockedScreen() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const BlockUserScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -34,6 +40,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            Row(
+              children: [
+                CommonBoxShadowButtons(
+                  buttonText: "Blocked Users",
+                  iconTextName: Icons.block,
+                  handleNavigateToScreen: handleToNavigateUserBlockedScreen,
+                ),
+              ],
+            ),
+            SizedBox(height: 8.h),
             AboutAndContactUs(
               getMobileNumber: widget.getMobileNumber,
             ),
