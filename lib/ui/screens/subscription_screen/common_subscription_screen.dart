@@ -1,9 +1,6 @@
-// ============================================================================
-// MODELS - Data Layer
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:research_mantra_official/ui/screens/subscription_screen/widgets/extra_discount_bottom_sheet.dart';
 import 'package:research_mantra_official/ui/screens/subscription_screen/widgets/pay_button.dart';
 
 class PaymentPlanModel {
@@ -235,6 +232,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   late PaymentPlanModel selectedPlan;
   late CouponModel? appliedCoupon;
 
+  bool isExtraDiscountBottomSheetVisible = false;
+
   @override
   void initState() {
     super.initState();
@@ -311,8 +310,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       alignment: Alignment.topRight,
                       child: GestureDetector(
                         onTap: () async {
-                          if (mounted) {
+                          if (!isExtraDiscountBottomSheetVisible) {
+                            showExtraDiscountSheet(context);
+                            setState(() {
+                              isExtraDiscountBottomSheetVisible = true;
+                            });
+                          } else {
                             Navigator.of(context).pop();
+                            setState(() {
+                              isExtraDiscountBottomSheetVisible = false;
+                            });
                           }
                         },
                         child: Container(
