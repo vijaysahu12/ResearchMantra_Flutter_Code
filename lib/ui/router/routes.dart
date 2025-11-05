@@ -43,16 +43,10 @@ class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case splash:
-        // if (_isFirstLaunch) {
-        // _isFirstLaunch = false;
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
         );
-      // } else {
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AuthRouteResolverWidget(),
-      //   );
-      // }
+
       case login:
         return MaterialPageRoute(
           builder: (_) => const LoginWidget(),

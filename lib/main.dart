@@ -66,7 +66,6 @@ import 'package:research_mantra_official/data/repositories/trading_journal_repos
 import 'package:research_mantra_official/data/repositories/user_repository.dart';
 import 'package:research_mantra_official/providers/check_connection_provider.dart';
 import 'package:research_mantra_official/providers/theme_provider/theme_provider.dart';
-import 'package:research_mantra_official/services/auto_bottom_observer.dart';
 import 'package:research_mantra_official/services/notification_navigation.dart';
 import 'package:research_mantra_official/services/user_secure_storage_service.dart';
 import 'package:research_mantra_official/ui/Screens/home/home_navigator.dart';
@@ -341,7 +340,9 @@ class _FlutterTemplateAppState extends ConsumerState<FlutterTemplateApp>
             designSize: const Size(360, 690),
             builder: (BuildContext context, Widget? child) {
               return MaterialApp(
-                navigatorObservers: [routeObserver, AutoBottomSheetObserver()],
+                navigatorObservers: [
+                  routeObserver,
+                ],
                 debugShowCheckedModeBanner: false,
                 onGenerateRoute: widget.appRouter.onGenerateRoute,
                 theme:
@@ -350,9 +351,7 @@ class _FlutterTemplateAppState extends ConsumerState<FlutterTemplateApp>
                 themeMode: themeMode == ThemeModeType.light
                     ? ThemeMode.dark
                     : ThemeMode.light,
-                // localizationsDelegates: localizationDelegates,
-                // supportedLocales: supportedLocales,
-                // locale: currentLanguage,
+
                 home: SplashScreen(
                   sessionDetails: widget.sessionDetails,
                 ),
