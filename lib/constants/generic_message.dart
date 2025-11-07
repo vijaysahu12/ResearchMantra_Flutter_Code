@@ -407,8 +407,8 @@ const indicatorDetailsText = "Indicator Details";
 
 //profile screen test
 const profileScreenAppBarText = "Profile";
-const unlockTitle = "Unlock thriving wealth!";
-const subUnlockTitle = "Made with Love for You  ♥";
+const unlockTitle = "Financially Independent";
+const subUnlockTitle = "Made with ♥ for You";
 const followusTitle = "Follow us on";
 
 //otp screen text
@@ -532,3 +532,7 @@ const String servicePeriodText = "Service Period";
 
 const String transactionIdText = "Transaction ID";
 const String copiedTransactionIdtext = "Copied Transaction ID";
+
+// ############### Generic message For Research Mantra App####
+
+const String tradesBySusmithaText = "Live Trades by SUSMITHA";

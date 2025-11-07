@@ -143,7 +143,6 @@ class _ResearchScreenState extends ConsumerState<ResearchScreen> {
       speechText +=
           "${basketData.title ?? ""}, ${basketData.description ?? ""},  ${basketData.companyCount ?? ""},Company in this Bucket }\n";
     }
-
     return speechText;
   }
 
@@ -164,7 +163,10 @@ class _ResearchScreenState extends ConsumerState<ResearchScreen> {
       if (getBasket.isLoading &&
           isgettingLoad &&
           getBasket.getAllBasketDataModel.isEmpty) {
-        return const CommonLoaderGif();
+        return Scaffold(
+          backgroundColor: theme.primaryColor,
+          body: const CommonLoaderGif(),
+        );
       }
       if (getBasket.error != null) {
         return const ErrorScreenWidget();

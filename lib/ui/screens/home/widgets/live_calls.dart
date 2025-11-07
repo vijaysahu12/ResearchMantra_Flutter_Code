@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:research_mantra_official/constants/assets_storage.dart';
+import 'package:research_mantra_official/constants/generic_message.dart';
 import 'package:research_mantra_official/ui/common_components/common_outline_button.dart';
 
+//Live Call Trades Screen Widget
+// This widget displays a grid of live call trade options.
+// Each grid item is tappable and triggers navigation based on the provided callback.
+//Added keys for testing purposes.
 class LiveCallTradesScreen extends ConsumerStatefulWidget {
   final void Function(dynamic subIndex, dynamic mainIndex) handleToNavigate;
   const LiveCallTradesScreen({super.key, required this.handleToNavigate});
@@ -67,13 +72,15 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Free Live Trades By SUSMITHA",
+                    tradesBySusmithaText,
+                    key: const Key('live_call_trades_title'),
                     style: theme.textTheme.titleSmall?.copyWith(
                       color: theme.primaryColorDark,
                     ),
                   ),
                   Text(
                     'SEBI Reg.',
+                    key: const Key('live_call_trades_sebi_label'),
                     style: theme.textTheme.titleSmall?.copyWith(
                       color: theme.primaryColorDark,
                     ),
@@ -93,7 +100,12 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
               ),
               itemBuilder: (context, index) {
                 final tab = _tabs[index];
+                // 🔑 Create a unique key for each grid item
+                final itemKey = Key('grid_item_${tab["title"]}');
+                final buttonKey = Key('grid_item_button_${tab["title"]}');
+                final iconKey = Key('grid_item_icon_${tab["title"]}');
                 return GestureDetector(
+                  key: itemKey,
                   onTap: () {
                     final tabIndex = tab["tabIndex"];
                     final subIndex = tab["subIndex"];
@@ -117,6 +129,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                       children: [
                         Text(
                           tab["title"],
+                          key: Key('grid_title_${tab["title"]}'),
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
@@ -126,6 +139,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                         SizedBox(height: 4.h),
                         Text(
                           tab["subtitle"],
+                          key: Key('grid_subtitle_${tab["title"]}'),
                           style: theme.textTheme.bodySmall?.copyWith(
                             fontSize: 10.sp,
                             color: theme.focusColor,
@@ -136,6 +150,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CommonOutlineButton(
+                              key: buttonKey,
                               borderColor: theme.shadowColor,
                               borderRadius: 20,
                               textStyle: theme.textTheme.titleSmall?.copyWith(
@@ -146,6 +161,7 @@ class _LiveCallTradesScreenState extends ConsumerState<LiveCallTradesScreen> {
                               onPressed: tab["onTap"],
                             ),
                             Container(
+                              key: iconKey,
                               width: 40.w,
                               height: 40.w,
                               padding: const EdgeInsets.all(8),
