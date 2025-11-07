@@ -4,7 +4,8 @@ import 'package:research_mantra_official/ui/components/common_buttons/common_but
 import 'package:research_mantra_official/ui/screens/market/screens/ipo/screen/ipo_details.dart';
 
 class IposScreen extends StatefulWidget {
-  const IposScreen({super.key});
+  final int selectedIndex;
+  const IposScreen({super.key, this.selectedIndex = 0});
 
   @override
   State<IposScreen> createState() => _IposScreenState();
@@ -61,7 +62,11 @@ class _IposScreenState extends State<IposScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: _mainTabs.length, vsync: this);
+    _tabController = TabController(
+      length: _mainTabs.length,
+      vsync: this,
+      initialIndex: widget.selectedIndex,
+    );
   }
 
   @override

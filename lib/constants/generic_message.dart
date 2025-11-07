@@ -158,7 +158,7 @@ const loginScreenurlEndpoint = "LOGIN";
 const dematEndPoint = "Demat";
 
 //policies url
-const policiesUrl = "https://www.kingresearch.co.in/terms-conditions/";
+const policiesUrl = "https://susmitasahoo.in/privacy-policy/";
 
 //topgainers and toploser
 const latestStorageDate = "LATEST_UPDATED_DATE_TIME";
@@ -408,7 +408,7 @@ const indicatorDetailsText = "Indicator Details";
 //profile screen test
 const profileScreenAppBarText = "Profile";
 const unlockTitle = "Financially Independent";
-const subUnlockTitle = "Made with ♥ for You";
+const subUnlockTitle = "Made with ♥ for traders";
 const followusTitle = "Follow us on";
 
 //otp screen text

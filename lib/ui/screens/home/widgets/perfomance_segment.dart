@@ -255,31 +255,6 @@ class _PerformanceCardState extends State<PerformanceCard> {
           textColor: theme.primaryColorDark,
           onPressed: _onActivateTrialPressed,
         )
-
-        //  SizedBox(
-        //   width: double.infinity,
-        //   height: 35.h,
-        //   child: ElevatedButton(
-        //     onPressed: _onActivateTrialPressed,
-        //     style: ElevatedButton.styleFrom(
-        //       backgroundColor: theme.primaryColor,
-        //       foregroundColor: theme.primaryColorDark,
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(8),
-        //       ),
-        //       elevation: 0,
-        //     ),
-        //     child: Text(
-        //       'Activate Now',
-        //       style: TextStyle(
-        //         fontSize: 14.sp,
-        //         fontWeight: FontWeight.w600,
-        //         color: theme.primaryColorDark,
-        //       ),
-        //     ),
-        //   ),
-        // ),
-
         );
   }
 

@@ -42,8 +42,10 @@ import 'package:research_mantra_official/ui/screens/home/home_navigator.dart';
 import 'package:research_mantra_official/ui/screens/home/screens/ongoing_trades.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/carousel_slider_widget.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/inflation_container.dart';
+import 'package:research_mantra_official/ui/screens/home/widgets/ipo_container.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/live_calls.dart';
 import 'package:research_mantra_official/ui/screens/home/widgets/perfomance_segment.dart';
+import 'package:research_mantra_official/ui/screens/market/screens/ipo/ipo.dart';
 import 'package:research_mantra_official/ui/screens/multibaggers/multibaggers.dart';
 import 'package:research_mantra_official/ui/screens/profile/screens/mybuckets/my_bucket_list_screen.dart';
 import 'package:research_mantra_official/ui/screens/research/research_screen.dart';
@@ -391,6 +393,23 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     );
   }
 
+  //Widget for Ipo explore button
+  final List<GridCardItem> exploreItems = [
+    GridCardItem(
+      title: 'Live Ipos',
+      subtitle: '2 Active Ipos',
+      // buttonText: 'View All',
+      icon: Icons.upcoming,
+      screen: IposScreen(selectedIndex: 0),
+    ),
+    GridCardItem(
+      title: 'Closed Ipos',
+      subtitle: '20 Closed Ipos',
+      icon: Icons.history,
+      screen: IposScreen(selectedIndex: 1),
+    ),
+  ];
+
   //Navigation
   void handleToNavigateTradeScreenTab(subIndex, mainIndex) {
     ref.read(mainTabProvider.notifier).state = mainIndex;
@@ -473,6 +492,14 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                   child: _buildScreenerList(context, theme),
                 ),
                 ProBasketContainer(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CommonGridSection(
+                    sectionTitle: "IPOs to Watch",
+                    items: exploreItems,
+                    theme: Theme.of(context),
+                  ),
+                ),
               ],
             ),
     );

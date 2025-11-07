@@ -37,9 +37,9 @@ class _ProBasketContainerState extends State<ProBasketContainer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Pro Baskets',
+            'More Freedom with Pro',
             style: TextStyle(
-              fontSize: 15.sp,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w600,
               color: theme.primaryColorDark,
             ),
